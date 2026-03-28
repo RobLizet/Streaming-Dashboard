@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="StreamNL">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#f5efe4">
 <title>StreamNL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -34,86 +33,95 @@
   --green-bg: rgba(63,185,80,0.10);
   --orange:   #d18616;
   --purple:   #a371f7;
-  --tab-h:    72px;
+  --tab-h:    62px;
+
+  /* Header cream palette */
+  --hdr-bg:      #f5efe4;
+  --hdr-border:  #e0d5c5;
+  --hdr-logo1:   #8b5e1a;
+  --hdr-logo2:   #1a1a2e;
+  --hdr-sub:     #9a8a70;
+  --hdr-pill-bg: #1a1a2e;
+  --hdr-pill-fg: #f5efe4;
 }
 
-- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-html { background: var(–bg); }
+html { background: var(--bg); }
 
 body {
-font-family: ‘DM Sans’, sans-serif;
-background: var(–bg);
-color: var(–text);
-min-height: 100dvh;
-overflow-x: hidden;
-padding-bottom: calc(var(–tab-h) + env(safe-area-inset-bottom));
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 8px);
 }
 
 /* ── HEADER ─────────────────────────────────────────── */
 .app-header {
-position: sticky; top: 0; z-index: 200;
-background: var(–surface);
-border-bottom: 1px solid var(–border);
-padding: 0 20px 14px;
-padding-top: calc(14px + env(safe-area-inset-top));
+  position: sticky; top: 0; z-index: 200;
+  background: var(--hdr-bg);
+  border-bottom: 1px solid var(--hdr-border);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.15);
+  padding: 10px 20px 12px;
+  padding-top: calc(10px + env(safe-area-inset-top));
 }
 
 .header-row {
-display: flex; align-items: center; justify-content: space-between;
-max-width: 600px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 600px; margin: 0 auto;
 }
 
 .app-logo {
-font-family: ‘Playfair Display’, serif;
-font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
-color: var(–gold);
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 900; letter-spacing: -0.5px;
+  color: var(--hdr-logo1);
 }
-.app-logo em { color: var(–text); font-style: normal; font-weight: 700; }
+.app-logo em { color: var(--hdr-logo2); font-style: normal; font-weight: 700; }
 
 .header-pill {
-font-size: 11px; font-weight: 600;
-color: var(–gold);
-background: var(–gold-bg);
-border: 1px solid var(–gold-bd);
-border-radius: 20px; padding: 4px 12px;
-letter-spacing: 0.8px; text-transform: uppercase;
+  font-size: 11px; font-weight: 700;
+  color: var(--hdr-pill-fg);
+  background: var(--hdr-pill-bg);
+  border-radius: 20px; padding: 5px 13px;
+  letter-spacing: 0.8px; text-transform: uppercase;
 }
 
 /* ── BOTTOM TABBAR ───────────────────────────────────── */
 .tabbar {
-position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
-height: calc(var(–tab-h) + env(safe-area-inset-bottom));
-padding-bottom: env(safe-area-inset-bottom);
-background: var(–surface);
-border-top: 1px solid var(–border);
-display: flex; align-items: stretch;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+  height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--hdr-bg);
+  border-top: 1px solid var(--hdr-border);
+  box-shadow: 0 -1px 12px rgba(0,0,0,0.15);
+  display: flex; align-items: stretch;
 }
 
 .tab-btn {
-flex: 1; display: flex; flex-direction: column;
-align-items: center; justify-content: center; gap: 4px;
-background: none; border: none; cursor: pointer;
-padding: 8px 4px;
-color: var(–muted);
-transition: color 0.2s;
--webkit-tap-highlight-color: transparent;
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 3px;
+  background: none; border: none; cursor: pointer;
+  padding: 6px 2px;
+  color: #b0a090;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.tab-btn.active { color: var(–gold); }
+.tab-btn.active { color: var(--hdr-logo1); }
 
-.tab-icon { font-size: 22px; line-height: 1; }
+.tab-icon { font-size: 20px; line-height: 1; }
 
 .tab-label {
-font-size: 10px; font-weight: 600;
-letter-spacing: 0.3px;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2px; color: inherit;
 }
 
 .tab-dot {
-width: 4px; height: 4px; border-radius: 50%;
-background: var(–gold);
-opacity: 0; transition: opacity 0.2s;
-margin-top: 2px;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--hdr-logo1);
+  opacity: 0; transition: opacity 0.2s;
 }
 .tab-btn.active .tab-dot { opacity: 1; }
 
@@ -123,17 +131,17 @@ margin-top: 2px;
 
 /* ── SHARED LAYOUT ───────────────────────────────────── */
 .content {
-max-width: 600px; margin: 0 auto;
-padding: 20px 16px 24px;
+  max-width: 600px; margin: 0 auto;
+  padding: 20px 16px 24px;
 }
 
 .section-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 20px; font-weight: 700;
-margin-bottom: 14px; letter-spacing: -0.3px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700;
+  margin-bottom: 14px; letter-spacing: -0.3px;
 }
 
-.section-title span { color: var(–gold); }
+.section-title span { color: var(--gold); }
 
 .section-gap { margin-bottom: 32px; }
 
@@ -141,323 +149,323 @@ margin-bottom: 14px; letter-spacing: -0.3px;
 .cards { display: flex; flex-direction: column; gap: 10px; }
 
 .pcard {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 14px;
-overflow: hidden;
-display: flex; align-items: stretch;
-text-decoration: none; color: inherit;
-transition: transform 0.15s, border-color 0.2s;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex; align-items: stretch;
+  text-decoration: none; color: inherit;
+  transition: transform 0.15s, border-color 0.2s;
 }
 .pcard:active { transform: scale(0.975); }
 
 .pcard-bar { width: 4px; flex-shrink: 0; }
-.bar-gold   { background: var(–gold); }
-.bar-red    { background: var(–red); }
-.bar-blue   { background: var(–blue); }
-.bar-teal   { background: var(–teal); }
-.bar-green  { background: var(–green); }
-.bar-orange { background: var(–orange); }
-.bar-purple { background: var(–purple); }
+.bar-gold   { background: var(--gold); }
+.bar-red    { background: var(--red); }
+.bar-blue   { background: var(--blue); }
+.bar-teal   { background: var(--teal); }
+.bar-green  { background: var(--green); }
+.bar-orange { background: var(--orange); }
+.bar-purple { background: var(--purple); }
 
 .pcard-body { padding: 13px 14px; flex: 1; min-width: 0; }
 
 .pcard-top {
-display: flex; align-items: center; gap: 9px;
-margin-bottom: 5px;
+  display: flex; align-items: center; gap: 9px;
+  margin-bottom: 5px;
 }
 
 .pcard-icon { font-size: 20px; flex-shrink: 0; }
 
 .pcard-name {
-font-size: 16px; font-weight: 600;
-flex: 1; min-width: 0;
-white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 16px; font-weight: 600;
+  flex: 1; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .pcard-tags { display: flex; gap: 5px; flex-shrink: 0; }
 
 .tag {
-font-size: 10px; font-weight: 600;
-border-radius: 6px; padding: 2px 7px;
-letter-spacing: 0.3px; white-space: nowrap;
+  font-size: 10px; font-weight: 600;
+  border-radius: 6px; padding: 2px 7px;
+  letter-spacing: 0.3px; white-space: nowrap;
 }
-.tag-nl     { background: var(–gold-bg);  color: var(–gold); border: 1px solid var(–gold-bd); }
-.tag-eu     { background: var(–teal-bg);  color: var(–teal); border: 1px solid rgba(57,210,192,0.25); }
-.tag-free   { background: var(–green-bg); color: var(–green); border: 1px solid rgba(63,185,80,0.25); }
-.tag-en     { background: var(–blue-bg);  color: var(–blue); border: 1px solid rgba(88,166,255,0.25); }
+.tag-nl     { background: var(--gold-bg);  color: var(--gold); border: 1px solid var(--gold-bd); }
+.tag-eu     { background: var(--teal-bg);  color: var(--teal); border: 1px solid rgba(57,210,192,0.25); }
+.tag-free   { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+.tag-en     { background: var(--blue-bg);  color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
 
 .pcard-desc {
-font-size: 13px; color: var(–sub); line-height: 1.45;
-margin-bottom: 8px;
+  font-size: 13px; color: var(--sub); line-height: 1.45;
+  margin-bottom: 8px;
 }
 
 .pcard-foot {
-display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between;
 }
 
-.pcard-url { font-size: 11px; color: var(–muted); font-family: monospace; }
-.pcard-arrow { font-size: 13px; color: var(–gold); font-weight: 700; }
+.pcard-url { font-size: 11px; color: var(--muted); font-family: monospace; }
+.pcard-arrow { font-size: 13px; color: var(--gold); font-weight: 700; }
 
 /* ── HOME SCREEN ─────────────────────────────────────── */
 .hero {
-background: linear-gradient(135deg, #1a1a2c 0%, #1c2330 100%);
-border: 1px solid var(–border);
-border-radius: 18px;
-padding: 22px 20px;
-margin-bottom: 16px;
-position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2c 0%, #1c2330 100%);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px 20px;
+  margin-bottom: 16px;
+  position: relative; overflow: hidden;
 }
 
 .hero::before {
-content: ‘’;
-position: absolute; top: -40px; right: -40px;
-width: 160px; height: 160px;
-background: radial-gradient(circle, rgba(230,184,74,0.12) 0%, transparent 70%);
-pointer-events: none;
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(230,184,74,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .hero-label {
-font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-text-transform: uppercase; color: var(–gold); margin-bottom: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
 }
 
 .hero-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 26px; font-weight: 900; line-height: 1.2;
-margin-bottom: 6px;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 900; line-height: 1.2;
+  margin-bottom: 6px;
 }
 
-.hero-sub { font-size: 14px; color: var(–sub); line-height: 1.5; margin-bottom: 18px; }
+.hero-sub { font-size: 14px; color: var(--sub); line-height: 1.5; margin-bottom: 18px; }
 
 .hero-actions { display: flex; gap: 10px; }
 
 .btn-primary {
-flex: 1; padding: 13px 16px;
-background: var(–gold);
-color: #000; font-weight: 700; font-size: 15px;
-border: none; border-radius: 10px; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-transition: opacity 0.15s;
+  flex: 1; padding: 13px 16px;
+  background: var(--gold);
+  color: #000; font-weight: 700; font-size: 15px;
+  border: none; border-radius: 10px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.15s;
 }
 .btn-primary:active { opacity: 0.85; }
 
 .btn-secondary {
-padding: 13px 16px;
-background: var(–card);
-color: var(–text); font-weight: 600; font-size: 15px;
-border: 1px solid var(–border); border-radius: 10px; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
-transition: border-color 0.2s;
-text-decoration: none; display: flex; align-items: center;
+  padding: 13px 16px;
+  background: var(--card);
+  color: var(--text); font-weight: 600; font-size: 15px;
+  border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s;
+  text-decoration: none; display: flex; align-items: center;
 }
-.btn-secondary:active { border-color: var(–gold); }
+.btn-secondary:active { border-color: var(--gold); }
 
 /* Quick stats row */
 .stats-row {
-display: grid; grid-template-columns: 1fr 1fr 1fr;
-gap: 10px; margin-bottom: 20px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
 }
 
 .stat-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 13px 12px;
-text-align: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 12px;
+  text-align: center;
 }
 
 .stat-val {
-font-family: ‘Playfair Display’, serif;
-font-size: 24px; font-weight: 900; color: var(–gold);
-line-height: 1;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 900; color: var(--gold);
+  line-height: 1;
 }
 
-.stat-label { font-size: 11px; color: var(–sub); margin-top: 4px; }
+.stat-label { font-size: 11px; color: var(--sub); margin-top: 4px; }
 
 /* Aanbevelingen */
 .rec-label {
-font-size: 12px; font-weight: 600; letter-spacing: 1px;
-text-transform: uppercase; color: var(–sub); margin-bottom: 12px;
+  font-size: 12px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--sub); margin-bottom: 12px;
 }
 
 .rec-cards { display: flex; flex-direction: column; gap: 8px; }
 
 .rec-card {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 12px;
-padding: 13px 14px;
-display: flex; align-items: center; gap: 13px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px;
+  display: flex; align-items: center; gap: 13px;
 }
 
 .rec-num {
-font-family: ‘Playfair Display’, serif;
-font-size: 28px; font-weight: 900;
-color: var(–border); line-height: 1; flex-shrink: 0;
-min-width: 32px;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900;
+  color: var(--border); line-height: 1; flex-shrink: 0;
+  min-width: 32px;
 }
 
 .rec-info { flex: 1; min-width: 0; }
 
 .rec-title {
-font-size: 15px; font-weight: 600; margin-bottom: 2px;
-white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: 15px; font-weight: 600; margin-bottom: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.rec-meta { font-size: 12px; color: var(–sub); }
+.rec-meta { font-size: 12px; color: var(--sub); }
 
 .rec-badge {
-font-size: 10px; font-weight: 600;
-padding: 3px 8px; border-radius: 6px;
-flex-shrink: 0;
+  font-size: 10px; font-weight: 600;
+  padding: 3px 8px; border-radius: 6px;
+  flex-shrink: 0;
 }
 
 /* Countdown strip */
 .countdown-strip {
-background: var(–green-bg);
-border: 1px solid rgba(63,185,80,0.25);
-border-radius: 12px;
-padding: 13px 16px;
-display: flex; align-items: center; justify-content: space-between;
-margin-bottom: 20px;
-text-decoration: none; color: inherit;
+  background: var(--green-bg);
+  border: 1px solid rgba(63,185,80,0.25);
+  border-radius: 12px;
+  padding: 13px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+  text-decoration: none; color: inherit;
 }
-.countdown-left { font-size: 13px; color: var(–sub); }
-.countdown-left strong { color: var(–green); display: block; font-size: 15px; }
+.countdown-left { font-size: 13px; color: var(--sub); }
+.countdown-left strong { color: var(--green); display: block; font-size: 15px; }
 .countdown-right { font-size: 22px; }
 
 /* ── SURPRISE MODAL ──────────────────────────────────── */
 .modal-overlay {
-display: none; position: fixed; inset: 0; z-index: 500;
-background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
-align-items: flex-end; justify-content: center;
-padding-bottom: calc(var(–tab-h) + env(safe-area-inset-bottom) + 10px);
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  align-items: flex-end; justify-content: center;
+  padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 10px);
 }
 .modal-overlay.open { display: flex; }
 
 .modal-sheet {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 22px 22px 16px 16px;
-padding: 24px 22px 22px;
-width: 100%; max-width: 580px;
-animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px 22px 16px 16px;
+  padding: 24px 22px 22px;
+  width: 100%; max-width: 580px;
+  animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
 
 @keyframes slideUp {
-from { transform: translateY(60px); opacity: 0; }
-to   { transform: translateY(0);    opacity: 1; }
+  from { transform: translateY(60px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 
 .modal-handle {
-width: 36px; height: 4px; border-radius: 2px;
-background: var(–muted); margin: 0 auto 20px;
+  width: 36px; height: 4px; border-radius: 2px;
+  background: var(--muted); margin: 0 auto 20px;
 }
 
 .modal-eyebrow {
-font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-text-transform: uppercase; color: var(–gold); margin-bottom: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
 }
 
 .modal-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 24px; font-weight: 900; margin-bottom: 5px; line-height: 1.2;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 900; margin-bottom: 5px; line-height: 1.2;
 }
 
-.modal-meta { font-size: 13px; color: var(–sub); margin-bottom: 10px; }
-.modal-desc { font-size: 15px; color: var(–sub); line-height: 1.55; margin-bottom: 20px; }
+.modal-meta { font-size: 13px; color: var(--sub); margin-bottom: 10px; }
+.modal-desc { font-size: 15px; color: var(--sub); line-height: 1.55; margin-bottom: 20px; }
 
 .modal-actions { display: flex; gap: 10px; }
 
 .modal-btn-go {
-flex: 1; padding: 14px;
-background: var(–gold); color: #000;
-font-weight: 700; font-size: 15px;
-border: none; border-radius: 10px; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
+  flex: 1; padding: 14px;
+  background: var(--gold); color: #000;
+  font-weight: 700; font-size: 15px;
+  border: none; border-radius: 10px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .modal-btn-shuffle {
-padding: 14px 18px;
-background: var(–card); color: var(–text);
-border: 1px solid var(–border); border-radius: 10px;
-cursor: pointer; font-size: 18px;
+  padding: 14px 18px;
+  background: var(--card); color: var(--text);
+  border: 1px solid var(--border); border-radius: 10px;
+  cursor: pointer; font-size: 18px;
 }
 
 .modal-close {
-display: block; text-align: center;
-margin-top: 14px;
-font-size: 13px; color: var(–muted);
-background: none; border: none; cursor: pointer;
-font-family: ‘DM Sans’, sans-serif; width: 100%;
+  display: block; text-align: center;
+  margin-top: 14px;
+  font-size: 13px; color: var(--muted);
+  background: none; border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; width: 100%;
 }
 
 /* ── SETTINGS SCREEN ─────────────────────────────────── */
 .setting-group { margin-bottom: 28px; }
 
 .setting-group-title {
-font-size: 11px; font-weight: 600; letter-spacing: 1px;
-text-transform: uppercase; color: var(–sub);
-margin-bottom: 10px; padding: 0 4px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--sub);
+  margin-bottom: 10px; padding: 0 4px;
 }
 
 .setting-row {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 12px;
-overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .setting-item {
-display: flex; align-items: center; gap: 14px;
-padding: 14px 16px;
-border-bottom: 1px solid var(–border);
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
 }
 .setting-item:last-child { border-bottom: none; }
 
 .setting-icon {
-width: 36px; height: 36px; border-radius: 8px;
-display: flex; align-items: center; justify-content: center;
-font-size: 18px; flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
 }
 
 .setting-content { flex: 1; min-width: 0; }
 
 .setting-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
 
-.setting-desc { font-size: 12px; color: var(–sub); line-height: 1.4; }
+.setting-desc { font-size: 12px; color: var(--sub); line-height: 1.4; }
 
 .setting-badge {
-font-size: 11px; font-weight: 600;
-padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
 }
 
-.badge-best { background: var(–gold-bg); color: var(–gold); border: 1px solid var(–gold-bd); }
-.badge-free { background: var(–green-bg); color: var(–green); border: 1px solid rgba(63,185,80,0.25); }
+.badge-best { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-bd); }
+.badge-free { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
 .badge-paid { background: rgba(218,54,51,0.1); color: #f87171; border: 1px solid rgba(218,54,51,0.25); }
-.badge-tip  { background: var(–blue-bg); color: var(–blue); border: 1px solid rgba(88,166,255,0.25); }
+.badge-tip  { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
 
 /* Info block */
 .info-block {
-background: var(–card);
-border: 1px solid var(–border);
-border-radius: 14px;
-padding: 16px;
-margin-bottom: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
 }
 .info-block-title {
-font-size: 14px; font-weight: 600; margin-bottom: 6px;
-display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600; margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px;
 }
-.info-block-text { font-size: 13px; color: var(–sub); line-height: 1.6; }
-.info-block-text strong { color: var(–text); }
+.info-block-text { font-size: 13px; color: var(--sub); line-height: 1.6; }
+.info-block-text strong { color: var(--text); }
 
 /* Animations */
 @keyframes fadeUp {
-from { opacity: 0; transform: translateY(12px); }
-to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .content > * { animation: fadeUp 0.35s ease both; }
 .content > *:nth-child(1) { animation-delay: 0.04s; }
@@ -473,17 +481,15 @@ to   { opacity: 1; transform: translateY(0); }
 .pcard:nth-child(4) { animation: fadeUp 0.3s 0.18s both; }
 .pcard:nth-child(5) { animation: fadeUp 0.3s 0.22s both; }
 </style>
-
 </head>
 <body>
 
 <!-- ── HEADER ─────────────────────────────────────────── -->
-
 <header class="app-header">
   <div class="header-row">
     <div>
       <div class="app-logo">Stream<em>NL</em></div>
-      <div style="font-family:'Playfair Display',serif;font-size:11px;font-style:italic;font-weight:400;color:var(--sub);letter-spacing:0.5px;margin-top:1px;">Made by Rob Borghouts 2026</div>
+      <div style="font-family:'Playfair Display',serif;font-size:11px;font-style:italic;font-weight:400;color:var(--hdr-sub);letter-spacing:0.5px;margin-top:1px;">Made by Rob Borghouts 2026</div>
     </div>
     <div class="header-pill">100% Gratis</div>
   </div>
@@ -492,7 +498,6 @@ to   { opacity: 1; transform: translateY(0); }
 <!-- ── SCREENS ─────────────────────────────────────────── -->
 
 <!-- HOME -->
-
 <div class="screen active" id="screen-home">
 <div class="content">
 
@@ -571,215 +576,205 @@ to   { opacity: 1; transform: translateY(0); }
 </div>
 
 <!-- FILMS -->
-
 <div class="screen" id="screen-films">
 <div class="content">
   <div class="section-title">🎬 <span>Films</span></div>
   <div class="cards">
 
-```
-<a class="pcard" href="https://rakuten.tv" onclick="goTo(this)">
-  <div class="pcard-bar bar-gold"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🎞️</div>
-      <div class="pcard-name">Rakuten TV</div>
-      <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Grote bibliotheek klassieke en recente films. Ad-supported, geen account nodig. Beschikbaar in NL.</div>
-    <div class="pcard-foot"><span class="pcard-url">rakuten.tv</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://rakuten.tv" onclick="goTo(this)">
+      <div class="pcard-bar bar-gold"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🎞️</div>
+          <div class="pcard-name">Rakuten TV</div>
+          <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Grote bibliotheek klassieke en recente films. Ad-supported, geen account nodig. Beschikbaar in NL.</div>
+        <div class="pcard-foot"><span class="pcard-url">rakuten.tv</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://watch.plex.tv/movies" onclick="goTo(this)">
-  <div class="pcard-bar bar-orange"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🟠</div>
-      <div class="pcard-name">Plex Films</div>
-      <div class="pcard-tags"><span class="tag tag-free">Gratis</span><span class="tag tag-en">EN</span></div>
-    </div>
-    <div class="pcard-desc">Brede filmbibiliotheek met advertenties. Gratis account vereist. Werkt goed in Safari.</div>
-    <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://watch.plex.tv/movies" onclick="goTo(this)">
+      <div class="pcard-bar bar-orange"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🟠</div>
+          <div class="pcard-name">Plex Films</div>
+          <div class="pcard-tags"><span class="tag tag-free">Gratis</span><span class="tag tag-en">EN</span></div>
+        </div>
+        <div class="pcard-desc">Brede filmbibiliotheek met advertenties. Gratis account vereist. Werkt goed in Safari.</div>
+        <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://youtube.com/feed/storefront" onclick="goTo(this)">
-  <div class="pcard-bar bar-red"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">▶️</div>
-      <div class="pcard-name">YouTube Films</div>
-      <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Duizenden gelicenseerde films. Mix van Hollywood en indie. Geen account nodig voor gratis titels.</div>
-    <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://youtube.com/feed/storefront" onclick="goTo(this)">
+      <div class="pcard-bar bar-red"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">▶️</div>
+          <div class="pcard-name">YouTube Films</div>
+          <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Duizenden gelicenseerde films. Mix van Hollywood en indie. Geen account nodig voor gratis titels.</div>
+        <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://arte.tv/nl/videos/films/" onclick="goTo(this)">
-  <div class="pcard-bar bar-teal"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🎭</div>
-      <div class="pcard-name">ARTE Films</div>
-      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Europees cultuurkanaal. Arthouse, klassiekers en festivalfilms. Geen reclame, geen account.</div>
-    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
-```
+    <a class="pcard" href="https://arte.tv/nl/videos/films/" onclick="goTo(this)">
+      <div class="pcard-bar bar-teal"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🎭</div>
+          <div class="pcard-name">ARTE Films</div>
+          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Europees cultuurkanaal. Arthouse, klassiekers en festivalfilms. Geen reclame, geen account.</div>
+        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
   </div>
 </div>
 </div>
 
 <!-- SERIES -->
-
 <div class="screen" id="screen-series">
 <div class="content">
   <div class="section-title">📺 <span>Series & TV</span></div>
   <div class="cards">
 
-```
-<a class="pcard" href="https://npostart.nl" onclick="goTo(this)">
-  <div class="pcard-bar bar-gold"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🇳🇱</div>
-      <div class="pcard-name">NPO Start</div>
-      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Terugkijken NPO 1/2/3 + live streams. Series, drama, entertainment. Geen account nodig.</div>
-    <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://npostart.nl" onclick="goTo(this)">
+      <div class="pcard-bar bar-gold"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🇳🇱</div>
+          <div class="pcard-name">NPO Start</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Terugkijken NPO 1/2/3 + live streams. Series, drama, entertainment. Geen account nodig.</div>
+        <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://www.rtlxl.nl" onclick="goTo(this)">
-  <div class="pcard-bar bar-blue"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">📡</div>
-      <div class="pcard-name">RTL+</div>
-      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame.</div>
-    <div class="pcard-foot"><span class="pcard-url">rtlxl.nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://www.rtlxl.nl" onclick="goTo(this)">
+      <div class="pcard-bar bar-blue"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">📡</div>
+          <div class="pcard-name">RTL+</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame.</div>
+        <div class="pcard-foot"><span class="pcard-url">rtlxl.nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://kijk.nl" onclick="goTo(this)">
-  <div class="pcard-bar bar-purple"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">👁️</div>
-      <div class="pcard-name">Kijk.nl</div>
-      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows en films. Geen account nodig.</div>
-    <div class="pcard-foot"><span class="pcard-url">kijk.nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://kijk.nl" onclick="goTo(this)">
+      <div class="pcard-bar bar-purple"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">👁️</div>
+          <div class="pcard-name">Kijk.nl</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows en films. Geen account nodig.</div>
+        <div class="pcard-foot"><span class="pcard-url">kijk.nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://nos.nl/live" onclick="goTo(this)">
-  <div class="pcard-bar bar-red"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🔴</div>
-      <div class="pcard-name">NOS Live</div>
-      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Live nieuws, breaking events en sportverslaggeving. Geen account nodig.</div>
-    <div class="pcard-foot"><span class="pcard-url">nos.nl/live</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://nos.nl/live" onclick="goTo(this)">
+      <div class="pcard-bar bar-red"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🔴</div>
+          <div class="pcard-name">NOS Live</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Live nieuws, breaking events en sportverslaggeving. Geen account nodig.</div>
+        <div class="pcard-foot"><span class="pcard-url">nos.nl/live</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://watch.plex.tv/live-tv" onclick="goTo(this)">
-  <div class="pcard-bar bar-orange"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">📻</div>
-      <div class="pcard-name">Plex Live TV</div>
-      <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Live internationale kanalen gratis. Nieuws, entertainment en series. Gratis account vereist.</div>
-    <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
-```
+    <a class="pcard" href="https://watch.plex.tv/live-tv" onclick="goTo(this)">
+      <div class="pcard-bar bar-orange"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">📻</div>
+          <div class="pcard-name">Plex Live TV</div>
+          <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Live internationale kanalen gratis. Nieuws, entertainment en series. Gratis account vereist.</div>
+        <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
   </div>
 </div>
 </div>
 
 <!-- DOCU'S -->
-
 <div class="screen" id="screen-docs">
 <div class="content">
   <div class="section-title">🎥 <span>Documentaires</span></div>
   <div class="cards">
 
-```
-<a class="pcard" href="https://arte.tv/nl/videos/documentaires/" onclick="goTo(this)">
-  <div class="pcard-bar bar-teal"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🔭</div>
-      <div class="pcard-name">ARTE Documentaires</div>
-      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Geen reclame, geen account. Topkwaliteit.</div>
-    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://arte.tv/nl/videos/documentaires/" onclick="goTo(this)">
+      <div class="pcard-bar bar-teal"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🔭</div>
+          <div class="pcard-name">ARTE Documentaires</div>
+          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Geen reclame, geen account. Topkwaliteit.</div>
+        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://npostart.nl/documentaire" onclick="goTo(this)">
-  <div class="pcard-bar bar-gold"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🎙️</div>
-      <div class="pcard-name">NPO Documentaires</div>
-      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">VPRO, NTR, Human. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
-    <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://npostart.nl/documentaire" onclick="goTo(this)">
+      <div class="pcard-bar bar-gold"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🎙️</div>
+          <div class="pcard-name">NPO Documentaires</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">VPRO, NTR, Human. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
+        <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://youtube.com/@DWDocumentary" onclick="goTo(this)">
-  <div class="pcard-bar bar-red"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🌍</div>
-      <div class="pcard-name">DW Documentary</div>
-      <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Honderden gratis docs op YouTube. Geopolitiek, natuur, wetenschap. Zoek ook op "VPRO documentary".</div>
-    <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
+    <a class="pcard" href="https://youtube.com/@DWDocumentary" onclick="goTo(this)">
+      <div class="pcard-bar bar-red"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🌍</div>
+          <div class="pcard-name">DW Documentary</div>
+          <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Honderden gratis docs op YouTube. Geopolitiek, natuur, wetenschap. Zoek ook op "VPRO documentary".</div>
+        <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
-<a class="pcard" href="https://arte.tv/nl/live/" onclick="goTo(this)">
-  <div class="pcard-bar bar-teal"></div>
-  <div class="pcard-body">
-    <div class="pcard-top">
-      <div class="pcard-icon">🌐</div>
-      <div class="pcard-name">ARTE Live</div>
-      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
-    </div>
-    <div class="pcard-desc">Concerten, theater, debatten en culturele evenementen live. Europees cultuurzender.</div>
-    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/live</span><span class="pcard-arrow">↗</span></div>
-  </div>
-</a>
-```
+    <a class="pcard" href="https://arte.tv/nl/live/" onclick="goTo(this)">
+      <div class="pcard-bar bar-teal"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🌐</div>
+          <div class="pcard-name">ARTE Live</div>
+          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+        </div>
+        <div class="pcard-desc">Concerten, theater, debatten en culturele evenementen live. Europees cultuurzender.</div>
+        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/live</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
   </div>
 </div>
 </div>
 
 <!-- WATCHLIST -->
-
 <div class="screen" id="screen-watchlist">
 <div class="content">
   <div class="section-title">📋 <span>Watchlist</span></div>
@@ -788,7 +783,6 @@ to   { opacity: 1; transform: translateY(0); }
 </div>
 
 <!-- INSTELLINGEN -->
-
 <div class="screen" id="screen-settings">
 <div class="content">
 
@@ -889,7 +883,6 @@ to   { opacity: 1; transform: translateY(0); }
 </div>
 
 <!-- ── TABBAR ─────────────────────────────────────────── -->
-
 <nav class="tabbar">
   <button class="tab-btn active" id="tab-home" onclick="switchTab('home')">
     <div class="tab-icon">🏠</div>
@@ -924,7 +917,6 @@ to   { opacity: 1; transform: translateY(0); }
 </nav>
 
 <!-- ── SURPRISE MODAL ─────────────────────────────────── -->
-
 <div class="modal-overlay" id="surpriseModal" onclick="closeSurprise()">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -1164,6 +1156,5 @@ function resetWatchlist() {
 
 renderWatchlist();
 </script>
-
 </body>
 </html>
