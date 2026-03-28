@@ -6,27 +6,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Stream NL">
-<meta name="theme-color" content="#1a1020">
-<title>Stream NL — Gratis Dashboard</title>
+<meta name="apple-mobile-web-app-title" content="StreamNL">
+<meta name="theme-color" content="#0d1117">
+<title>StreamNL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #13131a;
-    --card: #1c1c28;
-    --border: #2a2a3a;
-    --gold: #d4a843;
-    --gold-dim: #7a5e20;
-    --amber: #f0b429;
-    --text: #e8e6e0;
-    --muted: #7a7a90;
-    --red: #e85d5d;
-    --blue: #5d9de8;
-    --green: #5de8a0;
-    --teal: #5dd8e8;
-  }
+:root {
+  --bg:       #0d1117;
+  --surface:  #161b22;
+  --card:     #1c2330;
+  --border:   #30363d;
+  --gold:     #e6b84a;
+  --gold-bg:  rgba(230,184,74,0.10);
+  --gold-bd:  rgba(230,184,74,0.28);
+  --text:     #f0ece4;
+  --sub:      #8b949e;
+  --muted:    #484f58;
+  --red:      #da3633;
+  --red-bg:   rgba(218,54,51,0.12);
+  --red-bd:   rgba(218,54,51,0.30);
+  --blue:     #58a6ff;
+  --blue-bg:  rgba(88,166,255,0.10);
+  --teal:     #39d2c0;
+  --teal-bg:  rgba(57,210,192,0.10);
+  --green:    #3fb950;
+  --green-bg: rgba(63,185,80,0.10);
+  --orange:   #d18616;
+  --purple:   #a371f7;
+  --tab-h:    72px;
+}
 
 - { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
@@ -36,843 +45,1121 @@ body {
 font-family: ‘DM Sans’, sans-serif;
 background: var(–bg);
 color: var(–text);
-min-height: 100vh;
-padding-bottom: env(safe-area-inset-bottom);
+min-height: 100dvh;
 overflow-x: hidden;
+padding-bottom: calc(var(–tab-h) + env(safe-area-inset-bottom));
 }
 
-/* Grain overlay */
-body::before {
-content: ‘’;
-position: fixed; inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 200 200’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 0;
-opacity: 0.5;
+/* ── HEADER ─────────────────────────────────────────── */
+.app-header {
+position: sticky; top: 0; z-index: 200;
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+padding: 0 20px 14px;
+padding-top: calc(14px + env(safe-area-inset-top));
 }
 
-/* Header */
-header {
-position: sticky; top: 0; z-index: 100;
-background: linear-gradient(180deg, #1a1020 0%, rgba(14,10,20,0.96) 100%);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-border-bottom: 1px solid rgba(212,168,67,0.25);
-box-shadow: 0 2px 24px rgba(0,0,0,0.6);
-padding: 16px 20px 14px;
-padding-top: calc(16px + env(safe-area-inset-top));
-}
-
-.header-inner {
+.header-row {
 display: flex; align-items: center; justify-content: space-between;
 max-width: 600px; margin: 0 auto;
 }
 
-.logo {
+.app-logo {
 font-family: ‘Playfair Display’, serif;
-font-size: 24px; font-weight: 900;
+font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
 color: var(–gold);
-letter-spacing: -0.5px;
-text-shadow: 0 0 20px rgba(212,168,67,0.5);
+}
+.app-logo em { color: var(–text); font-style: normal; font-weight: 700; }
+
+.header-pill {
+font-size: 11px; font-weight: 600;
+color: var(–gold);
+background: var(–gold-bg);
+border: 1px solid var(–gold-bd);
+border-radius: 20px; padding: 4px 12px;
+letter-spacing: 0.8px; text-transform: uppercase;
 }
 
-.logo span { color: #fff; font-weight: 700; }
+/* ── BOTTOM TABBAR ───────────────────────────────────── */
+.tabbar {
+position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+height: calc(var(–tab-h) + env(safe-area-inset-bottom));
+padding-bottom: env(safe-area-inset-bottom);
+background: var(–surface);
+border-top: 1px solid var(–border);
+display: flex; align-items: stretch;
+}
 
-.badge {
+.tab-btn {
+flex: 1; display: flex; flex-direction: column;
+align-items: center; justify-content: center; gap: 4px;
+background: none; border: none; cursor: pointer;
+padding: 8px 4px;
+color: var(–muted);
+transition: color 0.2s;
+-webkit-tap-highlight-color: transparent;
+}
+
+.tab-btn.active { color: var(–gold); }
+
+.tab-icon { font-size: 22px; line-height: 1; }
+
+.tab-label {
 font-size: 10px; font-weight: 600;
-color: #fff;
-background: linear-gradient(135deg, #b8860b, var(–gold));
-border-radius: 20px;
-padding: 4px 12px;
-letter-spacing: 1px;
-text-transform: uppercase;
-box-shadow: 0 0 12px rgba(212,168,67,0.3);
+letter-spacing: 0.3px;
 }
 
-/* Main */
-main {
-max-width: 600px;
-margin: 0 auto;
-padding: 24px 16px 40px;
-position: relative; z-index: 1;
+.tab-dot {
+width: 4px; height: 4px; border-radius: 50%;
+background: var(–gold);
+opacity: 0; transition: opacity 0.2s;
+margin-top: 2px;
 }
+.tab-btn.active .tab-dot { opacity: 1; }
 
-/* Tip bar */
-.iphone-tip {
-background: linear-gradient(135deg, #1a1a2e, #16213e);
-border: 1px solid #2a3a5a;
-border-radius: 14px;
-padding: 14px 16px;
-margin-bottom: 28px;
-display: flex; gap: 12px; align-items: flex-start;
+/* ── SCREENS ─────────────────────────────────────────── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── SHARED LAYOUT ───────────────────────────────────── */
+.content {
+max-width: 600px; margin: 0 auto;
+padding: 20px 16px 24px;
 }
-
-.tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-
-.tip-text { font-size: 13px; line-height: 1.5; color: #a8b8d8; }
-.tip-text strong { color: var(–blue); }
-.tip-text em { font-style: normal; color: #c8d8f0; }
-
-/* Section */
-.section { margin-bottom: 32px; }
-
-.section-header {
-display: flex; align-items: center; gap: 10px;
-margin-bottom: 14px;
-}
-
-.section-icon { font-size: 18px; }
 
 .section-title {
 font-family: ‘Playfair Display’, serif;
-font-size: 18px; font-weight: 700;
-color: var(–text);
-letter-spacing: -0.3px;
+font-size: 20px; font-weight: 700;
+margin-bottom: 14px; letter-spacing: -0.3px;
 }
 
-.section-count {
-margin-left: auto;
-font-size: 11px;
-color: var(–muted);
-background: var(–card);
-border-radius: 20px;
-padding: 2px 8px;
-}
+.section-title span { color: var(–gold); }
 
-.divider {
-width: 40px; height: 2px;
-border-radius: 2px;
-margin-bottom: 14px;
-}
+.section-gap { margin-bottom: 32px; }
 
-/* Cards grid */
+/* ── PLATFORM CARDS ──────────────────────────────────── */
 .cards { display: flex; flex-direction: column; gap: 10px; }
 
-.card {
+.pcard {
 background: var(–card);
 border: 1px solid var(–border);
 border-radius: 14px;
 overflow: hidden;
-text-decoration: none;
-display: flex;
-align-items: stretch;
-transition: transform 0.15s ease, border-color 0.15s ease;
-position: relative;
+display: flex; align-items: stretch;
+text-decoration: none; color: inherit;
+transition: transform 0.15s, border-color 0.2s;
+}
+.pcard:active { transform: scale(0.975); }
+
+.pcard-bar { width: 4px; flex-shrink: 0; }
+.bar-gold   { background: var(–gold); }
+.bar-red    { background: var(–red); }
+.bar-blue   { background: var(–blue); }
+.bar-teal   { background: var(–teal); }
+.bar-green  { background: var(–green); }
+.bar-orange { background: var(–orange); }
+.bar-purple { background: var(–purple); }
+
+.pcard-body { padding: 13px 14px; flex: 1; min-width: 0; }
+
+.pcard-top {
+display: flex; align-items: center; gap: 9px;
+margin-bottom: 5px;
 }
 
-.card:active { transform: scale(0.97); }
+.pcard-icon { font-size: 20px; flex-shrink: 0; }
 
-.card-accent {
-width: 4px;
-flex-shrink: 0;
-border-radius: 0;
+.pcard-name {
+font-size: 16px; font-weight: 600;
+flex: 1; min-width: 0;
+white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-.card-body {
-padding: 13px 14px;
-flex: 1;
-min-width: 0;
-}
-
-.card-top {
-display: flex; align-items: center; gap: 8px;
-margin-bottom: 4px;
-}
-
-.card-logo { font-size: 18px; flex-shrink: 0; }
-
-.card-name {
-font-size: 15px; font-weight: 500;
-color: var(–text);
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-}
-
-.card-tags {
-display: flex; gap: 5px;
-flex-wrap: wrap;
-margin-left: auto;
-}
+.pcard-tags { display: flex; gap: 5px; flex-shrink: 0; }
 
 .tag {
-font-size: 10px; font-weight: 500;
-border-radius: 6px;
-padding: 2px 7px;
-letter-spacing: 0.3px;
-white-space: nowrap;
+font-size: 10px; font-weight: 600;
+border-radius: 6px; padding: 2px 7px;
+letter-spacing: 0.3px; white-space: nowrap;
 }
+.tag-nl     { background: var(–gold-bg);  color: var(–gold); border: 1px solid var(–gold-bd); }
+.tag-eu     { background: var(–teal-bg);  color: var(–teal); border: 1px solid rgba(57,210,192,0.25); }
+.tag-free   { background: var(–green-bg); color: var(–green); border: 1px solid rgba(63,185,80,0.25); }
+.tag-en     { background: var(–blue-bg);  color: var(–blue); border: 1px solid rgba(88,166,255,0.25); }
 
-.tag-nl { background: rgba(212,168,67,0.15); color: var(–gold); }
-.tag-en { background: rgba(93,157,232,0.15); color: var(–blue); }
-.tag-eu { background: rgba(93,216,232,0.15); color: var(–teal); }
-.tag-no-login { background: rgba(93,232,160,0.15); color: var(–green); }
-
-.card-desc {
-font-size: 12px;
-color: var(–muted);
-line-height: 1.4;
+.pcard-desc {
+font-size: 13px; color: var(–sub); line-height: 1.45;
 margin-bottom: 8px;
 }
 
-.card-footer {
+.pcard-foot {
 display: flex; align-items: center; justify-content: space-between;
 }
 
-.card-url {
-font-size: 11px; color: var(–muted);
-font-family: monospace;
-}
+.pcard-url { font-size: 11px; color: var(–muted); font-family: monospace; }
+.pcard-arrow { font-size: 13px; color: var(–gold); font-weight: 700; }
 
-.card-arrow {
-font-size: 14px;
-color: var(–muted);
-flex-shrink: 0;
-}
-
-/* Colors per accent */
-.acc-gold { background: var(–gold); }
-.acc-red { background: var(–red); }
-.acc-blue { background: var(–blue); }
-.acc-green { background: var(–green); }
-.acc-teal { background: var(–teal); }
-.acc-purple { background: #a07de8; }
-.acc-orange { background: #e87d3e; }
-
-/* Section color bars */
-.bar-films { background: linear-gradient(90deg, var(–gold), #e85d5d); }
-.bar-series { background: linear-gradient(90deg, var(–blue), #a07de8); }
-.bar-docs { background: linear-gradient(90deg, var(–teal), var(–green)); }
-.bar-kids { background: linear-gradient(90deg, #e87d3e, #f0b429); }
-.bar-news { background: linear-gradient(90deg, #e85d5d, #e87d3e); }
-
-/* iPhone setup section */
-.setup-section {
-background: var(–surface);
+/* ── HOME SCREEN ─────────────────────────────────────── */
+.hero {
+background: linear-gradient(135deg, #1a1a2c 0%, #1c2330 100%);
 border: 1px solid var(–border);
 border-radius: 18px;
-padding: 20px;
-margin-bottom: 28px;
+padding: 22px 20px;
+margin-bottom: 16px;
+position: relative; overflow: hidden;
 }
 
-.setup-title {
+.hero::before {
+content: ‘’;
+position: absolute; top: -40px; right: -40px;
+width: 160px; height: 160px;
+background: radial-gradient(circle, rgba(230,184,74,0.12) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.hero-label {
+font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+text-transform: uppercase; color: var(–gold); margin-bottom: 8px;
+}
+
+.hero-title {
 font-family: ‘Playfair Display’, serif;
-font-size: 17px; font-weight: 700;
-margin-bottom: 14px;
-display: flex; align-items: center; gap: 8px;
+font-size: 26px; font-weight: 900; line-height: 1.2;
+margin-bottom: 6px;
 }
 
-.setup-steps { display: flex; flex-direction: column; gap: 12px; }
+.hero-sub { font-size: 14px; color: var(–sub); line-height: 1.5; margin-bottom: 18px; }
 
-.step {
-display: flex; gap: 12px; align-items: flex-start;
-}
+.hero-actions { display: flex; gap: 10px; }
 
-.step-num {
-width: 26px; height: 26px;
-border-radius: 50%;
+.btn-primary {
+flex: 1; padding: 13px 16px;
 background: var(–gold);
-color: var(–bg);
-font-size: 12px; font-weight: 700;
-display: flex; align-items: center; justify-content: center;
+color: #000; font-weight: 700; font-size: 15px;
+border: none; border-radius: 10px; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif;
+transition: opacity 0.15s;
+}
+.btn-primary:active { opacity: 0.85; }
+
+.btn-secondary {
+padding: 13px 16px;
+background: var(–card);
+color: var(–text); font-weight: 600; font-size: 15px;
+border: 1px solid var(–border); border-radius: 10px; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif;
+transition: border-color 0.2s;
+text-decoration: none; display: flex; align-items: center;
+}
+.btn-secondary:active { border-color: var(–gold); }
+
+/* Quick stats row */
+.stats-row {
+display: grid; grid-template-columns: 1fr 1fr 1fr;
+gap: 10px; margin-bottom: 20px;
+}
+
+.stat-card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 13px 12px;
+text-align: center;
+}
+
+.stat-val {
+font-family: ‘Playfair Display’, serif;
+font-size: 24px; font-weight: 900; color: var(–gold);
+line-height: 1;
+}
+
+.stat-label { font-size: 11px; color: var(–sub); margin-top: 4px; }
+
+/* Aanbevelingen */
+.rec-label {
+font-size: 12px; font-weight: 600; letter-spacing: 1px;
+text-transform: uppercase; color: var(–sub); margin-bottom: 12px;
+}
+
+.rec-cards { display: flex; flex-direction: column; gap: 8px; }
+
+.rec-card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 12px;
+padding: 13px 14px;
+display: flex; align-items: center; gap: 13px;
+}
+
+.rec-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 28px; font-weight: 900;
+color: var(–border); line-height: 1; flex-shrink: 0;
+min-width: 32px;
+}
+
+.rec-info { flex: 1; min-width: 0; }
+
+.rec-title {
+font-size: 15px; font-weight: 600; margin-bottom: 2px;
+white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.rec-meta { font-size: 12px; color: var(–sub); }
+
+.rec-badge {
+font-size: 10px; font-weight: 600;
+padding: 3px 8px; border-radius: 6px;
 flex-shrink: 0;
 }
 
-.step-text { font-size: 13px; color: #b0afc8; line-height: 1.5; }
-.step-text strong { color: var(–text); }
-
-/* Footer */
-footer {
-text-align: center;
-font-size: 11px;
-color: var(–muted);
-padding: 12px;
-position: relative; z-index: 1;
+/* Countdown strip */
+.countdown-strip {
+background: var(–green-bg);
+border: 1px solid rgba(63,185,80,0.25);
+border-radius: 12px;
+padding: 13px 16px;
+display: flex; align-items: center; justify-content: space-between;
+margin-bottom: 20px;
+text-decoration: none; color: inherit;
 }
+.countdown-left { font-size: 13px; color: var(–sub); }
+.countdown-left strong { color: var(–green); display: block; font-size: 15px; }
+.countdown-right { font-size: 22px; }
+
+/* ── SURPRISE MODAL ──────────────────────────────────── */
+.modal-overlay {
+display: none; position: fixed; inset: 0; z-index: 500;
+background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+align-items: flex-end; justify-content: center;
+padding-bottom: calc(var(–tab-h) + env(safe-area-inset-bottom) + 10px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal-sheet {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 22px 22px 16px 16px;
+padding: 24px 22px 22px;
+width: 100%; max-width: 580px;
+animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes slideUp {
+from { transform: translateY(60px); opacity: 0; }
+to   { transform: translateY(0);    opacity: 1; }
+}
+
+.modal-handle {
+width: 36px; height: 4px; border-radius: 2px;
+background: var(–muted); margin: 0 auto 20px;
+}
+
+.modal-eyebrow {
+font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+text-transform: uppercase; color: var(–gold); margin-bottom: 8px;
+}
+
+.modal-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 24px; font-weight: 900; margin-bottom: 5px; line-height: 1.2;
+}
+
+.modal-meta { font-size: 13px; color: var(–sub); margin-bottom: 10px; }
+.modal-desc { font-size: 15px; color: var(–sub); line-height: 1.55; margin-bottom: 20px; }
+
+.modal-actions { display: flex; gap: 10px; }
+
+.modal-btn-go {
+flex: 1; padding: 14px;
+background: var(–gold); color: #000;
+font-weight: 700; font-size: 15px;
+border: none; border-radius: 10px; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif;
+}
+
+.modal-btn-shuffle {
+padding: 14px 18px;
+background: var(–card); color: var(–text);
+border: 1px solid var(–border); border-radius: 10px;
+cursor: pointer; font-size: 18px;
+}
+
+.modal-close {
+display: block; text-align: center;
+margin-top: 14px;
+font-size: 13px; color: var(–muted);
+background: none; border: none; cursor: pointer;
+font-family: ‘DM Sans’, sans-serif; width: 100%;
+}
+
+/* ── SETTINGS SCREEN ─────────────────────────────────── */
+.setting-group { margin-bottom: 28px; }
+
+.setting-group-title {
+font-size: 11px; font-weight: 600; letter-spacing: 1px;
+text-transform: uppercase; color: var(–sub);
+margin-bottom: 10px; padding: 0 4px;
+}
+
+.setting-row {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 12px;
+overflow: hidden;
+}
+
+.setting-item {
+display: flex; align-items: center; gap: 14px;
+padding: 14px 16px;
+border-bottom: 1px solid var(–border);
+}
+.setting-item:last-child { border-bottom: none; }
+
+.setting-icon {
+width: 36px; height: 36px; border-radius: 8px;
+display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+
+.setting-content { flex: 1; min-width: 0; }
+
+.setting-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+
+.setting-desc { font-size: 12px; color: var(–sub); line-height: 1.4; }
+
+.setting-badge {
+font-size: 11px; font-weight: 600;
+padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+}
+
+.badge-best { background: var(–gold-bg); color: var(–gold); border: 1px solid var(–gold-bd); }
+.badge-free { background: var(–green-bg); color: var(–green); border: 1px solid rgba(63,185,80,0.25); }
+.badge-paid { background: rgba(218,54,51,0.1); color: #f87171; border: 1px solid rgba(218,54,51,0.25); }
+.badge-tip  { background: var(–blue-bg); color: var(–blue); border: 1px solid rgba(88,166,255,0.25); }
+
+/* Info block */
+.info-block {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 16px;
+margin-bottom: 12px;
+}
+.info-block-title {
+font-size: 14px; font-weight: 600; margin-bottom: 6px;
+display: flex; align-items: center; gap: 8px;
+}
+.info-block-text { font-size: 13px; color: var(–sub); line-height: 1.6; }
+.info-block-text strong { color: var(–text); }
 
 /* Animations */
 @keyframes fadeUp {
-from { opacity: 0; transform: translateY(16px); }
+from { opacity: 0; transform: translateY(12px); }
 to   { opacity: 1; transform: translateY(0); }
 }
+.content > * { animation: fadeUp 0.35s ease both; }
+.content > *:nth-child(1) { animation-delay: 0.04s; }
+.content > *:nth-child(2) { animation-delay: 0.08s; }
+.content > *:nth-child(3) { animation-delay: 0.12s; }
+.content > *:nth-child(4) { animation-delay: 0.16s; }
+.content > *:nth-child(5) { animation-delay: 0.20s; }
+.content > *:nth-child(6) { animation-delay: 0.24s; }
 
-.section { animation: fadeUp 0.4s ease both; }
-.section:nth-child(1) { animation-delay: 0.05s; }
-.section:nth-child(2) { animation-delay: 0.10s; }
-.section:nth-child(3) { animation-delay: 0.15s; }
-.section:nth-child(4) { animation-delay: 0.20s; }
-.section:nth-child(5) { animation-delay: 0.25s; }
-.section:nth-child(6) { animation-delay: 0.30s; }
-.iphone-tip { animation: fadeUp 0.4s ease both; }
-.setup-section { animation: fadeUp 0.4s ease both; animation-delay: 0.02s; }
+.pcard:nth-child(1) { animation: fadeUp 0.3s 0.06s both; }
+.pcard:nth-child(2) { animation: fadeUp 0.3s 0.10s both; }
+.pcard:nth-child(3) { animation: fadeUp 0.3s 0.14s both; }
+.pcard:nth-child(4) { animation: fadeUp 0.3s 0.18s both; }
+.pcard:nth-child(5) { animation: fadeUp 0.3s 0.22s both; }
 </style>
 
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">Stream<span>NL</span></div>
-    <div class="badge">100% Gratis</div>
+<!-- ── HEADER ─────────────────────────────────────────── -->
+
+<header class="app-header">
+  <div class="header-row">
+    <div class="app-logo">Stream<em>NL</em></div>
+    <div class="header-pill">100% Gratis</div>
   </div>
 </header>
 
-<main>
+<!-- ── SCREENS ─────────────────────────────────────────── -->
 
-  <!-- iPhone tip -->
+<!-- HOME -->
 
-  <div class="iphone-tip">
-    <div class="tip-icon">📱</div>
-    <div class="tip-text">
-      <strong>Beste iPhone-setup:</strong> Voeg dit dashboard toe via Safari → <em>Deel → Zet op beginscherm</em>. Open links direct in Safari voor fullscreen. Gebruik <em>Safari + Focus-modus</em> voor afleiding-vrij kijken.
+<div class="screen active" id="screen-home">
+<div class="content">
+
+  <div class="hero">
+    <div class="hero-label">🇳🇱 Jouw gratis streaming hub</div>
+    <div class="hero-title">Vanavond iets<br>goeds kijken?</div>
+    <div class="hero-sub">Alle gratis, legale NL-platforms op één plek. Geen abonnement nodig.</div>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openSurprise()">🎲 Verras me</button>
+      <a class="btn-secondary" onclick="switchTab('watchlist')">📋 Watchlist</a>
     </div>
   </div>
 
-  <!-- Quick actions -->
-
-  <div style="display:flex; gap:10px; margin-bottom:22px; animation: fadeUp 0.4s ease 0.03s both;">
-    <button onclick="surpriseMe()" style="
-      flex:1; padding:13px 10px;
-      background:linear-gradient(135deg,#1e1430,#2a1a40);
-      border:1px solid #6a3d9a; border-radius:12px;
-      color:#d7a8f0; font-family:'Playfair Display',serif;
-      font-size:14px; font-weight:700; cursor:pointer;
-      box-shadow: 0 0 14px rgba(106,61,154,0.2);
-    ">🎲 Verras me</button>
-    <div id="mondayBox" style="
-      flex:1.3; padding:13px 14px;
-      background:linear-gradient(135deg,#0e1e14,#0a1a10);
-      border:1px solid #27ae60; border-radius:12px;
-      font-size:12px; color:#5de8a0; line-height:1.4;
-      box-shadow: 0 0 14px rgba(39,174,96,0.12);
-    ">⏱️ Laadt...</div>
-  </div>
-
-  <!-- Surprise modal -->
-
-  <div id="surpriseModal" style="
-    display:none; position:fixed; inset:0; z-index:500;
-    background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
-    align-items:center; justify-content:center; padding:24px;
-  " onclick="this.style.display='none'">
-    <div style="
-      background:#1c1c28; border:1px solid #d4a843;
-      border-radius:18px; padding:28px 24px; max-width:340px; width:100%;
-      box-shadow: 0 0 40px rgba(212,168,67,0.2);
-      animation: fadeUp 0.3s ease;
-    " onclick="event.stopPropagation()">
-      <div style="font-size:11px;letter-spacing:2px;color:#d4a843;margin-bottom:12px;text-transform:uppercase;">🎲 Vanavond kijken</div>
-      <div id="surpriseTitle" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;margin-bottom:6px;color:#fff;"></div>
-      <div id="surpriseYear" style="font-size:13px;color:#7a7a90;margin-bottom:10px;"></div>
-      <div id="surpriseDesc" style="font-size:14px;color:#b0afc8;line-height:1.5;margin-bottom:16px;"></div>
-      <div style="display:flex;gap:10px;">
-        <a id="surpriseLink" href="#" onclick="window.location.href=this.getAttribute('data-url');return false;" data-url="#" style="
-          flex:1; text-align:center; padding:11px;
-          background:#d4a843; border-radius:8px;
-          color:#000; font-weight:700; font-size:14px;
-          text-decoration:none;
-        ">Bekijk nu →</a>
-        <button onclick="surpriseMe()" style="
-          padding:11px 16px; background:transparent;
-          border:1px solid #2a2a3a; border-radius:8px;
-          color:#7a7a90; cursor:pointer; font-size:14px;
-        ">🔀</button>
-      </div>
-      <div style="text-align:center;margin-top:12px;">
-        <button onclick="document.getElementById('surpriseModal').style.display='none'" style="
-          background:transparent;border:none;color:#3a3a5a;
-          font-size:12px;cursor:pointer;
-        ">Sluiten</button>
-      </div>
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-val">8</div>
+      <div class="stat-label">Platforms</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="statDays">—</div>
+      <div class="stat-label">Dagen tot<br>nieuwe lijst</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">€0</div>
+      <div class="stat-label">Kosten</div>
     </div>
   </div>
 
-  <!-- iPhone Setup -->
-
-  <div class="setup-section">
-    <div class="setup-title">⚙️ iPhone Advies per Platform</div>
-    <div class="setup-steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-text"><strong>NPO Start / RTL+ / Kijk.nl</strong> — Download de officiële apps uit de App Store. Werken perfect als native app, incl. AirPlay naar TV.</div>
+  <div class="section-gap">
+    <div class="rec-label">⭐ Aanbevelingen deze week</div>
+    <div class="rec-cards">
+      <div class="rec-card">
+        <div class="rec-num">01</div>
+        <div class="rec-info">
+          <div class="rec-title">No Country for Old Men</div>
+          <div class="rec-meta">Thriller · 2007 · Plex</div>
+        </div>
+        <span class="rec-badge" style="background:var(--red-bg);color:#f87171;border:1px solid var(--red-bd);">Thriller</span>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-text"><strong>ARTE & YouTube</strong> — Download app of gebruik Safari. ARTE-app is sterk voor docs. YouTube-app biedt beste kwaliteit.</div>
+      <div class="rec-card">
+        <div class="rec-num">02</div>
+        <div class="rec-info">
+          <div class="rec-title">Icarus</div>
+          <div class="rec-meta">Documentaire · 2017 · YouTube</div>
+        </div>
+        <span class="rec-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Docu</span>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text"><strong>Rakuten TV / Plex</strong> — Safari werkt goed; Plex heeft ook een iOS-app. Rakuten heeft geen eigen NL-app, gebruik dus browser.</div>
+      <div class="rec-card">
+        <div class="rec-num">03</div>
+        <div class="rec-info">
+          <div class="rec-title">Spotlight</div>
+          <div class="rec-meta">Waargeburd · 2015 · Rakuten TV</div>
+        </div>
+        <span class="rec-badge" style="background:rgba(161,113,247,.12);color:var(--purple);border:1px solid rgba(161,113,247,.25);">Waar</span>
       </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-text"><strong>AirPlay tip:</strong> Alle Safari-streams zijn AirPlay-compatibel. Tik op het AirPlay-icoontje in de videospeler om naar je TV te sturen.</div>
+      <div class="rec-card">
+        <div class="rec-num">04</div>
+        <div class="rec-info">
+          <div class="rec-title">VPRO Documentaires</div>
+          <div class="rec-meta">Documentaire · NPO Start</div>
+        </div>
+        <span class="rec-badge" style="background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd);">NL</span>
       </div>
     </div>
   </div>
 
-  <!-- FILMS -->
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🎬</div>
-      <div class="section-title">Films</div>
-      <div class="section-count">4 platforms</div>
+  <a class="countdown-strip" onclick="switchTab('watchlist')">
+    <div class="countdown-left">
+      <strong id="countdownText">Laadt...</strong>
+      <span>Watchlist roteert elke maandag</span>
     </div>
-    <div class="divider bar-films"></div>
-    <div class="cards">
-
-```
-  <a href="https://rakuten.tv" class="card">
-    <div class="card-accent acc-gold"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🎞️</div>
-        <div class="card-name">Rakuten TV</div>
-        <div class="card-tags">
-          <span class="tag tag-en">EN</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Grote bibliotheek met klassieke en recente films. Gratis tier met advertenties, volledig legaal in NL.</div>
-      <div class="card-footer">
-        <span class="card-url">rakuten.tv</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://youtube.com/feed/storefront" class="card">
-    <div class="card-accent acc-red"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">▶️</div>
-        <div class="card-name">YouTube Films</div>
-        <div class="card-tags">
-          <span class="tag tag-en">EN/NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Duizenden gelicenseerde films gratis te bekijken via de Films & TV-sectie. Mix van Hollywood en indie.</div>
-      <div class="card-footer">
-        <span class="card-url">youtube.com</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://watch.plex.tv/movies" class="card">
-    <div class="card-accent acc-orange"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🟠</div>
-        <div class="card-name">Plex Films</div>
-        <div class="card-tags">
-          <span class="tag tag-en">EN</span>
-        </div>
-      </div>
-      <div class="card-desc">Gratis films met advertenties. Account nodig maar geen betaling. Brede bibliotheek met diverse genres.</div>
-      <div class="card-footer">
-        <span class="card-url">watch.plex.tv</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://arte.tv/nl/videos/films/" class="card">
-    <div class="card-accent acc-teal"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🎭</div>
-        <div class="card-name">ARTE Films</div>
-        <div class="card-tags">
-          <span class="tag tag-eu">EU</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Europees cultuurkanaal met arthouse, klassiekers en festivalfilms. Gratis, geen reclame, geen account.</div>
-      <div class="card-footer">
-        <span class="card-url">arte.tv/nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
+    <div class="countdown-right">📅</div>
   </a>
 
 </div>
-```
+</div>
 
+<!-- FILMS -->
+
+<div class="screen" id="screen-films">
+<div class="content">
+  <div class="section-title">🎬 <span>Films</span></div>
+  <div class="cards">
+
+```
+<a class="pcard" href="https://rakuten.tv" onclick="goTo(this)">
+  <div class="pcard-bar bar-gold"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🎞️</div>
+      <div class="pcard-name">Rakuten TV</div>
+      <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Grote bibliotheek klassieke en recente films. Ad-supported, geen account nodig. Beschikbaar in NL.</div>
+    <div class="pcard-foot"><span class="pcard-url">rakuten.tv</span><span class="pcard-arrow">↗</span></div>
   </div>
-
-  <!-- SERIES & TV -->
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">📺</div>
-      <div class="section-title">Series & TV</div>
-      <div class="section-count">4 platforms</div>
-    </div>
-    <div class="divider bar-series"></div>
-    <div class="cards">
-
-```
-  <a href="https://npostart.nl" class="card">
-    <div class="card-accent acc-gold"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🇳🇱</div>
-        <div class="card-name">NPO Start</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Terugkijken NPO 1/2/3, live streams, series, drama en entertainment van de publieke omroep. Beste NL-app.</div>
-      <div class="card-footer">
-        <span class="card-url">npostart.nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://www.rtlxl.nl" class="card">
-    <div class="card-accent acc-blue"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">📡</div>
-        <div class="card-name">RTL+</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-        </div>
-      </div>
-      <div class="card-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame, account aanbevolen.</div>
-      <div class="card-footer">
-        <span class="card-url">rtlxl.nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://kijk.nl" class="card">
-    <div class="card-accent acc-purple"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">👁️</div>
-        <div class="card-name">Kijk.nl</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows, films en nieuws. Gratis, geen account nodig.</div>
-      <div class="card-footer">
-        <span class="card-url">kijk.nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://watch.plex.tv/live-tv" class="card">
-    <div class="card-accent acc-orange"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">📻</div>
-        <div class="card-name">Plex Live TV</div>
-        <div class="card-tags">
-          <span class="tag tag-en">EN</span>
-        </div>
-      </div>
-      <div class="card-desc">Live internationale kanalen gratis. Mix van nieuws, entertainment en series. Account nodig, geen betaling.</div>
-      <div class="card-footer">
-        <span class="card-url">watch.plex.tv</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-</div>
-```
-
-  </div>
-
-  <!-- DOCUMENTAIRES -->
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🎥</div>
-      <div class="section-title">Documentaires</div>
-      <div class="section-count">3 platforms</div>
-    </div>
-    <div class="divider bar-docs"></div>
-    <div class="cards">
-
-```
-  <a href="https://arte.tv/nl/videos/documentaires/" class="card">
-    <div class="card-accent acc-teal"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🔭</div>
-        <div class="card-name">ARTE Documentaires</div>
-        <div class="card-tags">
-          <span class="tag tag-eu">EU</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Hoge kwaliteit, geen reclame, geen account.</div>
-      <div class="card-footer">
-        <span class="card-url">arte.tv/nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://npostart.nl/documentaire" class="card">
-    <div class="card-accent acc-gold"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🎙️</div>
-        <div class="card-name">NPO Documentaires</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">VPRO, NTR, Human en andere omroepen. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
-      <div class="card-footer">
-        <span class="card-url">npostart.nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://youtube.com/@DWDocumentary" class="card">
-    <div class="card-accent acc-red"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🌍</div>
-        <div class="card-name">YouTube Docs</div>
-        <div class="card-tags">
-          <span class="tag tag-en">EN/NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">DW Documentary, VPRO, NatGeo, Vice en meer. Onbeperkt gratis. Tip: zoek op "VPRO documentary" voor NL-subs.</div>
-      <div class="card-footer">
-        <span class="card-url">youtube.com</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-</div>
-```
-
-  </div>
-
-  <!-- NIEUWS & LIVE -->
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">📰</div>
-      <div class="section-title">Nieuws & Live TV</div>
-      <div class="section-count">3 platforms</div>
-    </div>
-    <div class="divider bar-news"></div>
-    <div class="cards">
-
-```
-  <a href="https://nos.nl/live" class="card">
-    <div class="card-accent acc-red"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">📡</div>
-        <div class="card-name">NOS Live</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Live nieuws, breaking events, sportverslaggeving. Direct via nos.nl/live of via NPO Start. Geen account nodig.</div>
-      <div class="card-footer">
-        <span class="card-url">nos.nl/live</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://npostart.nl/live" class="card">
-    <div class="card-accent acc-gold"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🔴</div>
-        <div class="card-name">NPO Live</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Live NPO 1, 2, 3 plus extra-kanalen NPO 1 Extra, 2 Extra, Politiek & Nieuws. Volledig gratis, geen account.</div>
-      <div class="card-footer">
-        <span class="card-url">npostart.nl/live</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://arte.tv/nl/live/" class="card">
-    <div class="card-accent acc-teal"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🌐</div>
-        <div class="card-name">ARTE Live</div>
-        <div class="card-tags">
-          <span class="tag tag-eu">EU</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Europees cultuurkanaal live. Concerten, theater, debatten en culturele evenementen rechtstreeks.</div>
-      <div class="card-footer">
-        <span class="card-url">arte.tv/nl/live</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-</div>
-```
-
-  </div>
-
-  <!-- KIDS -->
-
-  <div class="section">
-    <div class="section-header">
-      <div class="section-icon">🧒</div>
-      <div class="section-title">Kids</div>
-      <div class="section-count">2 platforms</div>
-    </div>
-    <div class="divider bar-kids"></div>
-    <div class="cards">
-
-```
-  <a href="https://npostart.nl/npozappxl" class="card">
-    <div class="card-accent acc-orange"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🌟</div>
-        <div class="card-name">NPO Zapp XL</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Kinderprogrammering van NPO Zapp. Animaties, series en educatief aanbod voor alle leeftijden.</div>
-      <div class="card-footer">
-        <span class="card-url">npostart.nl</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-  <a href="https://youtube.com/@NatGeoKidsDutch" class="card">
-    <div class="card-accent acc-green"></div>
-    <div class="card-body">
-      <div class="card-top">
-        <div class="card-logo">🦁</div>
-        <div class="card-name">YouTube Kids NL</div>
-        <div class="card-tags">
-          <span class="tag tag-nl">NL</span>
-          <span class="tag tag-no-login">Geen login</span>
-        </div>
-      </div>
-      <div class="card-desc">Via YouTube Kids-app of browser. NatGeo Kids, tekenfilms, educatief. Veilig, gratis, Nederlandstalig aanbod.</div>
-      <div class="card-footer">
-        <span class="card-url">youtube.com</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-  </a>
-
-</div>
-```
-
-  </div>
-
-  <!-- Watchlist link -->
-
-<a href="watchlist.html" style="
-display:flex; align-items:center; justify-content:space-between;
-margin-top:8px;
-background:#14141e; border:1px solid #c0392b;
-border-radius:12px; padding:16px 20px;
-text-decoration:none; color:#ede8e0;
-box-shadow: 0 0 18px rgba(192,57,43,0.15);
-animation: fadeUp 0.4s ease 0.35s both;
-">
-<div>
-<div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:3px;">
-🔪 Wekelijkse Watchlist
-</div>
-<div style="font-size:12px;color:#6b6b88;">Thrillers · Actie · Waargeburd · Docu — roteert elke maandag</div>
-</div>
-<div style="color:#c0392b;font-size:20px;">→</div>
 </a>
 
-</main>
+<a class="pcard" href="https://watch.plex.tv/movies" onclick="goTo(this)">
+  <div class="pcard-bar bar-orange"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🟠</div>
+      <div class="pcard-name">Plex Films</div>
+      <div class="pcard-tags"><span class="tag tag-free">Gratis</span><span class="tag tag-en">EN</span></div>
+    </div>
+    <div class="pcard-desc">Brede filmbibiliotheek met advertenties. Gratis account vereist. Werkt goed in Safari.</div>
+    <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
 
-<footer>Made by Rob Borghouts 2026 · Alleen legale, gratis NL-platforms</footer>
+<a class="pcard" href="https://youtube.com/feed/storefront" onclick="goTo(this)">
+  <div class="pcard-bar bar-red"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">▶️</div>
+      <div class="pcard-name">YouTube Films</div>
+      <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Duizenden gelicenseerde films. Mix van Hollywood en indie. Geen account nodig voor gratis titels.</div>
+    <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://arte.tv/nl/videos/films/" onclick="goTo(this)">
+  <div class="pcard-bar bar-teal"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🎭</div>
+      <div class="pcard-name">ARTE Films</div>
+      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Europees cultuurkanaal. Arthouse, klassiekers en festivalfilms. Geen reclame, geen account.</div>
+    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+```
+
+  </div>
+</div>
+</div>
+
+<!-- SERIES -->
+
+<div class="screen" id="screen-series">
+<div class="content">
+  <div class="section-title">📺 <span>Series & TV</span></div>
+  <div class="cards">
+
+```
+<a class="pcard" href="https://npostart.nl" onclick="goTo(this)">
+  <div class="pcard-bar bar-gold"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🇳🇱</div>
+      <div class="pcard-name">NPO Start</div>
+      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Terugkijken NPO 1/2/3 + live streams. Series, drama, entertainment. Geen account nodig.</div>
+    <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://www.rtlxl.nl" onclick="goTo(this)">
+  <div class="pcard-bar bar-blue"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">📡</div>
+      <div class="pcard-name">RTL+</div>
+      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame.</div>
+    <div class="pcard-foot"><span class="pcard-url">rtlxl.nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://kijk.nl" onclick="goTo(this)">
+  <div class="pcard-bar bar-purple"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">👁️</div>
+      <div class="pcard-name">Kijk.nl</div>
+      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows en films. Geen account nodig.</div>
+    <div class="pcard-foot"><span class="pcard-url">kijk.nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://nos.nl/live" onclick="goTo(this)">
+  <div class="pcard-bar bar-red"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🔴</div>
+      <div class="pcard-name">NOS Live</div>
+      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Live nieuws, breaking events en sportverslaggeving. Geen account nodig.</div>
+    <div class="pcard-foot"><span class="pcard-url">nos.nl/live</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://watch.plex.tv/live-tv" onclick="goTo(this)">
+  <div class="pcard-bar bar-orange"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">📻</div>
+      <div class="pcard-name">Plex Live TV</div>
+      <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Live internationale kanalen gratis. Nieuws, entertainment en series. Gratis account vereist.</div>
+    <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+```
+
+  </div>
+</div>
+</div>
+
+<!-- DOCU'S -->
+
+<div class="screen" id="screen-docs">
+<div class="content">
+  <div class="section-title">🎥 <span>Documentaires</span></div>
+  <div class="cards">
+
+```
+<a class="pcard" href="https://arte.tv/nl/videos/documentaires/" onclick="goTo(this)">
+  <div class="pcard-bar bar-teal"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🔭</div>
+      <div class="pcard-name">ARTE Documentaires</div>
+      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Geen reclame, geen account. Topkwaliteit.</div>
+    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://npostart.nl/documentaire" onclick="goTo(this)">
+  <div class="pcard-bar bar-gold"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🎙️</div>
+      <div class="pcard-name">NPO Documentaires</div>
+      <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">VPRO, NTR, Human. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
+    <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://youtube.com/@DWDocumentary" onclick="goTo(this)">
+  <div class="pcard-bar bar-red"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🌍</div>
+      <div class="pcard-name">DW Documentary</div>
+      <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Honderden gratis docs op YouTube. Geopolitiek, natuur, wetenschap. Zoek ook op "VPRO documentary".</div>
+    <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+
+<a class="pcard" href="https://arte.tv/nl/live/" onclick="goTo(this)">
+  <div class="pcard-bar bar-teal"></div>
+  <div class="pcard-body">
+    <div class="pcard-top">
+      <div class="pcard-icon">🌐</div>
+      <div class="pcard-name">ARTE Live</div>
+      <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+    </div>
+    <div class="pcard-desc">Concerten, theater, debatten en culturele evenementen live. Europees cultuurzender.</div>
+    <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/live</span><span class="pcard-arrow">↗</span></div>
+  </div>
+</a>
+```
+
+  </div>
+</div>
+</div>
+
+<!-- WATCHLIST -->
+
+<div class="screen" id="screen-watchlist">
+<div class="content">
+  <div class="section-title">📋 <span>Watchlist</span></div>
+  <div id="watchlistContent"></div>
+</div>
+</div>
+
+<!-- INSTELLINGEN -->
+
+<div class="screen" id="screen-settings">
+<div class="content">
+
+  <div class="section-title">⚙️ <span>Advies & Instellingen</span></div>
+
+  <div class="setting-group">
+    <div class="setting-group-title">📱 iPhone setup</div>
+    <div class="setting-row">
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1a3a2e;">🏠</div>
+        <div class="setting-content">
+          <div class="setting-title">Zet op beginscherm</div>
+          <div class="setting-desc">Safari → Deel → Zet op beginscherm. Werkt als native app met fullscreen.</div>
+        </div>
+        <span class="setting-badge badge-best">Stap 1</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1a2a3e;">📺</div>
+        <div class="setting-content">
+          <div class="setting-title">AirPlay naar TV</div>
+          <div class="setting-desc">Alle Safari-streams zijn AirPlay-compatibel. Tik het icoontje in de videospeler.</div>
+        </div>
+        <span class="setting-badge badge-tip">Tip</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#2a1a2e;">🎯</div>
+        <div class="setting-content">
+          <div class="setting-title">Focus-modus</div>
+          <div class="setting-desc">Instellingen → Focus → Niet storen. Kijk zonder afleidingen.</div>
+        </div>
+        <span class="setting-badge badge-tip">Tip</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-group">
+    <div class="setting-group-title">🔇 Ad Blockers voor Safari</div>
+    <div class="setting-row">
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1e2a1e;">🛡️</div>
+        <div class="setting-content">
+          <div class="setting-title">AdGuard</div>
+          <div class="setting-desc">Beste keuze. Gratis Safari-extensie. Blokkeert voor ze laden. App Store → AdGuard → Instellingen → Safari → Extensies → Aan.</div>
+        </div>
+        <span class="setting-badge badge-free">Gratis</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1a1e2e;">🔒</div>
+        <div class="setting-content">
+          <div class="setting-title">1Blocker</div>
+          <div class="setting-desc">Lichtgewicht, iCloud-sync over al je Apple-apparaten. Basis gratis, YouTube-blokkering betaald.</div>
+        </div>
+        <span class="setting-badge badge-free">Gratis</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#2a1e1e;">⚡</div>
+        <div class="setting-content">
+          <div class="setting-title">Wipr 2</div>
+          <div class="setting-desc">Set & forget. Eenmalig €4,99. Geen abonnement, automatisch bijgewerkt.</div>
+        </div>
+        <span class="setting-badge badge-paid">€4,99</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting-group">
+    <div class="setting-group-title">📱 Apps vs Safari</div>
+    <div class="setting-row">
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1e2a1e;">✅</div>
+        <div class="setting-content">
+          <div class="setting-title">Download app: NPO Start, RTL+, Kijk.nl</div>
+          <div class="setting-desc">Native apps werken beter. AirPlay, offline, betere kwaliteit.</div>
+        </div>
+        <span class="setting-badge badge-best">App</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:#1a2a3e;">🌐</div>
+        <div class="setting-content">
+          <div class="setting-title">Gebruik Safari: Rakuten TV, ARTE</div>
+          <div class="setting-desc">Geen NL-app beschikbaar. Safari werkt prima, AirPlay ook.</div>
+        </div>
+        <span class="setting-badge badge-tip">Safari</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <div class="info-block-title">⚠️ Let op: ads in apps</div>
+    <div class="info-block-text">Ad blockers werken alleen in <strong>Safari-browser</strong>. In de NPO Start-, RTL+- en Kijk.nl-apps zitten advertenties ingebakken in de videostream — die zijn technisch niet te blokkeren zonder de video te breken.</div>
+  </div>
+
+  <div style="text-align:center;padding:16px 0;font-size:11px;color:var(--muted);">
+    Made by Rob Borghouts 2026 · Alleen legale, gratis NL-platforms
+  </div>
+
+</div>
+</div>
+
+<!-- ── TABBAR ─────────────────────────────────────────── -->
+
+<nav class="tabbar">
+  <button class="tab-btn active" id="tab-home" onclick="switchTab('home')">
+    <div class="tab-icon">🏠</div>
+    <div class="tab-label">Home</div>
+    <div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-films" onclick="switchTab('films')">
+    <div class="tab-icon">🎬</div>
+    <div class="tab-label">Films</div>
+    <div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-series" onclick="switchTab('series')">
+    <div class="tab-icon">📺</div>
+    <div class="tab-label">Series</div>
+    <div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-docs" onclick="switchTab('docs')">
+    <div class="tab-icon">🎥</div>
+    <div class="tab-label">Docu's</div>
+    <div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-watchlist" onclick="switchTab('watchlist')">
+    <div class="tab-icon">📋</div>
+    <div class="tab-label">Watchlist</div>
+    <div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-settings" onclick="switchTab('settings')">
+    <div class="tab-icon">⚙️</div>
+    <div class="tab-label">Advies</div>
+    <div class="tab-dot"></div>
+  </button>
+</nav>
+
+<!-- ── SURPRISE MODAL ─────────────────────────────────── -->
+
+<div class="modal-overlay" id="surpriseModal" onclick="closeSurprise()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-eyebrow">🎲 Vanavond kijken</div>
+    <div class="modal-title" id="mTitle">—</div>
+    <div class="modal-meta" id="mMeta">—</div>
+    <div class="modal-desc" id="mDesc">—</div>
+    <div class="modal-actions">
+      <button class="modal-btn-go" onclick="goToSurprise()">Bekijk nu →</button>
+      <button class="modal-btn-shuffle" onclick="openSurprise()">🔀</button>
+    </div>
+    <button class="modal-close" onclick="closeSurprise()">Sluiten</button>
+  </div>
+</div>
 
 <script>
-// Surprise me - all platforms pool
-const allTitles = [
-  { title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
-  { title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
-  { title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
-  { title:'The Social Network', year:'2010', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
-  { title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Non-stop achtervolging. Visueel meesterwerk. Ademloos.' },
-  { title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
-  { title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'De Niro vs Pacino. Hectische LA-heist-thriller.' },
-  { title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', desc:'Rio favela. Drugs en geweld. Meeslepend en mooi.' },
-  { title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Drugs. Grens. Onbarmhartig. Villeneuve op zijn scherpst.' },
-  { title:'Knives Out', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
-  { title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
-  { title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher snijdt scherp. Huwelijk als slagveld.' },
-  { title:'Nightcrawler', year:'2014', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Jake Gyllenhaal als sinistere nieuwsjager. Ongemakkelijk.' },
-  { title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
-  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Genocide in Rwanda. Één man redt 1200 levens. Verplicht.' },
-  { title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
-  { title:'Three Billboards Outside Ebbing', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
-  { title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af.' },
-  { title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
-  { title:'Oldboy', year:'2003', platform:'Plex', url:'https://watch.plex.tv', desc:'Park Chan-wook. Koreaanse revenge-thriller. Slag in je gezicht.' },
-];
-
-let lastSurprise = -1;
-
-function surpriseMe() {
-  let idx;
-  do { idx = Math.floor(Math.random() * allTitles.length); } while (idx === lastSurprise);
-  lastSurprise = idx;
-  const t = allTitles[idx];
-  document.getElementById('surpriseTitle').textContent = t.title;
-  document.getElementById('surpriseYear').textContent = t.year + ' · ' + t.platform;
-  document.getElementById('surpriseDesc').textContent = t.desc;
-  document.getElementById('surpriseLink').setAttribute('data-url', t.url);
-  document.getElementById('surpriseModal').style.display = 'flex';
+// ── TAB SWITCHING ─────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  const btn = document.getElementById('tab-' + name);
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-// Monday countdown
+// ── EXTERNAL LINK HANDLER (PWA safe) ─────────────────
+function goTo(el) {
+  event.preventDefault();
+  window.location.href = el.href;
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────
 function updateCountdown() {
   const now = new Date();
-  const day = now.getDay(); // 0=sun, 1=mon
-  const daysUntil = day === 1 ? 7 : (8 - day) % 7;
-  const box = document.getElementById('mondayBox');
-  if (daysUntil === 0 || (day === 1 && now.getHours() < 6)) {
-    box.innerHTML = '🟢 <strong style="color:#5de8a0">Vandaag!</strong><br><span style="font-size:11px;color:#5de8a0">Nieuwe watchlist live</span>';
-  } else {
-    box.innerHTML = `📅 <strong style="color:#5de8a0">Maandag</strong><br><span style="font-size:11px;color:#3a8a5a">nieuwe lijst over ${daysUntil} dag${daysUntil !== 1 ? 'en' : ''}</span>`;
-  }
+  const day = now.getDay();
+  const daysUntil = day === 1 ? 7 : (8 - day) % 7 || 7;
+  const el = document.getElementById('countdownText');
+  const stat = document.getElementById('statDays');
+  if (el) el.textContent = daysUntil === 7 ? 'Vandaag nieuwe lijst!' : `Nieuwe lijst over ${daysUntil} dag${daysUntil !== 1 ? 'en' : ''}`;
+  if (stat) stat.textContent = daysUntil === 7 ? '0' : daysUntil;
 }
 updateCountdown();
+
+// ── SURPRISE ME ───────────────────────────────────────
+const pool = [
+  { title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk. Javier Bardem als ultieme schurk.' },
+  { title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', genre:'Waargeburd', desc:'Journalisten van de Boston Globe onthullen misbruikschandaal bij de kerk. Oscarwinnaar.' },
+  { title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Bong Joon-ho. Klasse-spanning die uitloopt op iets heel anders. Oscarwinnaar.' },
+  { title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', genre:'Actie', desc:'Twee uur non-stop achtervolging in de woestijn. Visueel meesterwerk. Ademloos.' },
+  { title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Fincher. De echte Zodiac-moordenaar. Obsessieve, langzame spanning die blijft hangen.' },
+  { title:'The Social Network', year:'2010', platform:'Rakuten TV', url:'https://rakuten.tv', genre:'Waargeburd', desc:'Facebook-oprichting als rechtbankdrama. Fincher op zijn sterkst. Trent Reznor score.' },
+  { title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', genre:'Actie', desc:'Nolan. Evacuatie van het strand van Duinkerken, 1940. Spanning zonder woorden.' },
+  { title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', genre:'Actie', desc:'Rio favela. Drugs en geweld. Meeslepend, mooi en hartverscheurend tegelijk.' },
+  { title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Fincher snijdt scherp. Huwelijk als slagveld. Rosamund Pike steelt de show.' },
+  { title:'Icarus', year:'2017', platform:'YouTube', url:'https://youtube.com', genre:'Documentaire', desc:'Begon als dopingexperiment, eindigde als staatsscanadaal. Oscar-winnaar.' },
+  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com', genre:'Waargeburd', desc:'Don Cheadle redt 1200 mensen tijdens de Rwandese genocide. Verplicht kijken.' },
+  { title:'Nightcrawler', year:'2014', platform:'Rakuten TV', url:'https://rakuten.tv', genre:'Thriller', desc:'Jake Gyllenhaal als sinistere freelance videojournalist in LA. Ongemakkelijk goed.' },
+  { title:'Three Billboards', year:'2017', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Frances McDormand. Wraak, gerechtigheid en morele grijszones. Briljant schriftwerk.' },
+  { title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', genre:'Actie', desc:'Villeneuve. Drugsoorlog aan de Mexicaanse grens. Onbarmhartig en prachtig gefilmd.' },
+  { title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', genre:'Waargeburd', desc:'CIA redt gijzelaars via een nepfilmproductie. Ben Affleck. Oscarwinnaar.' },
+  { title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://youtube.com', genre:'Documentaire', desc:'Bhagwan sekte in Oregon. Giftaanslag. Bizarre absolute werkelijkheid.' },
+  { title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', genre:'Actie', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af. Ridley Scott op zijn best.' },
+  { title:'The Jinx', year:'2015', platform:'YouTube', url:'https://youtube.com', genre:'Documentaire', desc:'Robert Durst. Zes afleveringen die eindigen met een ongelooflijk moment.' },
+  { title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv', genre:'Thriller', desc:'Adam Sandler als juwelier in schulden. Spanning die je adem afsnijdt. Non-stop.' },
+  { title:'All the President\'s Men', year:'1976', platform:'Plex', url:'https://watch.plex.tv', genre:'Waargeburd', desc:'Woodward en Bernstein leggen Watergate bloot. Journalistiek icoon. Redford en Hoffman.' },
+];
+
+let currentUrl = '';
+let lastIdx = -1;
+
+function openSurprise() {
+  let idx;
+  do { idx = Math.floor(Math.random() * pool.length); } while (idx === lastIdx);
+  lastIdx = idx;
+  const t = pool[idx];
+  currentUrl = t.url;
+  document.getElementById('mTitle').textContent = t.title;
+  document.getElementById('mMeta').textContent = t.genre + ' · ' + t.year + ' · ' + t.platform;
+  document.getElementById('mDesc').textContent = t.desc;
+  document.getElementById('surpriseModal').classList.add('open');
+}
+
+function closeSurprise() {
+  document.getElementById('surpriseModal').classList.remove('open');
+}
+
+function goToSurprise() {
+  closeSurprise();
+  window.location.href = currentUrl;
+}
+
+// ── WATCHLIST ─────────────────────────────────────────
+const WPOOL = [
+  [
+    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
+    { genre:'actie', title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'De Niro vs Pacino. Hectische LA-heist.' },
+    { genre:'waar', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
+    { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://youtube.com', desc:'Schudde Amerika op. True crime meesterwerk.' },
+    { genre:'thriller', title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
+    { genre:'actie', title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
+    { genre:'waar', title:'The Big Short', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'De financiële crash van 2008. Woedend en grappig.' },
+  ],
+  [
+    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Huwelijk als slagveld.' },
+    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
+    { genre:'waar', title:'Captain Phillips', year:'2013', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Somalische piraten. Hanks op zijn best.' },
+    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://youtube.com', desc:'Robert Durst. Ongelooflijk slot.' },
+    { genre:'thriller', title:'Prisoners', year:'2013', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
+    { genre:'actie', title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
+    { genre:'waar', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
+  ],
+  [
+    { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+    { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://youtube.com', desc:'Indonesisch actiemeesterwerk. Puur en rauw.' },
+    { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'Plex', url:'https://watch.plex.tv', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://youtube.com', desc:'Fietsen en doping worden staatsgeheim. Oscar.' },
+    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Jake Gyllenhaal als sinistere nieuwsjager.' },
+    { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', desc:'Rio favela. Drugs en geweld. Meeslepend.' },
+    { genre:'waar', title:'The Report', year:'2019', platform:'YouTube', url:'https://youtube.com', desc:'CIA-folterprogramma onthuld. Op ware feiten.' },
+  ],
+  [
+    { genre:'thriller', title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
+    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', desc:'Mogadishu 1993. Militaire catastrofe.' },
+    { genre:'waar', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
+    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Heeft hij haar gedood? 18 jaar, zes afleveringen.' },
+    { genre:'thriller', title:'Memento', year:'2000', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
+    { genre:'actie', title:'Gladiator', year:'2000', platform:'Plex', url:'https://watch.plex.tv', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
+    { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'Plex', url:'https://watch.plex.tv', desc:'Nixon gedwongen te bekennen op live tv.' },
+  ],
+];
+
+function getWeekNum() {
+  const d = new Date();
+  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+  const y = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil((((date - y) / 86400000) + 1) / 7);
+}
+
+function getMondayOf(d) {
+  const date = new Date(d);
+  const day = date.getDay();
+  date.setDate(date.getDate() + (day === 0 ? -6 : 1 - day));
+  return date;
+}
+
+const genreColors = {
+  thriller: { bg:'rgba(218,54,51,.12)', color:'#f87171', border:'rgba(218,54,51,.3)', label:'🔪 Thriller' },
+  actie:    { bg:'rgba(214,134,22,.12)', color:'#f0a830', border:'rgba(214,134,22,.3)', label:'💥 Actie' },
+  waar:     { bg:'rgba(161,113,247,.12)', color:'#a371f7', border:'rgba(161,113,247,.3)', label:'📋 Waargeburd' },
+  docu:     { bg:'rgba(88,166,255,.12)', color:'#58a6ff', border:'rgba(88,166,255,.3)', label:'🎥 Docu' },
+};
+
+function renderWatchlist() {
+  const wn = getWeekNum();
+  const titles = WPOOL[wn % WPOOL.length];
+  const key = 'rob_wl_w' + wn;
+  let watched = JSON.parse(localStorage.getItem(key) || '[]');
+
+  const mon = getMondayOf(new Date());
+  const fri = new Date(mon); fri.setDate(mon.getDate() + 6);
+  const fmt = d => d.toLocaleDateString('nl-NL', { day:'numeric', month:'long' });
+  const done = watched.length;
+  const pct = Math.round(done / titles.length * 100);
+
+  let html = `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;">
+      <div style="font-size:12px;color:var(--sub);margin-bottom:3px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:8px;margin-top:8px;">
+        <span>Voortgang</span><span>${done} / ${titles.length} bekeken</span>
+      </div>
+      <div style="height:5px;background:var(--muted);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:${pct}%;background:var(--gold);border-radius:3px;transition:width .5s;"></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:16px;">
+  `;
+
+  titles.forEach((t, i) => {
+    const isW = watched.includes(i);
+    const c = genreColors[t.genre];
+    html += `
+      <div onclick="toggleWatch(${i})" style="
+        background:var(--card);border:1px solid ${isW ? 'var(--gold)' : 'var(--border)'};
+        border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;
+        cursor:pointer;transition:border-color .2s;position:relative;
+        ${isW ? 'background:#16180f;' : ''}
+      ">
+        <div style="
+          width:36px;height:36px;border-radius:8px;flex-shrink:0;
+          background:${c.bg};border:1px solid ${c.border};
+          display:grid;place-items:center;font-size:16px;
+        ">${c.label.split(' ')[0]}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:15px;font-weight:600;${isW ? 'text-decoration:line-through;color:var(--sub);' : ''}">${t.title}</div>
+          <div style="font-size:12px;color:var(--sub);margin-top:2px;">${t.year} · ${t.platform}</div>
+        </div>
+        ${isW
+          ? '<div style="width:24px;height:24px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;">✓</div>'
+          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:12px;color:var(--gold);text-decoration:none;flex-shrink:0;">Bekijk →</a>`
+        }
+      </div>`;
+  });
+
+  html += `</div>
+    <button onclick="resetWatchlist()" style="
+      width:100%;padding:12px;background:transparent;
+      border:1px solid var(--border);border-radius:10px;
+      color:var(--sub);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;
+    ">↺ Reset week</button>`;
+
+  document.getElementById('watchlistContent').innerHTML = html;
+}
+
+window._wlKey = null;
+function toggleWatch(idx) {
+  const wn = getWeekNum();
+  const key = 'rob_wl_w' + wn;
+  let watched = JSON.parse(localStorage.getItem(key) || '[]');
+  if (watched.includes(idx)) {
+    watched = watched.filter(i => i !== idx);
+  } else {
+    watched.push(idx);
+  }
+  localStorage.setItem(key, JSON.stringify(watched));
+  renderWatchlist();
+}
+
+function resetWatchlist() {
+  if (confirm('Reset alle vinkjes voor deze week?')) {
+    const wn = getWeekNum();
+    localStorage.removeItem('rob_wl_w' + wn);
+    renderWatchlist();
+  }
+}
+
+renderWatchlist();
 </script>
 
 </body>
