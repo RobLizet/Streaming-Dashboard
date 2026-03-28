@@ -533,7 +533,7 @@ body {
         <div class="rec-num">01</div>
         <div class="rec-info">
           <div class="rec-title">No Country for Old Men</div>
-          <div class="rec-meta">Thriller · 2007 · Plex</div>
+          <div class="rec-meta">Thriller · 2007 · Plex <span style="color:#484f58;font-size:10px;">(check gratis)</span></div>
         </div>
         <span class="rec-badge" style="background:var(--red-bg);color:#f87171;border:1px solid var(--red-bd);">Thriller</span>
       </div>
@@ -541,7 +541,7 @@ body {
         <div class="rec-num">02</div>
         <div class="rec-info">
           <div class="rec-title">Icarus</div>
-          <div class="rec-meta">Documentaire · 2017 · Plex</div>
+          <div class="rec-meta">Documentaire · 2017 · Plex <span style="color:#484f58;font-size:10px;">(check gratis)</span></div>
         </div>
         <span class="rec-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Docu</span>
       </div>
@@ -925,7 +925,7 @@ body {
     <div class="modal-meta" id="mMeta">—</div>
     <div class="modal-desc" id="mDesc">—</div>
     <div class="modal-actions">
-      <button class="modal-btn-go" onclick="goToSurprise()">Bekijk nu →</button>
+      <button class="modal-btn-go" id="surpriseGoBtn" onclick="goToSurprise()">Bekijk nu →</button>
       <button class="modal-btn-shuffle" onclick="openSurprise()">🔀</button>
     </div>
     <button class="modal-close" onclick="closeSurprise()">Sluiten</button>
@@ -997,6 +997,8 @@ function openSurprise() {
   document.getElementById('mTitle').textContent = t.title;
   document.getElementById('mMeta').textContent = t.genre + ' · ' + t.year + ' · ' + t.platform;
   document.getElementById('mDesc').textContent = t.desc;
+  const btn = document.getElementById('surpriseGoBtn');
+  btn.textContent = t.platform === 'Plex' ? 'Check op Plex →' : 'Bekijk nu →';
   document.getElementById('surpriseModal').classList.add('open');
 }
 
@@ -1121,7 +1123,8 @@ function renderWatchlist() {
 
   let html = `
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;">
-      <div style="font-size:12px;color:var(--sub);margin-bottom:3px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5;">💡 Plex-titels: tik op <strong style="color:var(--gold)">Check op Plex</strong> → oranje knop = gratis, prijskaartje = huur</div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:3px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
       <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:8px;margin-top:8px;">
         <span>Voortgang</span><span>${done} / ${titles.length} bekeken</span>
       </div>
@@ -1153,7 +1156,7 @@ function renderWatchlist() {
         </div>
         ${isW
           ? '<div style="width:24px;height:24px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;">✓</div>'
-          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:12px;color:var(--gold);text-decoration:none;flex-shrink:0;">Bekijk →</a>`
+          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:11px;color:var(--gold);text-decoration:none;flex-shrink:0;text-align:right;line-height:1.3;">${t.platform === 'Plex' ? 'Check op<br>Plex →' : 'Bekijk →'}</a>`
         }
       </div>`;
   });
