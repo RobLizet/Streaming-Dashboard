@@ -529,7 +529,7 @@ body {
   <div class="section-gap">
     <div class="rec-label">⭐ Aanbevelingen deze week</div>
     <div class="rec-cards">
-      <div class="rec-card">
+      <div class="rec-card" onclick="window.location.href='https://watch.plex.tv'" style="cursor:pointer;">
         <div class="rec-num">01</div>
         <div class="rec-info">
           <div class="rec-title">No Country for Old Men</div>
@@ -537,7 +537,7 @@ body {
         </div>
         <span class="rec-badge" style="background:var(--red-bg);color:#f87171;border:1px solid var(--red-bd);">Thriller</span>
       </div>
-      <div class="rec-card">
+      <div class="rec-card" onclick="window.location.href='https://youtube.com'" style="cursor:pointer;">
         <div class="rec-num">02</div>
         <div class="rec-info">
           <div class="rec-title">Icarus</div>
@@ -545,7 +545,7 @@ body {
         </div>
         <span class="rec-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Docu</span>
       </div>
-      <div class="rec-card">
+      <div class="rec-card" onclick="window.location.href='https://rakuten.tv'" style="cursor:pointer;">
         <div class="rec-num">03</div>
         <div class="rec-info">
           <div class="rec-title">Spotlight</div>
@@ -553,7 +553,7 @@ body {
         </div>
         <span class="rec-badge" style="background:rgba(161,113,247,.12);color:var(--purple);border:1px solid rgba(161,113,247,.25);">Waar</span>
       </div>
-      <div class="rec-card">
+      <div class="rec-card" onclick="window.location.href='https://npostart.nl/documentaire'" style="cursor:pointer;">
         <div class="rec-num">04</div>
         <div class="rec-info">
           <div class="rec-title">VPRO Documentaires</div>
@@ -1011,16 +1011,16 @@ function goToSurprise() {
 
 // ── WATCHLIST ─────────────────────────────────────────
 const WPOOL = [
-  [
+  [ // Week A
     { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
     { genre:'actie', title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'De Niro vs Pacino. Hectische LA-heist.' },
     { genre:'waar', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
     { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://youtube.com', desc:'Schudde Amerika op. True crime meesterwerk.' },
     { genre:'thriller', title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
     { genre:'actie', title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
-    { genre:'waar', title:'The Big Short', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'De financiële crash van 2008. Woedend en grappig.' },
+    { genre:'where', title:'The Big Short', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'De financiële crash van 2008. Woedend en grappig.' },
   ],
-  [
+  [ // Week B
     { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Huwelijk als slagveld.' },
     { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
     { genre:'waar', title:'Captain Phillips', year:'2013', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Somalische piraten. Hanks op zijn best.' },
@@ -1029,7 +1029,7 @@ const WPOOL = [
     { genre:'actie', title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
     { genre:'waar', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
   ],
-  [
+  [ // Week C
     { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
     { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://youtube.com', desc:'Indonesisch actiemeesterwerk. Puur en rauw.' },
     { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'Plex', url:'https://watch.plex.tv', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
@@ -1038,7 +1038,7 @@ const WPOOL = [
     { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', desc:'Rio favela. Drugs en geweld. Meeslepend.' },
     { genre:'waar', title:'The Report', year:'2019', platform:'YouTube', url:'https://youtube.com', desc:'CIA-folterprogramma onthuld. Op ware feiten.' },
   ],
-  [
+  [ // Week D
     { genre:'thriller', title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
     { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', desc:'Mogadishu 1993. Militaire catastrofe.' },
     { genre:'waar', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
@@ -1046,6 +1046,42 @@ const WPOOL = [
     { genre:'thriller', title:'Memento', year:'2000', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
     { genre:'actie', title:'Gladiator', year:'2000', platform:'Plex', url:'https://watch.plex.tv', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
     { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'Plex', url:'https://watch.plex.tv', desc:'Nixon gedwongen te bekennen op live tv.' },
+  ],
+  [ // Week E — thriller zwaar
+    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'Plex', url:'https://watch.plex.tv', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
+    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
+    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'Plex', url:'https://watch.plex.tv', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
+    { genre:'docu', title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://youtube.com', desc:'Rajneesh-sekte. Giftaanslag. Absolute werkelijkheid.' },
+    { genre:'thriller', title:'Oldboy', year:'2003', platform:'Plex', url:'https://watch.plex.tv', desc:'Park Chan-wook. Koreaanse revenge-thriller. Geweldig.' },
+    { genre:'waar', title:'Catch Me If You Can', year:'2002', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio.' },
+    { genre:'docu', title:'Don\'t F**k with Cats', year:'2019', platform:'YouTube', url:'https://youtube.com', desc:'Internetdetectives jagen seriemoordenaar. Snel en schokkend.' },
+  ],
+  [ // Week F — thriller zwaar
+    { genre:'thriller', title:'Mystic River', year:'2003', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
+    { genre:'thriller', title:'Three Billboards', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
+    { genre:'actie', title:'Training Day', year:'2001', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
+    { genre:'docu', title:'Amanda Knox', year:'2016', platform:'YouTube', url:'https://youtube.com', desc:'Italiaanse moordrechtszaak. Mediaobsessie. Genuanceerd.' },
+    { genre:'thriller', title:'Knives Out', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
+    { genre:'waar', title:'All the President\'s Men', year:'1976', platform:'Plex', url:'https://watch.plex.tv', desc:'Woodward en Bernstein leggen Watergate bloot.' },
+    { genre:'thriller', title:'Rear Window', year:'1954', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Hitchcock. Spanning vanuit één kamer. Tijdloos.' },
+  ],
+  [ // Week G — thriller zwaar
+    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher snijdt scherp. Huwelijk als slagveld.' },
+    { genre:'thriller', title:'True Detective S1', year:'2014', platform:'YouTube', url:'https://youtube.com', desc:'McConaughey en Harrelson. Louisiana noir. Perfecte tv.' },
+    { genre:'actie', title:'Point Break', year:'1991', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
+    { genre:'docu', title:'The Last Dance', year:'2020', platform:'YouTube', url:'https://youtube.com', desc:'Michael Jordan en de Bulls. Sportdocu op zijn allerbest.' },
+    { genre:'thriller', title:'Hereditary', year:'2018', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
+    { genre:'waar', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.' },
+    { genre:'thriller', title:'Blue Ruin', year:'2013', platform:'Plex', url:'https://watch.plex.tv', desc:'Indie-wraakthriller. Geweld als gevolg. Ruw en echt.' },
+  ],
+  [ // Week H — thriller zwaar
+    { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+    { genre:'thriller', title:'Sharp Objects', year:'2018', platform:'YouTube', url:'https://youtube.com', desc:'Amy Adams. Gothisch Missouri. Duistere familiegeheimen.' },
+    { genre:'actie', title:'No Escape', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop.' },
+    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://youtube.com', desc:'Bizarre bankroof. Echte true crime chaos.' },
+    { genre:'thriller', title:'Chinatown', year:'1974', platform:'Plex', url:'https://watch.plex.tv', desc:'Polanski. De ultieme noir thriller. Tijdloos.' },
+    { genre:'waar', title:'Deepwater Horizon', year:'2016', platform:'Plex', url:'https://watch.plex.tv', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
+    { genre:'thriller', title:'The Conversation', year:'1974', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Coppola\'s paranoïde meesterwerk. Tijdloos.' },
   ],
 ];
 
