@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Stream NL">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#1a1020">
 <title>Stream NL — Gratis Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -366,7 +366,7 @@ to   { opacity: 1; transform: translateY(0); }
       <div id="surpriseYear" style="font-size:13px;color:#7a7a90;margin-bottom:10px;"></div>
       <div id="surpriseDesc" style="font-size:14px;color:#b0afc8;line-height:1.5;margin-bottom:16px;"></div>
       <div style="display:flex;gap:10px;">
-        <a id="surpriseLink" href="#" target="_blank" style="
+        <a id="surpriseLink" href="#" onclick="window.location.href=this.getAttribute('data-url');return false;" data-url="#" style="
           flex:1; text-align:center; padding:11px;
           background:#d4a843; border-radius:8px;
           color:#000; font-weight:700; font-size:14px;
@@ -423,7 +423,7 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="cards">
 
 ```
-  <a href="https://rakuten.tv" target="_blank" class="card">
+  <a href="https://rakuten.tv" class="card">
     <div class="card-accent acc-gold"></div>
     <div class="card-body">
       <div class="card-top">
@@ -442,7 +442,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://youtube.com/feed/storefront" target="_blank" class="card">
+  <a href="https://youtube.com/feed/storefront" class="card">
     <div class="card-accent acc-red"></div>
     <div class="card-body">
       <div class="card-top">
@@ -461,7 +461,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://watch.plex.tv/movies" target="_blank" class="card">
+  <a href="https://watch.plex.tv/movies" class="card">
     <div class="card-accent acc-orange"></div>
     <div class="card-body">
       <div class="card-top">
@@ -479,7 +479,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://arte.tv/nl/videos/films/" target="_blank" class="card">
+  <a href="https://arte.tv/nl/videos/films/" class="card">
     <div class="card-accent acc-teal"></div>
     <div class="card-body">
       <div class="card-top">
@@ -515,7 +515,7 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="cards">
 
 ```
-  <a href="https://npostart.nl" target="_blank" class="card">
+  <a href="https://npostart.nl" class="card">
     <div class="card-accent acc-gold"></div>
     <div class="card-body">
       <div class="card-top">
@@ -534,7 +534,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://www.rtlxl.nl" target="_blank" class="card">
+  <a href="https://www.rtlxl.nl" class="card">
     <div class="card-accent acc-blue"></div>
     <div class="card-body">
       <div class="card-top">
@@ -552,7 +552,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://kijk.nl" target="_blank" class="card">
+  <a href="https://kijk.nl" class="card">
     <div class="card-accent acc-purple"></div>
     <div class="card-body">
       <div class="card-top">
@@ -571,7 +571,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://watch.plex.tv/live-tv" target="_blank" class="card">
+  <a href="https://watch.plex.tv/live-tv" class="card">
     <div class="card-accent acc-orange"></div>
     <div class="card-body">
       <div class="card-top">
@@ -606,7 +606,7 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="cards">
 
 ```
-  <a href="https://arte.tv/nl/videos/documentaires/" target="_blank" class="card">
+  <a href="https://arte.tv/nl/videos/documentaires/" class="card">
     <div class="card-accent acc-teal"></div>
     <div class="card-body">
       <div class="card-top">
@@ -625,7 +625,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://npostart.nl/documentaire" target="_blank" class="card">
+  <a href="https://npostart.nl/documentaire" class="card">
     <div class="card-accent acc-gold"></div>
     <div class="card-body">
       <div class="card-top">
@@ -644,7 +644,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://youtube.com/@DWDocumentary" target="_blank" class="card">
+  <a href="https://youtube.com/@DWDocumentary" class="card">
     <div class="card-accent acc-red"></div>
     <div class="card-body">
       <div class="card-top">
@@ -680,7 +680,7 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="cards">
 
 ```
-  <a href="https://nos.nl/live" target="_blank" class="card">
+  <a href="https://nos.nl/live" class="card">
     <div class="card-accent acc-red"></div>
     <div class="card-body">
       <div class="card-top">
@@ -699,7 +699,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://npostart.nl/live" target="_blank" class="card">
+  <a href="https://npostart.nl/live" class="card">
     <div class="card-accent acc-gold"></div>
     <div class="card-body">
       <div class="card-top">
@@ -718,7 +718,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://arte.tv/nl/live/" target="_blank" class="card">
+  <a href="https://arte.tv/nl/live/" class="card">
     <div class="card-accent acc-teal"></div>
     <div class="card-body">
       <div class="card-top">
@@ -754,7 +754,7 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="cards">
 
 ```
-  <a href="https://npostart.nl/npozappxl" target="_blank" class="card">
+  <a href="https://npostart.nl/npozappxl" class="card">
     <div class="card-accent acc-orange"></div>
     <div class="card-body">
       <div class="card-top">
@@ -773,7 +773,7 @@ to   { opacity: 1; transform: translateY(0); }
     </div>
   </a>
 
-  <a href="https://youtube.com/@NatGeoKidsDutch" target="_blank" class="card">
+  <a href="https://youtube.com/@NatGeoKidsDutch" class="card">
     <div class="card-accent acc-green"></div>
     <div class="card-body">
       <div class="card-top">
@@ -820,6 +820,60 @@ animation: fadeUp 0.4s ease 0.35s both;
 </main>
 
 <footer>Made by Rob Borghouts 2026 · Alleen legale, gratis NL-platforms</footer>
+
+<script>
+// Surprise me - all platforms pool
+const allTitles = [
+  { title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
+  { title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
+  { title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
+  { title:'The Social Network', year:'2010', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
+  { title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Non-stop achtervolging. Visueel meesterwerk. Ademloos.' },
+  { title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
+  { title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'De Niro vs Pacino. Hectische LA-heist-thriller.' },
+  { title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', desc:'Rio favela. Drugs en geweld. Meeslepend en mooi.' },
+  { title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Drugs. Grens. Onbarmhartig. Villeneuve op zijn scherpst.' },
+  { title:'Knives Out', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
+  { title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
+  { title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher snijdt scherp. Huwelijk als slagveld.' },
+  { title:'Nightcrawler', year:'2014', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Jake Gyllenhaal als sinistere nieuwsjager. Ongemakkelijk.' },
+  { title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
+  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Genocide in Rwanda. Één man redt 1200 levens. Verplicht.' },
+  { title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
+  { title:'Three Billboards Outside Ebbing', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
+  { title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af.' },
+  { title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+  { title:'Oldboy', year:'2003', platform:'Plex', url:'https://watch.plex.tv', desc:'Park Chan-wook. Koreaanse revenge-thriller. Slag in je gezicht.' },
+];
+
+let lastSurprise = -1;
+
+function surpriseMe() {
+  let idx;
+  do { idx = Math.floor(Math.random() * allTitles.length); } while (idx === lastSurprise);
+  lastSurprise = idx;
+  const t = allTitles[idx];
+  document.getElementById('surpriseTitle').textContent = t.title;
+  document.getElementById('surpriseYear').textContent = t.year + ' · ' + t.platform;
+  document.getElementById('surpriseDesc').textContent = t.desc;
+  document.getElementById('surpriseLink').setAttribute('data-url', t.url);
+  document.getElementById('surpriseModal').style.display = 'flex';
+}
+
+// Monday countdown
+function updateCountdown() {
+  const now = new Date();
+  const day = now.getDay(); // 0=sun, 1=mon
+  const daysUntil = day === 1 ? 7 : (8 - day) % 7;
+  const box = document.getElementById('mondayBox');
+  if (daysUntil === 0 || (day === 1 && now.getHours() < 6)) {
+    box.innerHTML = '🟢 <strong style="color:#5de8a0">Vandaag!</strong><br><span style="font-size:11px;color:#5de8a0">Nieuwe watchlist live</span>';
+  } else {
+    box.innerHTML = `📅 <strong style="color:#5de8a0">Maandag</strong><br><span style="font-size:11px;color:#3a8a5a">nieuwe lijst over ${daysUntil} dag${daysUntil !== 1 ? 'en' : ''}</span>`;
+  }
+}
+updateCountdown();
+</script>
 
 </body>
 </html>
