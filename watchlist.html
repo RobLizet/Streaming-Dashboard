@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Watchlist">
+<meta name="theme-color" content="#080810">
+<title>Rob's Watchlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --surface: #0f0f1c;
+  --card: #141424;
+  --card2: #1a1a2e;
+  --border: #252540;
+  --red: #c0392b;
+  --red-bright: #e74c3c;
+  --red-glow: rgba(192,57,43,0.18);
+  --crimson: #8b0000;
+  --text: #ede8e0;
+  --muted: #6b6b88;
+  --faint: #2a2a45;
+  --gold: #c8a84b;
+  --green: #27ae60;
+  --blue: #2980b9;
+  --orange: #d35400;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+background: var(–bg);
+min-height: 100vh;
+font-family: ‘Crimson Pro’, Georgia, serif;
+color: var(–text);
+overflow-x: hidden;
+}
+
+body::before {
+content: ‘’;
+position: fixed; inset: 0;
+background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+pointer-events: none; z-index: 0;
+}
+
+body::after {
+content: ‘’;
+position: fixed; top: 0; left: 0; right: 0; height: 3px;
+background: linear-gradient(90deg, transparent, var(–red), var(–red-bright), var(–red), transparent);
+z-index: 200;
+box-shadow: 0 0 20px var(–red);
+}
+
+header {
+position: sticky; top: 0; z-index: 100;
+background: rgba(8,8,16,0.92);
+backdrop-filter: blur(16px);
+-webkit-backdrop-filter: blur(16px);
+border-bottom: 1px solid var(–border);
+padding: 14px 18px;
+padding-top: calc(14px + env(safe-area-inset-top));
+}
+
+.header-inner {
+max-width: 580px; margin: 0 auto;
+display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+
+.logo {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 24px; letter-spacing: 2px; color: var(–text); line-height: 1;
+}
+.logo-red { color: var(–red-bright); }
+
+.back-btn {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 13px; letter-spacing: 1px;
+color: var(–muted);
+text-decoration: none;
+border: 1px solid var(–border);
+padding: 4px 12px; border-radius: 3px;
+transition: color 0.2s, border-color 0.2s;
+}
+.back-btn:active { color: var(–red-bright); border-color: var(–red); }
+
+main {
+max-width: 580px; margin: 0 auto;
+padding: 20px 16px 60px;
+position: relative; z-index: 1;
+}
+
+.week-header { margin-bottom: 20px; animation: fadeSlide 0.5s ease both; }
+
+.week-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 38px; letter-spacing: 2px; line-height: 1; color: var(–text);
+}
+.week-title span { color: var(–red-bright); }
+
+.week-meta { font-size: 14px; color: var(–muted); font-style: italic; margin-top: 4px; }
+.week-meta strong { color: var(–gold); font-style: normal; }
+
+/* Progress */
+.progress-section { margin-bottom: 20px; animation: fadeSlide 0.5s ease 0.05s both; }
+.progress-label {
+display: flex; justify-content: space-between;
+font-size: 12px; color: var(–muted); margin-bottom: 7px;
+letter-spacing: 0.5px; text-transform: uppercase;
+}
+.progress-bar-bg { height: 4px; background: var(–faint); border-radius: 2px; overflow: hidden; }
+.progress-bar-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–crimson), var(–red-bright));
+border-radius: 2px;
+transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+box-shadow: 0 0 8px var(–red);
+}
+
+/* Genre filter tabs */
+.tabs {
+display: flex; gap: 6px; margin-bottom: 18px;
+overflow-x: auto; scrollbar-width: none;
+animation: fadeSlide 0.5s ease 0.08s both;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 13px; letter-spacing: 1px;
+padding: 5px 13px; border-radius: 3px;
+border: 1px solid var(–border);
+background: transparent; color: var(–muted);
+cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+.tab.active { border-color: var(–week-accent, var(–red)); color: #fff; box-shadow: 0 0 10px var(–red-glow); }
+.tab[data-genre=“thriller”].active { background: var(–red); –week-accent: var(–red); }
+.tab[data-genre=“actie”].active { background: var(–orange); –week-accent: var(–orange); }
+.tab[data-genre=“waargeburd”].active { background: #7d3c98; –week-accent: #7d3c98; }
+.tab[data-genre=“docu”].active { background: var(–blue); –week-accent: var(–blue); }
+.tab[data-genre=“all”].active { background: var(–red); }
+
+/* Cards */
+.cards-list { display: flex; flex-direction: column; gap: 10px; }
+
+.card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 8px; overflow: hidden;
+display: flex; cursor: pointer; position: relative;
+animation: fadeSlide 0.4s ease both;
+transition: border-color 0.2s, transform 0.15s;
+}
+.card:active { transform: scale(0.98); }
+
+.card.watched { border-color: var(–red); background: #14140c; }
+.card.watched::after {
+content: ‘✓’;
+position: absolute; top: 10px; right: 12px;
+width: 22px; height: 22px;
+background: var(–red); border-radius: 50%;
+display: grid; place-items: center;
+font-size: 12px; color: #fff; font-family: sans-serif;
+}
+
+.card-accent {
+width: 4px; flex-shrink: 0;
+}
+.acc-thriller { background: var(–red); }
+.acc-actie    { background: var(–orange); }
+.acc-waargeburd { background: #7d3c98; }
+.acc-docu     { background: var(–blue); }
+
+.card-num {
+width: 42px; flex-shrink: 0;
+background: var(–card2);
+display: flex; align-items: center; justify-content: center;
+font-family: ‘Bebas Neue’, sans-serif; font-size: 20px;
+color: var(–red);
+border-right: 1px solid var(–border);
+}
+.card.watched .card-num { color: var(–muted); }
+
+.card-body { padding: 11px 38px 11px 13px; flex: 1; min-width: 0; }
+
+.card-genre-row { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+
+.genre-dot {
+width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.dot-thriller  { background: var(–red-bright); }
+.dot-actie     { background: var(–orange); }
+.dot-waargeburd{ background: #a569bd; }
+.dot-docu      { background: var(–blue); }
+
+.card-genre-label {
+font-size: 10px; letter-spacing: 1.5px;
+text-transform: uppercase; color: var(–muted);
+}
+
+.card-title {
+font-size: 17px; font-weight: 600; line-height: 1.2; margin-bottom: 2px;
+}
+.card.watched .card-title {
+color: var(–muted);
+text-decoration: line-through;
+text-decoration-color: var(–red);
+}
+
+.card-sub {
+font-size: 13px; color: var(–muted); font-style: italic; margin-bottom: 7px;
+}
+
+.card-footer { display: flex; align-items: center; gap: 7px; }
+
+.platform-tag {
+font-size: 10px; letter-spacing: 0.5px;
+background: var(–faint); color: var(–muted);
+border-radius: 3px; padding: 2px 7px; font-style: normal;
+}
+
+.card-link {
+font-size: 11px; color: var(–red-bright);
+text-decoration: none; margin-left: auto; font-style: normal;
+}
+
+.true-badge {
+font-size: 9px; letter-spacing: 0.8px;
+background: rgba(125,60,152,0.2); color: #a569bd;
+border: 1px solid rgba(125,60,152,0.35);
+border-radius: 3px; padding: 1px 6px; font-style: normal;
+white-space: nowrap;
+}
+
+/* Section label */
+.section-label {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 13px; letter-spacing: 2px; color: var(–muted);
+margin: 20px 0 10px;
+display: flex; align-items: center; gap: 10px;
+}
+.section-label::after { content: ‘’; flex: 1; height: 1px; background: var(–border); }
+
+/* Next week */
+.next-week {
+margin-top: 24px; padding: 14px 16px;
+border: 1px solid var(–border); border-left: 3px solid var(–red);
+border-radius: 6px; background: var(–surface);
+animation: fadeSlide 0.5s ease 0.3s both;
+}
+.next-week-label {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 12px; letter-spacing: 2px; color: var(–red); margin-bottom: 6px;
+}
+.next-week-text { font-size: 14px; color: var(–muted); font-style: italic; line-height: 1.5; }
+.next-week-countdown { margin-top: 6px; font-size: 12px; color: var(–faint); font-style: normal; }
+.next-week-countdown strong { color: var(–gold); }
+
+.reset-btn {
+display: block; width: 100%; margin-top: 20px; padding: 11px;
+background: transparent; border: 1px solid var(–border);
+border-radius: 6px; color: var(–muted);
+font-family: ‘Bebas Neue’, sans-serif; font-size: 14px; letter-spacing: 1.5px;
+cursor: pointer; transition: all 0.2s;
+animation: fadeSlide 0.5s ease 0.35s both;
+}
+.reset-btn:active { border-color: var(–red); color: var(–red); }
+
+footer {
+text-align: center; font-size: 11px; color: var(–faint);
+padding: 16px; position: relative; z-index: 1; font-style: italic;
+padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+@keyframes fadeSlide {
+from { opacity: 0; transform: translateY(14px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+.card:nth-child(1) { animation-delay: 0.10s; }
+.card:nth-child(2) { animation-delay: 0.14s; }
+.card:nth-child(3) { animation-delay: 0.18s; }
+.card:nth-child(4) { animation-delay: 0.22s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.28s; }
+.card:nth-child(7) { animation-delay: 0.31s; }
+.card:nth-child(8) { animation-delay: 0.34s; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Rob's <span class="logo-red">Watchlist</span></div>
+    <a href="index.html" class="back-btn">← Dashboard</a>
+  </div>
+</header>
+
+<main>
+  <div class="week-header">
+    <div class="week-title">WEEK <span id="weekNum">—</span></div>
+    <div class="week-meta" id="weekMeta">Laadt...</div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-label">
+      <span>Voortgang deze week</span>
+      <span id="progressText">0 / 0 bekeken</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-genre="all" onclick="filterCards('all', this)">Alles</button>
+    <button class="tab" data-genre="thriller" onclick="filterCards('thriller', this)">🔪 Thriller</button>
+    <button class="tab" data-genre="actie" onclick="filterCards('actie', this)">💥 Actie</button>
+    <button class="tab" data-genre="waargeburd" onclick="filterCards('waargeburd', this)">📋 Waargeburd</button>
+    <button class="tab" data-genre="docu" onclick="filterCards('docu', this)">🎥 Docu</button>
+  </div>
+
+  <div class="section-label" id="sectionLabel">Deze week</div>
+  <div class="cards-list" id="cardsList"></div>
+  <div class="next-week" id="nextWeekBox"></div>
+  <button class="reset-btn" onclick="resetWeek()">↺ Reset deze week</button>
+</main>
+
+<footer>Made by Rob Borghouts 2026 · Rotatie elke maandag · Alleen gratis NL-platforms</footer>
+
+<script>
+const POOL = [
+  // WEEK A
+  [
+    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
+    { genre:'actie', title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'De Niro vs Pacino. Hectische LA-heist-thriller.' },
+    { genre:'waargeburd', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
+    { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://youtube.com', desc:'Schudde Amerika op. True crime op zijn indrukwekkendst.' },
+    { genre:'thriller', title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
+    { genre:'waargeburd', title:'The Big Short', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'De financiële crash van 2008. Woedend en grappig.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://youtube.com', desc:'Fietsen en doping worden staatsgeheim. Oscar-winnaar.' },
+  ],
+  // WEEK B
+  [
+    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv', desc:'Fincher snijdt scherp. Huwelijk als slagveld.' },
+    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Non-stop achtervolging. Visueel meesterwerk. Ademloos.' },
+    { genre:'waargeburd', title:'Captain Phillips', year:'2013', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Somalische piraten kapen containerschip. Hanks op zijn best.' },
+    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://youtube.com', desc:'Robert Durst. Ongelooflijk slot. Echte spanning.' },
+    { genre:'thriller', title:'Prisoners', year:'2013', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
+    { genre:'actie', title:'Die Hard', year:'1988', platform:'Plex', url:'https://watch.plex.tv', desc:'Bruce Willis. Klassieker die de actiefilm uitvond.' },
+    { genre:'waargeburd', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
+  ],
+  // WEEK C
+  [
+    { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+    { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://youtube.com', desc:'Indonesisch actiemeesterwerk. Puur, rauw, onverbiddelijk.' },
+    { genre:'waargeburd', title:'Zero Dark Thirty', year:'2012', platform:'Plex', url:'https://watch.plex.tv', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
+    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://youtube.com', desc:'Bizarre bankroof. Echte true crime chaos.' },
+    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Jake Gyllenhaal als sinistere nieuwsjager. Ongemakkelijk.' },
+    { genre:'actie', title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Drugs. Grens. Onbarmhartig. Villeneuve op zijn scherpst.' },
+    { genre:'waargeburd', title:'The Report', year:'2019', platform:'YouTube', url:'https://youtube.com', desc:'CIA-folterprogramma onthuld. Op ware feiten gebaseerd.' },
+  ],
+  // WEEK D
+  [
+    { genre:'thriller', title:'Rear Window', year:'1954', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Hitchcock\'s meesterwerk. Spanning vanuit één kamer.' },
+    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af.' },
+    { genre:'waargeburd', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Noodlanding Hudson River. Eastwood. Stille heldenmoed.' },
+    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Heeft hij haar gedood? 18 jaar in zes afleveringen.' },
+    { genre:'thriller', title:'Memento', year:'2000', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
+    { genre:'actie', title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
+    { genre:'waargeburd', title:'The Disaster Artist', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'Hoe de slechtste film ooit gemaakt werd. Ongelofelijk maar waar.' },
+  ],
+  // WEEK E
+  [
+    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'Plex', url:'https://watch.plex.tv', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
+    { genre:'actie', title:'Gladiator', year:'2000', platform:'Plex', url:'https://watch.plex.tv', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
+    { genre:'waargeburd', title:'Catch Me If You Can', year:'2002', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio schittert.' },
+    { genre:'docu', title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://youtube.com', desc:'Rajneesh-sekte. Giftaanslag. Absolute werkelijkheid.' },
+    { genre:'thriller', title:'Oldboy', year:'2003', platform:'Plex', url:'https://watch.plex.tv', desc:'Park Chan-wook. Koreaanse revenge-thriller. Slag in je gezicht.' },
+    { genre:'actie', title:'The Battle of Algiers', year:'1966', platform:'YouTube', url:'https://youtube.com', desc:'Algerijnse onafhankelijkheidsoorlog. Ruwe documentairestijl.' },
+    { genre:'waargeburd', title:'Frost/Nixon', year:'2008', platform:'Plex', url:'https://watch.plex.tv', desc:'Nixon gedwongen te bekennen op live televisie. Boeiend.' },
+  ],
+  // WEEK F
+  [
+    { genre:'thriller', title:'Mystic River', year:'2003', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
+    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'Plex', url:'https://watch.plex.tv', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
+    { genre:'waargeburd', title:'The Social Network', year:'2010', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
+    { genre:'docu', title:'Don\'t F**k with Cats', year:'2019', platform:'YouTube', url:'https://youtube.com', desc:'Internetdetectives jagen seriemoordenaar. Snel en schokkend.' },
+    { genre:'thriller', title:'Knives Out', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
+    { genre:'actie', title:'Training Day', year:'2001', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
+    { genre:'waargeburd', title:'Philomena', year:'2013', platform:'Plex', url:'https://watch.plex.tv', desc:'Vrouw zoekt haar gestolen kind. Judi Dench. Ontroerend.' },
+  ],
+  // WEEK G
+  [
+    { genre:'thriller', title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
+    { genre:'actie', title:'The Bourne Identity', year:'2002', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Wie ben ik? CIA-thriller die het genre herbedacht.' },
+    { genre:'waargeburd', title:'All the President\'s Men', year:'1976', platform:'Plex', url:'https://watch.plex.tv', desc:'Watergate onthuld. Redford en Hoffman. Journalistiek icoon.' },
+    { genre:'docu', title:'Amanda Knox', year:'2016', platform:'YouTube', url:'https://youtube.com', desc:'Italiaanse moordrechtszaak. Mediaobsessie. Genuanceerd.' },
+    { genre:'thriller', title:'Three Billboards Outside Ebbing', year:'2017', platform:'Plex', url:'https://watch.plex.tv', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
+    { genre:'actie', title:'Point Break', year:'1991', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
+    { genre:'waargeburd', title:'Deepwater Horizon', year:'2016', platform:'Plex', url:'https://watch.plex.tv', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
+  ],
+  // WEEK H
+  [
+    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
+    { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com', desc:'Rio favela. Drugs en geweld. Meeslepend en mooi.' },
+    { genre:'waargeburd', title:'The Mauritanian', year:'2021', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Guantánamo. Onrechtvaardige detentie. Wahab Salim.' },
+    { genre:'docu', title:'The Last Dance', year:'2020', platform:'YouTube', url:'https://youtube.com', desc:'Michael Jordan en de Bulls. Sportdocu op zijn allerbest.' },
+    { genre:'thriller', title:'Hereditary', year:'2018', platform:'Rakuten TV', url:'https://rakuten.tv', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
+    { genre:'actie', title:'No Escape', year:'2015', platform:'Plex', url:'https://watch.plex.tv', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop spanning.' },
+    { genre:'waargeburd', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com', desc:'Genocide in Rwanda. Één man redt 1200 levens. Verplicht.' },
+  ],
+];
+
+function getWeekNumber(d) {
+  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+}
+
+function getMondayOf(d) {
+  const date = new Date(d);
+  const day = date.getDay();
+  const diff = (day === 0) ? -6 : 1 - day;
+  date.setDate(date.getDate() + diff);
+  return date;
+}
+
+function getNextMonday(d) {
+  const m = getMondayOf(d);
+  m.setDate(m.getDate() + 7);
+  return m;
+}
+
+function formatDate(d) {
+  return d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long' });
+}
+
+function genreLabel(g) {
+  const map = { thriller:'🔪 Thriller', actie:'💥 Actie', waargeburd:'📋 Waargeburd', docu:'🎥 Documentaire' };
+  return map[g] || g;
+}
+
+const now = new Date();
+const weekNum = getWeekNumber(now);
+const poolIndex = weekNum % POOL.length;
+const weekTitles = POOL[poolIndex];
+const storageKey = `rob_watchlist_w${weekNum}`;
+
+let watched = JSON.parse(localStorage.getItem(storageKey) || '[]');
+let activeFilter = 'all';
+
+function saveWatched() { localStorage.setItem(storageKey, JSON.stringify(watched)); }
+
+function toggleWatched(idx) {
+  watched = watched.includes(idx) ? watched.filter(i => i !== idx) : [...watched, idx];
+  saveWatched(); updateProgress(); renderCards();
+}
+
+function updateProgress() {
+  const visible = weekTitles.filter(t => activeFilter === 'all' || t.genre === activeFilter);
+  const visibleIdx = visible.map((t, i) => weekTitles.indexOf(t));
+  const done = visibleIdx.filter(i => watched.includes(i)).length;
+  const total = visible.length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done} / ${total} bekeken`;
+}
+
+function filterCards(type, btn) {
+  activeFilter = type;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  updateProgress();
+  renderCards();
+}
+
+function renderCards() {
+  const list = document.getElementById('cardsList');
+  const filtered = weekTitles
+    .map((t, i) => ({ ...t, idx: i }))
+    .filter(t => activeFilter === 'all' || t.genre === activeFilter);
+
+  list.innerHTML = filtered.map((t, pos) => {
+    const isWatched = watched.includes(t.idx);
+    return `
+    <div class="card ${isWatched ? 'watched' : ''}" onclick="toggleWatched(${t.idx})">
+      <div class="card-accent acc-${t.genre}"></div>
+      <div class="card-num">${String(pos + 1).padStart(2, '0')}</div>
+      <div class="card-body">
+        <div class="card-genre-row">
+          <div class="genre-dot dot-${t.genre}"></div>
+          <span class="card-genre-label">${genreLabel(t.genre)}</span>
+          ${t.genre === 'waargeburd' ? '<span class="true-badge">OP WARE FEITEN</span>' : ''}
+        </div>
+        <div class="card-title">${t.title}</div>
+        <div class="card-sub">${t.year} · ${isWatched ? '<em style="color:var(--red)">Bekeken ✓</em>' : t.desc}</div>
+        <div class="card-footer">
+          <span class="platform-tag">${t.platform}</span>
+          <a class="card-link" href="${t.url}" target="_blank" onclick="event.stopPropagation()">Bekijk →</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function resetWeek() {
+  if (confirm('Reset alle vinkjes voor deze week?')) {
+    watched = []; saveWatched(); updateProgress(); renderCards();
+  }
+}
+
+// Init
+document.getElementById('weekNum').textContent = weekNum;
+const monday = getMondayOf(now);
+const friday = new Date(monday); friday.setDate(monday.getDate() + 6);
+document.getElementById('weekMeta').innerHTML =
+  `${formatDate(monday)} – ${formatDate(friday)} · <strong>${weekTitles.length} titels</strong> · thriller, actie, waargeburd & docu`;
+
+renderCards();
+updateProgress();
+
+const nextPool = POOL[(weekNum + 1) % POOL.length];
+const nextTitles = nextPool.slice(0, 3).map(t => `<em>${t.title}</em>`).join(', ');
+const nextMon = getNextMonday(now);
+const days = Math.ceil((nextMon - now) / 86400000);
+document.getElementById('nextWeekBox').innerHTML = `
+  <div class="next-week-label">▸ Volgende week</div>
+  <div class="next-week-text">Maandag ${formatDate(nextMon)} roteert de lijst automatisch.<br>Teaser: ${nextTitles} en meer.</div>
+  <div class="next-week-countdown">Nieuwe titels over <strong>${days} dag${days !== 1 ? 'en' : ''}</strong></div>
+`;
+</script>
+
+</body>
+</html>

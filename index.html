@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Stream NL">
+<meta name="theme-color" content="#0a0a0f">
+<title>Stream NL — Gratis Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --card: #1c1c28;
+    --border: #2a2a3a;
+    --gold: #d4a843;
+    --gold-dim: #7a5e20;
+    --amber: #f0b429;
+    --text: #e8e6e0;
+    --muted: #7a7a90;
+    --red: #e85d5d;
+    --blue: #5d9de8;
+    --green: #5de8a0;
+    --teal: #5dd8e8;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html { background: var(–bg); }
+
+body {
+font-family: ‘DM Sans’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+padding-bottom: env(safe-area-inset-bottom);
+overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+content: ‘’;
+position: fixed; inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 200 200’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 0;
+opacity: 0.5;
+}
+
+/* Header */
+header {
+position: sticky; top: 0; z-index: 100;
+background: rgba(10,10,15,0.88);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–border);
+padding: 16px 20px 14px;
+padding-top: calc(16px + env(safe-area-inset-top));
+}
+
+.header-inner {
+display: flex; align-items: center; justify-content: space-between;
+max-width: 600px; margin: 0 auto;
+}
+
+.logo {
+font-family: ‘Playfair Display’, serif;
+font-size: 22px; font-weight: 900;
+color: var(–gold);
+letter-spacing: -0.5px;
+}
+
+.logo span { color: var(–text); font-weight: 700; }
+
+.badge {
+font-size: 10px; font-weight: 500;
+color: var(–gold);
+border: 1px solid var(–gold-dim);
+border-radius: 20px;
+padding: 3px 10px;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+/* Main */
+main {
+max-width: 600px;
+margin: 0 auto;
+padding: 24px 16px 40px;
+position: relative; z-index: 1;
+}
+
+/* Tip bar */
+.iphone-tip {
+background: linear-gradient(135deg, #1a1a2e, #16213e);
+border: 1px solid #2a3a5a;
+border-radius: 14px;
+padding: 14px 16px;
+margin-bottom: 28px;
+display: flex; gap: 12px; align-items: flex-start;
+}
+
+.tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+.tip-text { font-size: 13px; line-height: 1.5; color: #a8b8d8; }
+.tip-text strong { color: var(–blue); }
+.tip-text em { font-style: normal; color: #c8d8f0; }
+
+/* Section */
+.section { margin-bottom: 32px; }
+
+.section-header {
+display: flex; align-items: center; gap: 10px;
+margin-bottom: 14px;
+}
+
+.section-icon { font-size: 18px; }
+
+.section-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 18px; font-weight: 700;
+color: var(–text);
+letter-spacing: -0.3px;
+}
+
+.section-count {
+margin-left: auto;
+font-size: 11px;
+color: var(–muted);
+background: var(–card);
+border-radius: 20px;
+padding: 2px 8px;
+}
+
+.divider {
+width: 40px; height: 2px;
+border-radius: 2px;
+margin-bottom: 14px;
+}
+
+/* Cards grid */
+.cards { display: flex; flex-direction: column; gap: 10px; }
+
+.card {
+background: var(–card);
+border: 1px solid var(–border);
+border-radius: 14px;
+overflow: hidden;
+text-decoration: none;
+display: flex;
+align-items: stretch;
+transition: transform 0.15s ease, border-color 0.15s ease;
+position: relative;
+}
+
+.card:active { transform: scale(0.97); }
+
+.card-accent {
+width: 4px;
+flex-shrink: 0;
+border-radius: 0;
+}
+
+.card-body {
+padding: 13px 14px;
+flex: 1;
+min-width: 0;
+}
+
+.card-top {
+display: flex; align-items: center; gap: 8px;
+margin-bottom: 4px;
+}
+
+.card-logo { font-size: 18px; flex-shrink: 0; }
+
+.card-name {
+font-size: 15px; font-weight: 500;
+color: var(–text);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.card-tags {
+display: flex; gap: 5px;
+flex-wrap: wrap;
+margin-left: auto;
+}
+
+.tag {
+font-size: 10px; font-weight: 500;
+border-radius: 6px;
+padding: 2px 7px;
+letter-spacing: 0.3px;
+white-space: nowrap;
+}
+
+.tag-nl { background: rgba(212,168,67,0.15); color: var(–gold); }
+.tag-en { background: rgba(93,157,232,0.15); color: var(–blue); }
+.tag-eu { background: rgba(93,216,232,0.15); color: var(–teal); }
+.tag-no-login { background: rgba(93,232,160,0.15); color: var(–green); }
+
+.card-desc {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.4;
+margin-bottom: 8px;
+}
+
+.card-footer {
+display: flex; align-items: center; justify-content: space-between;
+}
+
+.card-url {
+font-size: 11px; color: var(–muted);
+font-family: monospace;
+}
+
+.card-arrow {
+font-size: 14px;
+color: var(–muted);
+flex-shrink: 0;
+}
+
+/* Colors per accent */
+.acc-gold { background: var(–gold); }
+.acc-red { background: var(–red); }
+.acc-blue { background: var(–blue); }
+.acc-green { background: var(–green); }
+.acc-teal { background: var(–teal); }
+.acc-purple { background: #a07de8; }
+.acc-orange { background: #e87d3e; }
+
+/* Section color bars */
+.bar-films { background: linear-gradient(90deg, var(–gold), #e85d5d); }
+.bar-series { background: linear-gradient(90deg, var(–blue), #a07de8); }
+.bar-docs { background: linear-gradient(90deg, var(–teal), var(–green)); }
+.bar-kids { background: linear-gradient(90deg, #e87d3e, #f0b429); }
+.bar-news { background: linear-gradient(90deg, #e85d5d, #e87d3e); }
+
+/* iPhone setup section */
+.setup-section {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 18px;
+padding: 20px;
+margin-bottom: 28px;
+}
+
+.setup-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 17px; font-weight: 700;
+margin-bottom: 14px;
+display: flex; align-items: center; gap: 8px;
+}
+
+.setup-steps { display: flex; flex-direction: column; gap: 12px; }
+
+.step {
+display: flex; gap: 12px; align-items: flex-start;
+}
+
+.step-num {
+width: 26px; height: 26px;
+border-radius: 50%;
+background: var(–gold);
+color: var(–bg);
+font-size: 12px; font-weight: 700;
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0;
+}
+
+.step-text { font-size: 13px; color: #b0afc8; line-height: 1.5; }
+.step-text strong { color: var(–text); }
+
+/* Footer */
+footer {
+text-align: center;
+font-size: 11px;
+color: var(–muted);
+padding: 12px;
+position: relative; z-index: 1;
+}
+
+/* Animations */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.section { animation: fadeUp 0.4s ease both; }
+.section:nth-child(1) { animation-delay: 0.05s; }
+.section:nth-child(2) { animation-delay: 0.10s; }
+.section:nth-child(3) { animation-delay: 0.15s; }
+.section:nth-child(4) { animation-delay: 0.20s; }
+.section:nth-child(5) { animation-delay: 0.25s; }
+.section:nth-child(6) { animation-delay: 0.30s; }
+.iphone-tip { animation: fadeUp 0.4s ease both; }
+.setup-section { animation: fadeUp 0.4s ease both; animation-delay: 0.02s; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Stream<span>NL</span></div>
+    <div class="badge">100% Gratis</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- iPhone tip -->
+
+  <div class="iphone-tip">
+    <div class="tip-icon">📱</div>
+    <div class="tip-text">
+      <strong>Beste iPhone-setup:</strong> Voeg dit dashboard toe via Safari → <em>Deel → Zet op beginscherm</em>. Open links direct in Safari voor fullscreen. Gebruik <em>Safari + Focus-modus</em> voor afleiding-vrij kijken.
+    </div>
+  </div>
+
+  <!-- iPhone Setup -->
+
+  <div class="setup-section">
+    <div class="setup-title">⚙️ iPhone Advies per Platform</div>
+    <div class="setup-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>NPO Start / RTL+ / Kijk.nl</strong> — Download de officiële apps uit de App Store. Werken perfect als native app, incl. AirPlay naar TV.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>ARTE & YouTube</strong> — Download app of gebruik Safari. ARTE-app is sterk voor docs. YouTube-app biedt beste kwaliteit.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Rakuten TV / Plex</strong> — Safari werkt goed; Plex heeft ook een iOS-app. Rakuten heeft geen eigen NL-app, gebruik dus browser.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>AirPlay tip:</strong> Alle Safari-streams zijn AirPlay-compatibel. Tik op het AirPlay-icoontje in de videospeler om naar je TV te sturen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILMS -->
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎬</div>
+      <div class="section-title">Films</div>
+      <div class="section-count">4 platforms</div>
+    </div>
+    <div class="divider bar-films"></div>
+    <div class="cards">
+
+```
+  <a href="https://rakuten.tv" target="_blank" class="card">
+    <div class="card-accent acc-gold"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🎞️</div>
+        <div class="card-name">Rakuten TV</div>
+        <div class="card-tags">
+          <span class="tag tag-en">EN</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Grote bibliotheek met klassieke en recente films. Gratis tier met advertenties, volledig legaal in NL.</div>
+      <div class="card-footer">
+        <span class="card-url">rakuten.tv</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://youtube.com/feed/storefront" target="_blank" class="card">
+    <div class="card-accent acc-red"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">▶️</div>
+        <div class="card-name">YouTube Films</div>
+        <div class="card-tags">
+          <span class="tag tag-en">EN/NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Duizenden gelicenseerde films gratis te bekijken via de Films & TV-sectie. Mix van Hollywood en indie.</div>
+      <div class="card-footer">
+        <span class="card-url">youtube.com</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://watch.plex.tv/movies" target="_blank" class="card">
+    <div class="card-accent acc-orange"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🟠</div>
+        <div class="card-name">Plex Films</div>
+        <div class="card-tags">
+          <span class="tag tag-en">EN</span>
+        </div>
+      </div>
+      <div class="card-desc">Gratis films met advertenties. Account nodig maar geen betaling. Brede bibliotheek met diverse genres.</div>
+      <div class="card-footer">
+        <span class="card-url">watch.plex.tv</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://arte.tv/nl/videos/films/" target="_blank" class="card">
+    <div class="card-accent acc-teal"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🎭</div>
+        <div class="card-name">ARTE Films</div>
+        <div class="card-tags">
+          <span class="tag tag-eu">EU</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Europees cultuurkanaal met arthouse, klassiekers en festivalfilms. Gratis, geen reclame, geen account.</div>
+      <div class="card-footer">
+        <span class="card-url">arte.tv/nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+
+  <!-- SERIES & TV -->
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📺</div>
+      <div class="section-title">Series & TV</div>
+      <div class="section-count">4 platforms</div>
+    </div>
+    <div class="divider bar-series"></div>
+    <div class="cards">
+
+```
+  <a href="https://npostart.nl" target="_blank" class="card">
+    <div class="card-accent acc-gold"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🇳🇱</div>
+        <div class="card-name">NPO Start</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Terugkijken NPO 1/2/3, live streams, series, drama en entertainment van de publieke omroep. Beste NL-app.</div>
+      <div class="card-footer">
+        <span class="card-url">npostart.nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://www.rtlxl.nl" target="_blank" class="card">
+    <div class="card-accent acc-blue"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">📡</div>
+        <div class="card-name">RTL+</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+        </div>
+      </div>
+      <div class="card-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame, account aanbevolen.</div>
+      <div class="card-footer">
+        <span class="card-url">rtlxl.nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://kijk.nl" target="_blank" class="card">
+    <div class="card-accent acc-purple"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">👁️</div>
+        <div class="card-name">Kijk.nl</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows, films en nieuws. Gratis, geen account nodig.</div>
+      <div class="card-footer">
+        <span class="card-url">kijk.nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://watch.plex.tv/live-tv" target="_blank" class="card">
+    <div class="card-accent acc-orange"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">📻</div>
+        <div class="card-name">Plex Live TV</div>
+        <div class="card-tags">
+          <span class="tag tag-en">EN</span>
+        </div>
+      </div>
+      <div class="card-desc">Live internationale kanalen gratis. Mix van nieuws, entertainment en series. Account nodig, geen betaling.</div>
+      <div class="card-footer">
+        <span class="card-url">watch.plex.tv</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+
+  <!-- DOCUMENTAIRES -->
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎥</div>
+      <div class="section-title">Documentaires</div>
+      <div class="section-count">3 platforms</div>
+    </div>
+    <div class="divider bar-docs"></div>
+    <div class="cards">
+
+```
+  <a href="https://arte.tv/nl/videos/documentaires/" target="_blank" class="card">
+    <div class="card-accent acc-teal"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🔭</div>
+        <div class="card-name">ARTE Documentaires</div>
+        <div class="card-tags">
+          <span class="tag tag-eu">EU</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Hoge kwaliteit, geen reclame, geen account.</div>
+      <div class="card-footer">
+        <span class="card-url">arte.tv/nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://npostart.nl/documentaire" target="_blank" class="card">
+    <div class="card-accent acc-gold"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🎙️</div>
+        <div class="card-name">NPO Documentaires</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">VPRO, NTR, Human en andere omroepen. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
+      <div class="card-footer">
+        <span class="card-url">npostart.nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://youtube.com/@DWDocumentary" target="_blank" class="card">
+    <div class="card-accent acc-red"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🌍</div>
+        <div class="card-name">YouTube Docs</div>
+        <div class="card-tags">
+          <span class="tag tag-en">EN/NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">DW Documentary, VPRO, NatGeo, Vice en meer. Onbeperkt gratis. Tip: zoek op "VPRO documentary" voor NL-subs.</div>
+      <div class="card-footer">
+        <span class="card-url">youtube.com</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+
+  <!-- NIEUWS & LIVE -->
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📰</div>
+      <div class="section-title">Nieuws & Live TV</div>
+      <div class="section-count">3 platforms</div>
+    </div>
+    <div class="divider bar-news"></div>
+    <div class="cards">
+
+```
+  <a href="https://nos.nl/live" target="_blank" class="card">
+    <div class="card-accent acc-red"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">📡</div>
+        <div class="card-name">NOS Live</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Live nieuws, breaking events, sportverslaggeving. Direct via nos.nl/live of via NPO Start. Geen account nodig.</div>
+      <div class="card-footer">
+        <span class="card-url">nos.nl/live</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://npostart.nl/live" target="_blank" class="card">
+    <div class="card-accent acc-gold"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🔴</div>
+        <div class="card-name">NPO Live</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Live NPO 1, 2, 3 plus extra-kanalen NPO 1 Extra, 2 Extra, Politiek & Nieuws. Volledig gratis, geen account.</div>
+      <div class="card-footer">
+        <span class="card-url">npostart.nl/live</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://arte.tv/nl/live/" target="_blank" class="card">
+    <div class="card-accent acc-teal"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🌐</div>
+        <div class="card-name">ARTE Live</div>
+        <div class="card-tags">
+          <span class="tag tag-eu">EU</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Europees cultuurkanaal live. Concerten, theater, debatten en culturele evenementen rechtstreeks.</div>
+      <div class="card-footer">
+        <span class="card-url">arte.tv/nl/live</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+
+  <!-- KIDS -->
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🧒</div>
+      <div class="section-title">Kids</div>
+      <div class="section-count">2 platforms</div>
+    </div>
+    <div class="divider bar-kids"></div>
+    <div class="cards">
+
+```
+  <a href="https://npostart.nl/npozappxl" target="_blank" class="card">
+    <div class="card-accent acc-orange"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🌟</div>
+        <div class="card-name">NPO Zapp XL</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Kinderprogrammering van NPO Zapp. Animaties, series en educatief aanbod voor alle leeftijden.</div>
+      <div class="card-footer">
+        <span class="card-url">npostart.nl</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="https://youtube.com/@NatGeoKidsDutch" target="_blank" class="card">
+    <div class="card-accent acc-green"></div>
+    <div class="card-body">
+      <div class="card-top">
+        <div class="card-logo">🦁</div>
+        <div class="card-name">YouTube Kids NL</div>
+        <div class="card-tags">
+          <span class="tag tag-nl">NL</span>
+          <span class="tag tag-no-login">Geen login</span>
+        </div>
+      </div>
+      <div class="card-desc">Via YouTube Kids-app of browser. NatGeo Kids, tekenfilms, educatief. Veilig, gratis, Nederlandstalig aanbod.</div>
+      <div class="card-footer">
+        <span class="card-url">youtube.com</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+  </a>
+
+</div>
+```
+
+  </div>
+
+</main>
+
+<footer>Made by Rob Borghouts 2026 · Alleen legale, gratis NL-platforms</footer>
+
+</body>
+</html>
