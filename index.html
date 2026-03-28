@@ -54,10 +54,11 @@ opacity: 0.5;
 /* Header */
 header {
 position: sticky; top: 0; z-index: 100;
-background: rgba(10,10,15,0.88);
+background: linear-gradient(180deg, #1a1020 0%, rgba(14,10,20,0.96) 100%);
 backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
-border-bottom: 1px solid var(–border);
+border-bottom: 1px solid rgba(212,168,67,0.25);
+box-shadow: 0 2px 24px rgba(0,0,0,0.6);
 padding: 16px 20px 14px;
 padding-top: calc(16px + env(safe-area-inset-top));
 }
@@ -69,21 +70,23 @@ max-width: 600px; margin: 0 auto;
 
 .logo {
 font-family: ‘Playfair Display’, serif;
-font-size: 22px; font-weight: 900;
+font-size: 24px; font-weight: 900;
 color: var(–gold);
 letter-spacing: -0.5px;
+text-shadow: 0 0 20px rgba(212,168,67,0.5);
 }
 
-.logo span { color: var(–text); font-weight: 700; }
+.logo span { color: #fff; font-weight: 700; }
 
 .badge {
-font-size: 10px; font-weight: 500;
-color: var(–gold);
-border: 1px solid var(–gold-dim);
+font-size: 10px; font-weight: 600;
+color: #fff;
+background: linear-gradient(135deg, #b8860b, var(–gold));
 border-radius: 20px;
-padding: 3px 10px;
+padding: 4px 12px;
 letter-spacing: 1px;
 text-transform: uppercase;
+box-shadow: 0 0 12px rgba(212,168,67,0.3);
 }
 
 /* Main */
@@ -322,6 +325,65 @@ to   { opacity: 1; transform: translateY(0); }
     <div class="tip-icon">📱</div>
     <div class="tip-text">
       <strong>Beste iPhone-setup:</strong> Voeg dit dashboard toe via Safari → <em>Deel → Zet op beginscherm</em>. Open links direct in Safari voor fullscreen. Gebruik <em>Safari + Focus-modus</em> voor afleiding-vrij kijken.
+    </div>
+  </div>
+
+  <!-- Quick actions -->
+
+  <div style="display:flex; gap:10px; margin-bottom:22px; animation: fadeUp 0.4s ease 0.03s both;">
+    <button onclick="surpriseMe()" style="
+      flex:1; padding:13px 10px;
+      background:linear-gradient(135deg,#1e1430,#2a1a40);
+      border:1px solid #6a3d9a; border-radius:12px;
+      color:#d7a8f0; font-family:'Playfair Display',serif;
+      font-size:14px; font-weight:700; cursor:pointer;
+      box-shadow: 0 0 14px rgba(106,61,154,0.2);
+    ">🎲 Verras me</button>
+    <div id="mondayBox" style="
+      flex:1.3; padding:13px 14px;
+      background:linear-gradient(135deg,#0e1e14,#0a1a10);
+      border:1px solid #27ae60; border-radius:12px;
+      font-size:12px; color:#5de8a0; line-height:1.4;
+      box-shadow: 0 0 14px rgba(39,174,96,0.12);
+    ">⏱️ Laadt...</div>
+  </div>
+
+  <!-- Surprise modal -->
+
+  <div id="surpriseModal" style="
+    display:none; position:fixed; inset:0; z-index:500;
+    background:rgba(0,0,0,0.85); backdrop-filter:blur(8px);
+    align-items:center; justify-content:center; padding:24px;
+  " onclick="this.style.display='none'">
+    <div style="
+      background:#1c1c28; border:1px solid #d4a843;
+      border-radius:18px; padding:28px 24px; max-width:340px; width:100%;
+      box-shadow: 0 0 40px rgba(212,168,67,0.2);
+      animation: fadeUp 0.3s ease;
+    " onclick="event.stopPropagation()">
+      <div style="font-size:11px;letter-spacing:2px;color:#d4a843;margin-bottom:12px;text-transform:uppercase;">🎲 Vanavond kijken</div>
+      <div id="surpriseTitle" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;margin-bottom:6px;color:#fff;"></div>
+      <div id="surpriseYear" style="font-size:13px;color:#7a7a90;margin-bottom:10px;"></div>
+      <div id="surpriseDesc" style="font-size:14px;color:#b0afc8;line-height:1.5;margin-bottom:16px;"></div>
+      <div style="display:flex;gap:10px;">
+        <a id="surpriseLink" href="#" target="_blank" style="
+          flex:1; text-align:center; padding:11px;
+          background:#d4a843; border-radius:8px;
+          color:#000; font-weight:700; font-size:14px;
+          text-decoration:none;
+        ">Bekijk nu →</a>
+        <button onclick="surpriseMe()" style="
+          padding:11px 16px; background:transparent;
+          border:1px solid #2a2a3a; border-radius:8px;
+          color:#7a7a90; cursor:pointer; font-size:14px;
+        ">🔀</button>
+      </div>
+      <div style="text-align:center;margin-top:12px;">
+        <button onclick="document.getElementById('surpriseModal').style.display='none'" style="
+          background:transparent;border:none;color:#3a3a5a;
+          font-size:12px;cursor:pointer;
+        ">Sluiten</button>
+      </div>
     </div>
   </div>
 
@@ -734,6 +796,26 @@ to   { opacity: 1; transform: translateY(0); }
 ```
 
   </div>
+
+  <!-- Watchlist link -->
+
+<a href="watchlist.html" style="
+display:flex; align-items:center; justify-content:space-between;
+margin-top:8px;
+background:#14141e; border:1px solid #c0392b;
+border-radius:12px; padding:16px 20px;
+text-decoration:none; color:#ede8e0;
+box-shadow: 0 0 18px rgba(192,57,43,0.15);
+animation: fadeUp 0.4s ease 0.35s both;
+">
+<div>
+<div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:3px;">
+🔪 Wekelijkse Watchlist
+</div>
+<div style="font-size:12px;color:#6b6b88;">Thrillers · Actie · Waargeburd · Docu — roteert elke maandag</div>
+</div>
+<div style="color:#c0392b;font-size:20px;">→</div>
+</a>
 
 </main>
 
