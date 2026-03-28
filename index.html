@@ -529,19 +529,19 @@ body {
   <div class="section-gap">
     <div class="rec-label">⭐ Aanbevelingen deze week</div>
     <div class="rec-cards">
-      <div class="rec-card" onclick="window.location.href='https://watch.plex.tv/movie/no-country-for-old-men'" style="cursor:pointer;">
+      <div class="rec-card" onclick="window.location.href='https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie'" style="cursor:pointer;">
         <div class="rec-num">01</div>
         <div class="rec-info">
           <div class="rec-title">No Country for Old Men</div>
-          <div class="rec-meta">Thriller · 2007 · Plex <span style="color:#484f58;font-size:10px;">(check gratis)</span></div>
+          <div class="rec-meta">Thriller · 2007 · Plex</div>
         </div>
         <span class="rec-badge" style="background:var(--red-bg);color:#f87171;border:1px solid var(--red-bd);">Thriller</span>
       </div>
-      <div class="rec-card" onclick="window.location.href='https://watch.plex.tv/movie/icarus-2017'" style="cursor:pointer;">
+      <div class="rec-card" onclick="window.location.href='https://www.youtube.com/results?search_query=icarus+2017+doping+documentary'" style="cursor:pointer;">
         <div class="rec-num">02</div>
         <div class="rec-info">
           <div class="rec-title">Icarus</div>
-          <div class="rec-meta">Documentaire · 2017 · Plex <span style="color:#484f58;font-size:10px;">(check gratis)</span></div>
+          <div class="rec-meta">Documentaire · 2017 · YouTube</div>
         </div>
         <span class="rec-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Docu</span>
       </div>
@@ -579,35 +579,14 @@ body {
 <div class="screen" id="screen-films">
 <div class="content">
   <div class="section-title">🎬 <span>Films</span></div>
+
+  <div style="background:var(--green-bg);border:1px solid rgba(63,185,80,.25);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#5de8a0;line-height:1.5;">
+    ✅ Alle platforms hieronder zijn <strong>altijd gratis</strong> — geen verrassende betaalmuren.
+  </div>
+
   <div class="cards">
 
-    <a class="pcard" href="https://rakuten.tv" onclick="goTo(this)">
-      <div class="pcard-bar bar-gold"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎞️</div>
-          <div class="pcard-name">Rakuten TV</div>
-          <div class="pcard-tags"><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Grote bibliotheek klassieke en recente films. Ad-supported, geen account nodig. Beschikbaar in NL.</div>
-        <div class="pcard-foot"><span class="pcard-url">rakuten.tv</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://watch.plex.tv/movies" onclick="goTo(this)">
-      <div class="pcard-bar bar-orange"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🟠</div>
-          <div class="pcard-name">Plex Films</div>
-          <div class="pcard-tags"><span class="tag tag-free">Gratis</span><span class="tag tag-en">EN</span></div>
-        </div>
-        <div class="pcard-desc">Brede filmbibiliotheek met advertenties. Gratis account vereist. Werkt goed in Safari.</div>
-        <div class="pcard-foot"><span class="pcard-url">watch.plex.tv</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://youtube.com/feed/storefront" onclick="goTo(this)">
+    <a class="pcard" href="https://www.youtube.com/feed/storefront" onclick="goTo(this)">
       <div class="pcard-bar bar-red"></div>
       <div class="pcard-body">
         <div class="pcard-top">
@@ -615,8 +594,21 @@ body {
           <div class="pcard-name">YouTube Films</div>
           <div class="pcard-tags"><span class="tag tag-free">Premium ✓</span></div>
         </div>
-        <div class="pcard-desc">Duizenden gelicenseerde films. Mix van Hollywood en indie. Geen reclame dankzij jouw Premium abonnement.</div>
-        <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+        <div class="pcard-desc">Beste keuze. Duizenden films gratis en zonder reclame dankzij jouw Premium. Altijd Watch Now — nooit huren.</div>
+        <div class="pcard-foot"><span class="pcard-url">youtube.com/feed/storefront</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pcard" href="https://rakuten.tv/nl/store/free" onclick="goTo(this)">
+      <div class="pcard-bar bar-gold"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🎞️</div>
+          <div class="pcard-name">Rakuten TV Free</div>
+          <div class="pcard-tags"><span class="tag tag-free">Altijd gratis</span></div>
+        </div>
+        <div class="pcard-desc">Gratis tier apart gefilterd van huur/koop. Klassiekers, actie en thrillers. Geen account nodig. Beschikbaar in NL.</div>
+        <div class="pcard-foot"><span class="pcard-url">rakuten.tv/nl/store/free</span><span class="pcard-arrow">↗</span></div>
       </div>
     </a>
 
@@ -626,10 +618,23 @@ body {
         <div class="pcard-top">
           <div class="pcard-icon">🎭</div>
           <div class="pcard-name">ARTE Films</div>
-          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
+          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Altijd gratis</span></div>
         </div>
-        <div class="pcard-desc">Europees cultuurkanaal. Arthouse, klassiekers en festivalfilms. Geen reclame, geen account.</div>
-        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+        <div class="pcard-desc">Arthouse, klassiekers en festivalfilms. Geen reclame, geen account. Elke titel is Watch Now.</div>
+        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/videos/films</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
+
+    <a class="pcard" href="https://npostart.nl/films" onclick="goTo(this)">
+      <div class="pcard-bar bar-gold"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🇳🇱</div>
+          <div class="pcard-name">NPO Start Films</div>
+          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Altijd gratis</span></div>
+        </div>
+        <div class="pcard-desc">Nederlandse en internationale films van de publieke omroep. Geen account nodig, alles direct te kijken.</div>
+        <div class="pcard-foot"><span class="pcard-url">npostart.nl/films</span><span class="pcard-arrow">↗</span></div>
       </div>
     </a>
 
@@ -963,26 +968,26 @@ updateCountdown();
 
 // ── SURPRISE ME ───────────────────────────────────────
 const pool = [
-  { title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv/movie/no-country-for-old-men', genre:'Thriller', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk. Javier Bardem als ultieme schurk.' },
+  { title:'No Country for Old Men', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie', genre:'Thriller', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk. Javier Bardem als ultieme schurk.' },
   { title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/spotlight', genre:'Waargeburd', desc:'Journalisten van de Boston Globe onthullen misbruikschandaal bij de kerk. Oscarwinnaar.' },
-  { title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv/movie/parasite-2019', genre:'Thriller', desc:'Bong Joon-ho. Klasse-spanning die uitloopt op iets heel anders. Oscarwinnaar.' },
-  { title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/mad-max-fury-road', genre:'Actie', desc:'Twee uur non-stop achtervolging in de woestijn. Visueel meesterwerk. Ademloos.' },
-  { title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv/movie/zodiac', genre:'Thriller', desc:'Fincher. De echte Zodiac-moordenaar. Obsessieve, langzame spanning die blijft hangen.' },
-  { title:'The Social Network', year:'2010', platform:'Plex', url:'https://watch.plex.tv/movie/the-social-network', genre:'Waargeburd', desc:'Facebook-oprichting als rechtbankdrama. Fincher op zijn sterkst. Trent Reznor score.' },
-  { title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/dunkirk-2017', genre:'Actie', desc:'Nolan. Evacuatie van het strand van Duinkerken, 1940. Spanning zonder woorden.' },
-  { title:'City of God', year:'2002', platform:'YouTube', url:'https://youtube.com/results?search_query=city+of+god+2002+full+movie', genre:'Actie', desc:'Rio favela. Drugs en geweld. Meeslepend, mooi en hartverscheurend tegelijk.' },
-  { title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv/movie/gone-girl', genre:'Thriller', desc:'Fincher snijdt scherp. Huwelijk als slagveld. Rosamund Pike steelt de show.' },
-  { title:'Icarus', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/icarus-2017', genre:'Documentaire', desc:'Begon als dopingexperiment, eindigde als staatsschandaal. Oscar-winnaar.' },
-  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://youtube.com/results?search_query=hotel+rwanda+full+movie', genre:'Waargeburd', desc:'Don Cheadle redt 1200 mensen tijdens de Rwandese genocide. Verplicht kijken.' },
-  { title:'Nightcrawler', year:'2014', platform:'Plex', url:'https://watch.plex.tv/movie/nightcrawler', genre:'Thriller', desc:'Jake Gyllenhaal als sinistere freelance videojournalist in LA. Ongemakkelijk goed.' },
-  { title:'Three Billboards', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/three-billboards-outside-ebbing-missouri', genre:'Thriller', desc:'Frances McDormand. Wraak, gerechtigheid en morele grijszones. Briljant schriftwerk.' },
-  { title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/sicario', genre:'Actie', desc:'Villeneuve. Drugsoorlog aan de Mexicaanse grens. Onbarmhartig en prachtig gefilmd.' },
+  { title:'Parasite', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie', genre:'Thriller', desc:'Bong Joon-ho. Klasse-spanning die uitloopt op iets heel anders. Oscarwinnaar.' },
+  { title:'Mad Max: Fury Road', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie', genre:'Actie', desc:'Twee uur non-stop achtervolging in de woestijn. Visueel meesterwerk. Ademloos.' },
+  { title:'Zodiac', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie', genre:'Thriller', desc:'Fincher. De echte Zodiac-moordenaar. Obsessieve, langzame spanning die blijft hangen.' },
+  { title:'The Social Network', year:'2010', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie', genre:'Waargeburd', desc:'Facebook-oprichting als rechtbankdrama. Fincher op zijn sterkst. Trent Reznor score.' },
+  { title:'Dunkirk', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie', genre:'Actie', desc:'Nolan. Evacuatie van het strand van Duinkerken, 1940. Spanning zonder woorden.' },
+  { title:'City of God', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie', genre:'Actie', desc:'Rio favela. Drugs en geweld. Meeslepend, mooi en hartverscheurend tegelijk.' },
+  { title:'Gone Girl', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gone+girl+2014+fincher+full+movie', genre:'Thriller', desc:'Fincher snijdt scherp. Huwelijk als slagveld. Rosamund Pike steelt de show.' },
+  { title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', genre:'Documentaire', desc:'Begon als dopingexperiment, eindigde als staatsschandaal. Oscar-winnaar.' },
+  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie', genre:'Waargeburd', desc:'Don Cheadle redt 1200 mensen tijdens de Rwandese genocide. Verplicht kijken.' },
+  { title:'Nightcrawler', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=nightcrawler+2014+gyllenhaal+full+movie', genre:'Thriller', desc:'Jake Gyllenhaal als sinistere freelance videojournalist in LA. Ongemakkelijk goed.' },
+  { title:'Three Billboards', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie', genre:'Thriller', desc:'Frances McDormand. Wraak, gerechtigheid en morele grijszones. Briljant schriftwerk.' },
+  { title:'Sicario', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sicario+2015+villeneuve+full+movie', genre:'Actie', desc:'Villeneuve. Drugsoorlog aan de Mexicaanse grens. Onbarmhartig en prachtig gefilmd.' },
   { title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/argo', genre:'Waargeburd', desc:'CIA redt gijzelaars via een nepfilmproductie. Ben Affleck. Oscarwinnaar.' },
-  { title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://youtube.com/results?search_query=wild+wild+country+documentary', genre:'Documentaire', desc:'Bhagwan sekte in Oregon. Giftaanslag. Bizarre absolute werkelijkheid.' },
-  { title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv/movie/black-hawk-down', genre:'Actie', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af. Ridley Scott op zijn best.' },
-  { title:'The Jinx', year:'2015', platform:'YouTube', url:'https://youtube.com/results?search_query=the+jinx+robert+durst+documentary', genre:'Documentaire', desc:'Robert Durst. Zes afleveringen die eindigen met een ongelooflijk moment.' },
-  { title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv/movie/uncut-gems', genre:'Thriller', desc:'Adam Sandler als juwelier in schulden. Spanning die je adem afsnijdt. Non-stop.' },
-  { title:'All the President\'s Men', year:'1976', platform:'Plex', url:'https://watch.plex.tv/movie/all-the-presidents-men', genre:'Waargeburd', desc:'Woodward en Bernstein leggen Watergate bloot. Journalistiek icoon. Redford en Hoffman.' },
+  { title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary', genre:'Documentaire', desc:'Bhagwan sekte in Oregon. Giftaanslag. Bizarre absolute werkelijkheid.' },
+  { title:'Black Hawk Down', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie', genre:'Actie', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af. Ridley Scott op zijn best.' },
+  { title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+documentary', genre:'Documentaire', desc:'Robert Durst. Zes afleveringen die eindigen met een ongelooflijk moment.' },
+  { title:'Uncut Gems', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie', genre:'Thriller', desc:'Adam Sandler als juwelier in schulden. Spanning die je adem afsnijdt. Non-stop.' },
+  { title:'All the President\'s Men', year:'1976', platform:'YouTube', url:'https://www.youtube.com/results?search_query=all+the+presidents+men+1976+full+movie', genre:'Waargeburd', desc:'Woodward en Bernstein leggen Watergate bloot. Journalistiek icoon. Redford en Hoffman.' },
 ];
 
 let currentUrl = '';
@@ -1014,76 +1019,76 @@ function goToSurprise() {
 // ── WATCHLIST ─────────────────────────────────────────
 const WPOOL = [
   [ // Week A
-    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'Plex', url:'https://watch.plex.tv/movie/no-country-for-old-men', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
-    { genre:'actie', title:'Heat', year:'1995', platform:'Plex', url:'https://watch.plex.tv/movie/heat-1995', desc:'De Niro vs Pacino. Hectische LA-heist.' },
+    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
+    { genre:'actie', title:'Heat', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=heat+1995+de+niro+pacino+full+movie', desc:'De Niro vs Pacino. Hectische LA-heist.' },
     { genre:'waar', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/spotlight', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
     { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=making+a+murderer+documentary', desc:'Schudde Amerika op. True crime meesterwerk.' },
-    { genre:'thriller', title:'Zodiac', year:'2007', platform:'Plex', url:'https://watch.plex.tv/movie/zodiac', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
-    { genre:'actie', title:'Sicario', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/sicario', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
-    { genre:'waar', title:'The Big Short', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/the-big-short', desc:'De financiële crash van 2008. Woedend en grappig.' },
+    { genre:'thriller', title:'Zodiac', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
+    { genre:'actie', title:'Sicario', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sicario+2015+full+movie', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
+    { genre:'waar', title:'The Big Short', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+big+short+2015+full+movie', desc:'De financiële crash van 2008. Woedend en grappig.' },
   ],
   [ // Week B
-    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv/movie/gone-girl', desc:'Fincher. Huwelijk als slagveld.' },
-    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/mad-max-fury-road', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
-    { genre:'waar', title:'Captain Phillips', year:'2013', platform:'Plex', url:'https://watch.plex.tv/movie/captain-phillips', desc:'Somalische piraten. Hanks op zijn best.' },
-    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+hbo', desc:'Robert Durst. Ongelooflijk slot.' },
-    { genre:'thriller', title:'Prisoners', year:'2013', platform:'Plex', url:'https://watch.plex.tv/movie/prisoners', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
-    { genre:'actie', title:'Dunkirk', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/dunkirk-2017', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
-    { genre:'waar', title:'Argo', year:'2012', platform:'Plex', url:'https://watch.plex.tv/movie/argo', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
+    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gone+girl+2014+full+movie', desc:'Fincher. Huwelijk als slagveld.' },
+    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
+    { genre:'waar', title:'Captain Phillips', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=captain+phillips+2013+full+movie', desc:'Somalische piraten. Hanks op zijn best.' },
+    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+hbo+documentary', desc:'Robert Durst. Ongelooflijk slot.' },
+    { genre:'thriller', title:'Prisoners', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=prisoners+2013+villeneuve+full+movie', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
+    { genre:'actie', title:'Dunkirk', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
+    { genre:'waar', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/argo', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
   ],
   [ // Week C
-    { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv/movie/se7en', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+    { genre:'thriller', title:'Se7en', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=se7en+1995+fincher+full+movie', desc:'Wat zit er in de doos? Klassieke Fincher.' },
     { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+raid+2011+full+movie', desc:'Indonesisch actiemeesterwerk. Puur en rauw.' },
-    { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'Plex', url:'https://watch.plex.tv/movie/zero-dark-thirty', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
-    { genre:'docu', title:'Icarus', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/icarus-2017', desc:'Fietsen en doping worden staatsgeheim. Oscar.' },
-    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'Plex', url:'https://watch.plex.tv/movie/nightcrawler', desc:'Jake Gyllenhaal als sinistere nieuwsjager.' },
+    { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zero+dark+thirty+2012+full+movie', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar.' },
+    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=nightcrawler+2014+gyllenhaal+full+movie', desc:'Jake Gyllenhaal als sinistere nieuwsjager.' },
     { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie', desc:'Rio favela. Drugs en geweld. Meeslepend.' },
     { genre:'waar', title:'The Report', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+report+2019+full+movie', desc:'CIA-folterprogramma onthuld. Op ware feiten.' },
   ],
   [ // Week D
-    { genre:'thriller', title:'Parasite', year:'2019', platform:'Plex', url:'https://watch.plex.tv/movie/parasite-2019', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
-    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'Plex', url:'https://watch.plex.tv/movie/black-hawk-down', desc:'Mogadishu 1993. Militaire catastrofe.' },
-    { genre:'waar', title:'Sully', year:'2016', platform:'Plex', url:'https://watch.plex.tv/movie/sully', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
-    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+staircase+documentary+2004', desc:'Heeft hij haar gedood? 18 jaar, zes afleveringen.' },
-    { genre:'thriller', title:'Memento', year:'2000', platform:'Plex', url:'https://watch.plex.tv/movie/memento', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
-    { genre:'actie', title:'Gladiator', year:'2000', platform:'Plex', url:'https://watch.plex.tv/movie/gladiator', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
-    { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'Plex', url:'https://watch.plex.tv/movie/frost-nixon', desc:'Nixon gedwongen te bekennen op live tv.' },
+    { genre:'thriller', title:'Parasite', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
+    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie', desc:'Mogadishu 1993. Militaire catastrofe.' },
+    { genre:'waar', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/sully', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
+    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+staircase+2004+documentary', desc:'Heeft hij haar gedood? 18 jaar, zes afleveringen.' },
+    { genre:'thriller', title:'Memento', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=memento+2000+nolan+full+movie', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
+    { genre:'actie', title:'Gladiator', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gladiator+2000+ridley+scott+full+movie', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
+    { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'YouTube', url:'https://www.youtube.com/results?search_query=frost+nixon+2008+full+movie', desc:'Nixon gedwongen te bekennen op live tv.' },
   ],
   [ // Week E
-    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'Plex', url:'https://watch.plex.tv/movie/the-silence-of-the-lambs', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
-    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'Plex', url:'https://watch.plex.tv/movie/uncut-gems', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
-    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'Plex', url:'https://watch.plex.tv/movie/leon-the-professional', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
+    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=silence+of+the+lambs+1991+full+movie', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
+    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
+    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'YouTube', url:'https://www.youtube.com/results?search_query=leon+the+professional+1994+full+movie', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
     { genre:'docu', title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary', desc:'Rajneesh-sekte. Giftaanslag. Absolute werkelijkheid.' },
-    { genre:'thriller', title:'Oldboy', year:'2003', platform:'Plex', url:'https://watch.plex.tv/movie/oldboy', desc:'Park Chan-wook. Koreaanse revenge-thriller.' },
-    { genre:'waar', title:'Catch Me If You Can', year:'2002', platform:'Plex', url:'https://watch.plex.tv/movie/catch-me-if-you-can', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio.' },
-    { genre:'docu', title:"Don't F**k with Cats", year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dont+f+with+cats+documentary', desc:'Internetdetectives jagen seriemoordenaar.' },
+    { genre:'thriller', title:'Oldboy', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=oldboy+2003+park+chan+wook+full+movie', desc:'Park Chan-wook. Koreaanse revenge-thriller.' },
+    { genre:'waar', title:'Catch Me If You Can', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=catch+me+if+you+can+2002+full+movie', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio.' },
+    { genre:'docu', title:"Don't F**k with Cats", year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dont+f+with+cats+documentary+2019', desc:'Internetdetectives jagen seriemoordenaar.' },
   ],
   [ // Week F
-    { genre:'thriller', title:'Mystic River', year:'2003', platform:'Plex', url:'https://watch.plex.tv/movie/mystic-river', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
-    { genre:'thriller', title:'Three Billboards', year:'2017', platform:'Plex', url:'https://watch.plex.tv/movie/three-billboards-outside-ebbing-missouri', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
-    { genre:'actie', title:'Training Day', year:'2001', platform:'Plex', url:'https://watch.plex.tv/movie/training-day', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
+    { genre:'thriller', title:'Mystic River', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mystic+river+2003+eastwood+full+movie', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
+    { genre:'thriller', title:'Three Billboards', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
+    { genre:'actie', title:'Training Day', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=training+day+2001+denzel+washington+full+movie', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
     { genre:'docu', title:'Amanda Knox', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=amanda+knox+documentary+2016', desc:'Italiaanse moordrechtszaak. Mediaobsessie.' },
-    { genre:'thriller', title:'Knives Out', year:'2019', platform:'Plex', url:'https://watch.plex.tv/movie/knives-out', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
-    { genre:'waar', title:"All the President's Men", year:'1976', platform:'Plex', url:'https://watch.plex.tv/movie/all-the-presidents-men', desc:'Woodward en Bernstein leggen Watergate bloot.' },
-    { genre:'thriller', title:'Rear Window', year:'1954', platform:'Plex', url:'https://watch.plex.tv/movie/rear-window', desc:'Hitchcock. Spanning vanuit één kamer. Tijdloos.' },
+    { genre:'thriller', title:'Knives Out', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=knives+out+2019+full+movie', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
+    { genre:'waar', title:"All the President's Men", year:'1976', platform:'YouTube', url:'https://www.youtube.com/results?search_query=all+the+presidents+men+1976+full+movie', desc:'Woodward en Bernstein leggen Watergate bloot.' },
+    { genre:'thriller', title:'Rear Window', year:'1954', platform:'YouTube', url:'https://www.youtube.com/results?search_query=rear+window+1954+hitchcock+full+movie', desc:'Hitchcock. Spanning vanuit één kamer. Tijdloos.' },
   ],
   [ // Week G
-    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'Plex', url:'https://watch.plex.tv/movie/gone-girl', desc:'Fincher snijdt scherp. Huwelijk als slagveld.' },
-    { genre:'thriller', title:'True Detective S1', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=true+detective+season+1', desc:'McConaughey en Harrelson. Louisiana noir.' },
-    { genre:'actie', title:'Point Break', year:'1991', platform:'Plex', url:'https://watch.plex.tv/movie/point-break', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
+    { genre:'thriller', title:'True Detective S1', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=true+detective+season+1+full+episodes', desc:'McConaughey en Harrelson. Louisiana noir.' },
+    { genre:'thriller', title:'Hereditary', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hereditary+2018+ari+aster+full+movie', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
+    { genre:'actie', title:'Point Break', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=point+break+1991+full+movie', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
     { genre:'docu', title:'The Last Dance', year:'2020', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+last+dance+documentary+michael+jordan', desc:'Michael Jordan en de Bulls. Sportdocu op zijn allerbest.' },
-    { genre:'thriller', title:'Hereditary', year:'2018', platform:'Plex', url:'https://watch.plex.tv/movie/hereditary', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
-    { genre:'waar', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+full+movie', desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.' },
-    { genre:'thriller', title:'Blue Ruin', year:'2013', platform:'Plex', url:'https://watch.plex.tv/movie/blue-ruin', desc:'Indie-wraakthriller. Geweld als gevolg. Ruw en echt.' },
+    { genre:'thriller', title:'Blue Ruin', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=blue+ruin+2013+full+movie', desc:'Indie-wraakthriller. Geweld als gevolg. Ruw en echt.' },
+    { genre:'waar', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie', desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.' },
+    { genre:'actie', title:'The Social Network', year:'2010', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
   ],
   [ // Week H
-    { genre:'thriller', title:'Se7en', year:'1995', platform:'Plex', url:'https://watch.plex.tv/movie/se7en', desc:'Wat zit er in de doos? Klassieke Fincher.' },
-    { genre:'thriller', title:'Sharp Objects', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sharp+objects+hbo+series', desc:'Amy Adams. Gothisch Missouri. Duistere familiegeheimen.' },
-    { genre:'actie', title:'No Escape', year:'2015', platform:'Plex', url:'https://watch.plex.tv/movie/no-escape-2015', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop.' },
-    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=evil+genius+documentary+netflix', desc:'Bizarre bankroof. Echte true crime chaos.' },
-    { genre:'thriller', title:'Chinatown', year:'1974', platform:'Plex', url:'https://watch.plex.tv/movie/chinatown', desc:'Polanski. De ultieme noir thriller. Tijdloos.' },
-    { genre:'waar', title:'Deepwater Horizon', year:'2016', platform:'Plex', url:'https://watch.plex.tv/movie/deepwater-horizon', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
-    { genre:'thriller', title:'The Conversation', year:'1974', platform:'Plex', url:'https://watch.plex.tv/movie/the-conversation', desc:"Coppola's paranoïde meesterwerk. Tijdloos." },
+    { genre:'thriller', title:'Chinatown', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=chinatown+1974+polanski+full+movie', desc:'Polanski. De ultieme noir thriller. Tijdloos.' },
+    { genre:'thriller', title:'Sharp Objects', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sharp+objects+hbo+2018+full+series', desc:'Amy Adams. Gothisch Missouri. Duistere familiegeheimen.' },
+    { genre:'actie', title:'No Escape', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+escape+2015+owen+wilson+full+movie', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop.' },
+    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=evil+genius+documentary+2018', desc:'Bizarre bankroof. Echte true crime chaos.' },
+    { genre:'thriller', title:'The Conversation', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+conversation+1974+coppola+full+movie', desc:"Coppola's paranoïde meesterwerk. Tijdloos." },
+    { genre:'waar', title:'Deepwater Horizon', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=deepwater+horizon+2016+full+movie', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar-winnaar.' },
   ],
 ];
 
@@ -1123,7 +1128,7 @@ function renderWatchlist() {
 
   let html = `
     <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;">
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5;">💡 Plex-titels: tik op <strong style="color:var(--gold)">Check op Plex</strong> → oranje knop = gratis, prijskaartje = huur</div>
+      
     <div style="font-size:12px;color:var(--sub);margin-bottom:3px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
       <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:8px;margin-top:8px;">
         <span>Voortgang</span><span>${done} / ${titles.length} bekeken</span>
@@ -1156,7 +1161,7 @@ function renderWatchlist() {
         </div>
         ${isW
           ? '<div style="width:24px;height:24px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;">✓</div>'
-          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:11px;color:var(--gold);text-decoration:none;flex-shrink:0;text-align:right;line-height:1.3;">${t.platform === 'Plex' ? 'Check op<br>Plex →' : 'Bekijk →'}</a>`
+          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:11px;color:var(--gold);text-decoration:none;flex-shrink:0;text-align:right;line-height:1.3;">${'Bekijk →'}</a>`
         }
       </div>`;
   });
