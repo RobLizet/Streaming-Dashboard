@@ -495,7 +495,7 @@ body {
       <div class="app-logo">Stream<em>NL</em></div>
       <div style="font-family:'Playfair Display',serif;font-size:11px;font-style:italic;font-weight:400;color:var(--hdr-sub);letter-spacing:0.5px;margin-top:1px;">Made by Rob Borghouts 2026</div>
     </div>
-    <div class="header-pill">100% Gratis</div>
+    
   </div>
 </header>
 
@@ -517,7 +517,7 @@ body {
 
   <div class="stats-row">
     <div class="stat-card">
-      <div class="stat-val">11</div>
+      <div class="stat-val">12</div>
       <div class="stat-label">Platforms</div>
     </div>
     <div class="stat-card">
@@ -532,39 +532,60 @@ body {
 
   <div class="section-gap">
     <div class="rec-label">⭐ Aanbevelingen deze week</div>
-    <div class="rec-cards">
-      <div class="rec-card" onclick="window.location.href='https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie'" style="cursor:pointer;">
-        <div class="rec-num">01</div>
-        <div class="rec-info">
-          <div class="rec-title">No Country for Old Men</div>
-          <div class="rec-meta">Thriller · 2007 · YouTube</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+
+      <!-- Glass Onion - Netflix -->
+      <div onclick="window.location.href='https://www.netflix.com/title/81458416'" style="cursor:pointer;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:transform .15s;" ontouchstart="this.style.transform='scale(0.97)'" ontouchend="this.style.transform='scale(1)'">
+        <div style="position:relative;">
+          <img src="https://image.tmdb.org/t/p/w300/vZVEUPychdvZLz4EiDEJCaFMWIs.jpg" alt="Glass Onion" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;aspect-ratio:2/3;background:#1a1a2e;align-items:center;justify-content:center;font-size:40px;">🔍</div>
+          <div style="position:absolute;top:7px;left:7px;background:#e50914;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;">NETFLIX</div>
         </div>
-        <span class="rec-badge" style="background:var(--red-bg);color:#f87171;border:1px solid var(--red-bd);">Thriller</span>
-      </div>
-      <div class="rec-card" onclick="window.location.href='https://www.youtube.com/results?search_query=icarus+2017+doping+documentary'" style="cursor:pointer;">
-        <div class="rec-num">02</div>
-        <div class="rec-info">
-          <div class="rec-title">Icarus</div>
-          <div class="rec-meta">Documentaire · 2017 · YouTube</div>
+        <div style="padding:10px 10px 11px;">
+          <div style="font-size:13px;font-weight:700;line-height:1.2;margin-bottom:3px;">Glass Onion</div>
+          <div style="font-size:11px;color:var(--sub);">Thriller · 2022</div>
         </div>
-        <span class="rec-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Docu</span>
       </div>
-      <div class="rec-card" onclick="window.location.href='https://rakuten.tv/nl/movies/spotlight'" style="cursor:pointer;">
-        <div class="rec-num">03</div>
-        <div class="rec-info">
-          <div class="rec-title">Spotlight</div>
-          <div class="rec-meta">Waargeburd · 2015 · Rakuten TV</div>
+
+      <!-- Saltburn - Prime -->
+      <div onclick="window.location.href='https://www.primevideo.com/search?phrase=saltburn'" style="cursor:pointer;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:transform .15s;" ontouchstart="this.style.transform='scale(0.97)'" ontouchend="this.style.transform='scale(1)'">
+        <div style="position:relative;">
+          <img src="https://image.tmdb.org/t/p/w300/qjhahNLSZ705B5JP92YMEYPocPz.jpg" alt="Saltburn" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;aspect-ratio:2/3;background:#1a1a2e;align-items:center;justify-content:center;font-size:40px;">🏚️</div>
+          <div style="position:absolute;top:7px;left:7px;background:#00a8e1;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;">PRIME</div>
         </div>
-        <span class="rec-badge" style="background:rgba(161,113,247,.12);color:var(--purple);border:1px solid rgba(161,113,247,.25);">Waar</span>
-      </div>
-      <div class="rec-card" onclick="window.location.href='https://npostart.nl/documentaire'" style="cursor:pointer;">
-        <div class="rec-num">04</div>
-        <div class="rec-info">
-          <div class="rec-title">VPRO Documentaires</div>
-          <div class="rec-meta">Documentaire · NPO Start</div>
+        <div style="padding:10px 10px 11px;">
+          <div style="font-size:13px;font-weight:700;line-height:1.2;margin-bottom:3px;">Saltburn</div>
+          <div style="font-size:11px;color:var(--sub);">Thriller · 2023</div>
         </div>
-        <span class="rec-badge" style="background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd);">NL</span>
       </div>
+
+      <!-- Ozark - Netflix -->
+      <div onclick="window.location.href='https://www.netflix.com/title/80117552'" style="cursor:pointer;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:transform .15s;" ontouchstart="this.style.transform='scale(0.97)'" ontouchend="this.style.transform='scale(1)'">
+        <div style="position:relative;">
+          <img src="https://image.tmdb.org/t/p/w300/pCGyPVrI9Fzc8NLBgKvW1OnZhqs.jpg" alt="Ozark" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;aspect-ratio:2/3;background:#1a1a2e;align-items:center;justify-content:center;font-size:40px;">💰</div>
+          <div style="position:absolute;top:7px;left:7px;background:#e50914;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;">NETFLIX</div>
+        </div>
+        <div style="padding:10px 10px 11px;">
+          <div style="font-size:13px;font-weight:700;line-height:1.2;margin-bottom:3px;">Ozark</div>
+          <div style="font-size:11px;color:var(--sub);">Thriller · 2017–22</div>
+        </div>
+      </div>
+
+      <!-- Mocro Maffia - Videoland -->
+      <div onclick="window.location.href='https://www.videoland.com/series/mocro-maffia'" style="cursor:pointer;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:transform .15s;" ontouchstart="this.style.transform='scale(0.97)'" ontouchend="this.style.transform='scale(1)'">
+        <div style="position:relative;">
+          <img src="https://image.tmdb.org/t/p/w300/sHX8169oPZOlkmkAF2rEBiXJY5C.jpg" alt="Mocro Maffia" style="width:100%;aspect-ratio:2/3;object-fit:cover;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;aspect-ratio:2/3;background:#1a1a2e;align-items:center;justify-content:center;font-size:40px;">🔫</div>
+          <div style="position:absolute;top:7px;left:7px;background:#e63946;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;">VIDEOLAND</div>
+        </div>
+        <div style="padding:10px 10px 11px;">
+          <div style="font-size:13px;font-weight:700;line-height:1.2;margin-bottom:3px;">Mocro Maffia</div>
+          <div style="font-size:11px;color:var(--sub);">Misdaad · NL</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -584,26 +605,25 @@ body {
 <div class="content">
   <div class="section-title">🎬 <span>Films</span></div>
 
-  <div style="background:var(--green-bg);border:1px solid rgba(63,185,80,.25);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#5de8a0;line-height:1.5;">
-    ✅ Alle platforms hieronder zijn <strong>altijd gratis</strong> — geen verrassende betaalmuren.
-  </div>
-
-  <div style="background:rgba(230,57,70,.08);border:1px solid rgba(230,57,70,.25);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#e63946;line-height:1.5;">
-    🎬 <strong>Videoland &amp; Amazon Prime</strong> (Kevin's account) hebben ook grote filmbibliotheken — zie de Series-tab.
+  <div style="background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.25);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#e50914;line-height:1.5;">
+    🎬 Netflix op #1 — eigen account. Rakuten en NPO zijn altijd gratis zonder account.
   </div>
 
   <div class="cards">
 
-    <a class="pcard" href="https://www.youtube.com/feed/storefront" onclick="goTo(this)">
-      <div class="pcard-bar bar-red"></div>
+    <a class="pcard" href="https://www.netflix.com/browse/genre/8711" onclick="goTo(this)">
+      <div class="pcard-bar" style="background:#e50914;"></div>
       <div class="pcard-body">
         <div class="pcard-top">
-          <div class="pcard-icon">▶️</div>
-          <div class="pcard-name">YouTube Films</div>
-          <div class="pcard-tags"><span class="tag tag-free">Premium ✓</span></div>
+          <div class="pcard-icon">🎬</div>
+          <div class="pcard-name">Netflix Films</div>
+          <div class="pcard-tags">
+            <span class="tag tag-en">EN/NL</span>
+            <span class="tag" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen account</span>
+          </div>
         </div>
-        <div class="pcard-desc">Beste keuze. Duizenden films gratis en zonder reclame dankzij jouw Premium. Altijd Watch Now — nooit huren.</div>
-        <div class="pcard-foot"><span class="pcard-url">youtube.com/feed/storefront</span><span class="pcard-arrow">↗</span></div>
+        <div class="pcard-desc">Grootste filmbibliotheek. Netflix Originals, Hollywood blockbusters en internationale topfilms. NL ondertiteling.</div>
+        <div class="pcard-foot"><span class="pcard-url">netflix.com/browse/genre/8711</span><span class="pcard-arrow">↗</span></div>
       </div>
     </a>
 
@@ -615,21 +635,8 @@ body {
           <div class="pcard-name">Rakuten TV Free</div>
           <div class="pcard-tags"><span class="tag tag-free">Altijd gratis</span></div>
         </div>
-        <div class="pcard-desc">Gratis tier apart gefilterd van huur/koop. Klassiekers, actie en thrillers. Geen account nodig. Beschikbaar in NL.</div>
+        <div class="pcard-desc">Gratis tier apart gefilterd van huur/koop. Klassiekers, actie en thrillers. Geen account nodig.</div>
         <div class="pcard-foot"><span class="pcard-url">rakuten.tv/nl/store/free</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://arte.tv/nl/videos/films/" onclick="goTo(this)">
-      <div class="pcard-bar bar-teal"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎭</div>
-          <div class="pcard-name">ARTE Films</div>
-          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Altijd gratis</span></div>
-        </div>
-        <div class="pcard-desc">Arthouse, klassiekers en festivalfilms. Geen reclame, geen account. Elke titel is Watch Now.</div>
-        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/videos/films</span><span class="pcard-arrow">↗</span></div>
       </div>
     </a>
 
@@ -655,6 +662,22 @@ body {
 <div class="content">
   <div class="section-title">📺 <span>Series & TV</span></div>
   <div class="cards">
+
+    <a class="pcard" href="https://www.netflix.com" onclick="goTo(this)">
+      <div class="pcard-bar" style="background:#e50914;"></div>
+      <div class="pcard-body">
+        <div class="pcard-top">
+          <div class="pcard-icon">🎬</div>
+          <div class="pcard-name">Netflix</div>
+          <div class="pcard-tags">
+            <span class="tag tag-en">EN/NL</span>
+            <span class="tag" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen account</span>
+          </div>
+        </div>
+        <div class="pcard-desc">Films, series en Netflix Originals. Grootste streamingdienst ter wereld. NL ondertiteling beschikbaar.</div>
+        <div class="pcard-foot"><span class="pcard-url">netflix.com</span><span class="pcard-arrow">↗</span></div>
+      </div>
+    </a>
 
     <a class="pcard" href="https://www.ziggogo.tv" onclick="goTo(this)">
       <div class="pcard-bar" style="background:linear-gradient(180deg,#ff6a00,#ee0979);"></div>
@@ -867,6 +890,28 @@ body {
 <div class="content">
 
   <div class="section-title">⚙️ <span>Advies & Instellingen</span></div>
+
+  <div class="setting-group">
+    <div class="setting-group-title">👤 Jouw accounts</div>
+    <div class="setting-row">
+      <div class="setting-item">
+        <div class="setting-icon" style="background:rgba(229,9,20,.15);">🎬</div>
+        <div class="setting-content">
+          <div class="setting-title">Netflix</div>
+          <div class="setting-desc">Eigen account. Grootste streamingdienst. Films, series, documentaires en Netflix Originals.</div>
+        </div>
+        <span class="setting-badge" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen ✓</span>
+      </div>
+      <div class="setting-item">
+        <div class="setting-icon" style="background:rgba(255,106,0,.15);">📡</div>
+        <div class="setting-content">
+          <div class="setting-title">Ziggo Go</div>
+          <div class="setting-desc">Eigen Ziggo-account. Live TV en terugkijken op iPhone via Safari of app.</div>
+        </div>
+        <span class="setting-badge" style="background:rgba(255,106,0,.15);color:#ff6a00;border:1px solid rgba(255,106,0,.3);">Eigen ✓</span>
+      </div>
+    </div>
+  </div>
 
   <div class="setting-group">
     <div class="setting-group-title">👤 Kevin's accounts</div>
