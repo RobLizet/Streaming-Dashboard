@@ -13,1129 +13,683 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:       #0d1117;
-  --surface:  #161b22;
-  --card:     #1c2330;
-  --border:   #30363d;
-  --gold:     #e6b84a;
-  --gold-bg:  rgba(230,184,74,0.10);
-  --gold-bd:  rgba(230,184,74,0.28);
-  --text:     #f0ece4;
-  --sub:      #8b949e;
-  --muted:    #484f58;
-  --red:      #da3633;
-  --red-bg:   rgba(218,54,51,0.12);
-  --red-bd:   rgba(218,54,51,0.30);
-  --blue:     #58a6ff;
-  --blue-bg:  rgba(88,166,255,0.10);
-  --teal:     #39d2c0;
-  --teal-bg:  rgba(57,210,192,0.10);
-  --green:    #3fb950;
-  --green-bg: rgba(63,185,80,0.10);
-  --orange:   #d18616;
-  --purple:   #a371f7;
-  --tab-h:    56px;
-
-  /* Header cream palette */
-  --hdr-bg:      #f5efe4;
-  --hdr-border:  #e0d5c5;
-  --hdr-logo1:   #8b5e1a;
-  --hdr-logo2:   #1a1a2e;
-  --hdr-sub:     #9a8a70;
-  --hdr-pill-bg: #1a1a2e;
-  --hdr-pill-fg: #f5efe4;
+:root{
+  --bg:#0d1117;--surface:#161b22;--card:#1c2330;--border:#30363d;
+  --gold:#e6b84a;--gold-bg:rgba(230,184,74,.10);--gold-bd:rgba(230,184,74,.28);
+  --text:#f0ece4;--sub:#8b949e;--muted:#484f58;
+  --red:#da3633;--red-bg:rgba(218,54,51,.12);--red-bd:rgba(218,54,51,.30);
+  --blue:#58a6ff;--blue-bg:rgba(88,166,255,.10);
+  --green:#3fb950;--green-bg:rgba(63,185,80,.10);
+  --tab-h:58px;
+  --hdr-bg:#f5efe4;--hdr-border:#e0d5c5;
+  --hdr-logo1:#8b5e1a;--hdr-logo2:#1a1a2e;--hdr-sub:#9a8a70;
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-html { background: var(--bg); }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100dvh;
-  overflow-x: hidden;
-  padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 8px);
-}
-
-/* ── HEADER ─────────────────────────────────────────── */
-.app-header {
-  position: sticky; top: 0; z-index: 200;
-  background: var(--hdr-bg);
-  border-bottom: 1px solid var(--hdr-border);
-  box-shadow: 0 1px 12px rgba(0,0,0,0.15);
-  padding: 10px 20px 12px;
-  padding-top: calc(10px + env(safe-area-inset-top));
-}
-
-.header-row {
-  display: flex; align-items: center; justify-content: space-between;
-  max-width: 600px; margin: 0 auto;
-}
-
-.app-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 900; letter-spacing: -0.5px;
-  color: var(--hdr-logo1);
-}
-.app-logo em { color: var(--hdr-logo2); font-style: normal; font-weight: 700; }
-
-.header-pill {
-  font-size: 11px; font-weight: 700;
-  color: var(--hdr-pill-fg);
-  background: var(--hdr-pill-bg);
-  border-radius: 20px; padding: 5px 13px;
-  letter-spacing: 0.8px; text-transform: uppercase;
-}
-
-/* ── BOTTOM TABBAR ───────────────────────────────────── */
-.tabbar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
-  height: calc(var(--tab-h) + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
-  background: var(--hdr-bg);
-  border-top: 1px solid var(--hdr-border);
-  box-shadow: 0 -1px 12px rgba(0,0,0,0.15);
-  display: flex; align-items: stretch;
-}
-
-.tab-btn {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px;
-  background: none; border: none; cursor: pointer;
-  padding: 5px 2px;
-  color: #b0a090;
-  transition: color 0.2s;
-  -webkit-tap-highlight-color: transparent;
-  min-width: 0;
-}
-
-.tab-btn.active { color: var(--hdr-logo1); }
-
-.tab-icon { font-size: 18px; line-height: 1; }
-
-.tab-label {
-  font-size: 8.5px; font-weight: 700;
-  letter-spacing: 0.1px; color: inherit;
-  white-space: nowrap;
-}
-
-.tab-dot {
-  width: 3px; height: 3px; border-radius: 50%;
-  background: var(--hdr-logo1);
-  opacity: 0; transition: opacity 0.2s;
-}
-.tab-btn.active .tab-dot { opacity: 1; }
-
-/* ── SCREENS ─────────────────────────────────────────── */
-.screen { display: none; }
-.screen.active { display: block; }
-
-/* ── SHARED LAYOUT ───────────────────────────────────── */
-.content {
-  max-width: 600px; margin: 0 auto;
-  padding: 20px 16px 24px;
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; font-weight: 700;
-  margin-bottom: 14px; letter-spacing: -0.3px;
-}
-
-.section-title span { color: var(--gold); }
-
-.section-gap { margin-bottom: 32px; }
-
-/* ── PLATFORM CARDS ──────────────────────────────────── */
-.cards { display: flex; flex-direction: column; gap: 10px; }
-
-.pcard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex; align-items: stretch;
-  text-decoration: none; color: inherit;
-  transition: transform 0.15s, border-color 0.2s;
-}
-.pcard:active { transform: scale(0.975); }
-
-.pcard-bar { width: 4px; flex-shrink: 0; }
-.bar-gold   { background: var(--gold); }
-.bar-red    { background: var(--red); }
-.bar-blue   { background: var(--blue); }
-.bar-teal   { background: var(--teal); }
-.bar-green  { background: var(--green); }
-.bar-orange { background: var(--orange); }
-.bar-purple { background: var(--purple); }
-
-.pcard-body { padding: 13px 14px; flex: 1; min-width: 0; }
-
-.pcard-top {
-  display: flex; align-items: center; gap: 9px;
-  margin-bottom: 5px;
-}
-
-.pcard-icon { font-size: 20px; flex-shrink: 0; }
-
-.pcard-name {
-  font-size: 16px; font-weight: 600;
-  flex: 1; min-width: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-.pcard-tags { display: flex; gap: 5px; flex-shrink: 0; }
-
-.tag {
-  font-size: 10px; font-weight: 600;
-  border-radius: 6px; padding: 2px 7px;
-  letter-spacing: 0.3px; white-space: nowrap;
-}
-.tag-nl     { background: var(--gold-bg);  color: var(--gold); border: 1px solid var(--gold-bd); }
-.tag-eu     { background: var(--teal-bg);  color: var(--teal); border: 1px solid rgba(57,210,192,0.25); }
-.tag-free   { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
-.tag-en     { background: var(--blue-bg);  color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
-
-.pcard-desc {
-  font-size: 13px; color: var(--sub); line-height: 1.45;
-  margin-bottom: 8px;
-}
-
-.pcard-foot {
-  display: flex; align-items: center; justify-content: space-between;
-}
-
-.pcard-url { font-size: 11px; color: var(--muted); font-family: monospace; }
-.pcard-arrow { font-size: 13px; color: var(--gold); font-weight: 700; }
-
-/* ── HOME SCREEN ─────────────────────────────────────── */
-.hero {
-  background: linear-gradient(135deg, #1a1a2c 0%, #1c2330 100%);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 20px 18px;
-  margin-bottom: 16px;
-  margin-top: 4px;
-  position: relative; overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute; top: -40px; right: -40px;
-  width: 160px; height: 160px;
-  background: radial-gradient(circle, rgba(230,184,74,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hero-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-}
-
-.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 900; line-height: 1.2;
-  margin-bottom: 6px;
-}
-
-.hero-sub { font-size: 13px; color: var(--sub); line-height: 1.5; margin-bottom: 16px; }
-
-.hero-actions { display: flex; gap: 10px; align-items: center; }
-
-.btn-primary {
-  flex: 1; padding: 12px 10px;
-  background: var(--gold);
-  color: #000; font-weight: 700; font-size: 15px;
-  border: none; border-radius: 10px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-}
-.btn-primary:active { opacity: 0.85; }
-
-.btn-secondary {
-  padding: 12px 14px;
-  background: var(--card);
-  color: var(--text); font-weight: 600; font-size: 15px;
-  border: 1px solid var(--border); border-radius: 10px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color 0.2s; white-space: nowrap;
-  text-decoration: none; display: flex; align-items: center; gap: 6px;
-}
-.btn-secondary:active { border-color: var(--gold); }
-
-/* Quick stats row */
-.stats-row {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px; margin-bottom: 20px;
-}
-
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 12px;
-  text-align: center;
-}
-
-.stat-val {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 900; color: var(--gold);
-  line-height: 1;
-}
-
-.stat-label { font-size: 11px; color: var(--sub); margin-top: 4px; }
-
-/* Aanbevelingen */
-.rec-label {
-  font-size: 12px; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--sub); margin-bottom: 12px;
-}
-
-.rec-cards { display: flex; flex-direction: column; gap: 8px; }
-
-.rec-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 14px;
-  display: flex; align-items: center; gap: 13px;
-}
-
-.rec-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 900;
-  color: var(--border); line-height: 1; flex-shrink: 0;
-  min-width: 32px;
-}
-
-.rec-info { flex: 1; min-width: 0; }
-
-.rec-title {
-  font-size: 15px; font-weight: 600; margin-bottom: 2px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-.rec-meta { font-size: 12px; color: var(--sub); }
-
-.rec-badge {
-  font-size: 10px; font-weight: 600;
-  padding: 3px 8px; border-radius: 6px;
-  flex-shrink: 0;
-}
-
-/* Countdown strip */
-.countdown-strip {
-  background: var(--green-bg);
-  border: 1px solid rgba(63,185,80,0.25);
-  border-radius: 12px;
-  padding: 13px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 20px;
-  text-decoration: none; color: inherit;
-}
-.countdown-left { font-size: 13px; color: var(--sub); }
-.countdown-left strong { color: var(--green); display: block; font-size: 15px; }
-.countdown-right { font-size: 22px; }
-
-/* ── SURPRISE MODAL ──────────────────────────────────── */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  align-items: flex-end; justify-content: center;
-  padding-bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 10px);
-}
-.modal-overlay.open { display: flex; }
-
-.modal-sheet {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 22px 22px 16px 16px;
-  padding: 24px 22px 22px;
-  width: 100%; max-width: 580px;
-  animation: slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-
-@keyframes slideUp {
-  from { transform: translateY(60px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
-}
-
-.modal-handle {
-  width: 36px; height: 4px; border-radius: 2px;
-  background: var(--muted); margin: 0 auto 20px;
-}
-
-.modal-eyebrow {
-  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-}
-
-.modal-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px; font-weight: 900; margin-bottom: 5px; line-height: 1.2;
-}
-
-.modal-meta { font-size: 13px; color: var(--sub); margin-bottom: 10px; }
-.modal-desc { font-size: 15px; color: var(--sub); line-height: 1.55; margin-bottom: 20px; }
-
-.modal-actions { display: flex; gap: 10px; }
-
-.modal-btn-go {
-  flex: 1; padding: 14px;
-  background: var(--gold); color: #000;
-  font-weight: 700; font-size: 15px;
-  border: none; border-radius: 10px; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.modal-btn-shuffle {
-  padding: 14px 18px;
-  background: var(--card); color: var(--text);
-  border: 1px solid var(--border); border-radius: 10px;
-  cursor: pointer; font-size: 18px;
-}
-
-.modal-close {
-  display: block; text-align: center;
-  margin-top: 14px;
-  font-size: 13px; color: var(--muted);
-  background: none; border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; width: 100%;
-}
-
-/* ── SETTINGS SCREEN ─────────────────────────────────── */
-.setting-group { margin-bottom: 28px; }
-
-.setting-group-title {
-  font-size: 11px; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--sub);
-  margin-bottom: 10px; padding: 0 4px;
-}
-
-.setting-row {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.setting-item {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.setting-item:last-child { border-bottom: none; }
-
-.setting-icon {
-  width: 36px; height: 36px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-
-.setting-content { flex: 1; min-width: 0; }
-
-.setting-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
-
-.setting-desc { font-size: 12px; color: var(--sub); line-height: 1.4; }
-
-.setting-badge {
-  font-size: 11px; font-weight: 600;
-  padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
-}
-
-.badge-best { background: var(--gold-bg); color: var(--gold); border: 1px solid var(--gold-bd); }
-.badge-free { background: var(--green-bg); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
-.badge-paid { background: rgba(218,54,51,0.1); color: #f87171; border: 1px solid rgba(218,54,51,0.25); }
-.badge-tip  { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
-
-/* Info block */
-.info-block {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-}
-.info-block-title {
-  font-size: 14px; font-weight: 600; margin-bottom: 6px;
-  display: flex; align-items: center; gap: 8px;
-}
-.info-block-text { font-size: 13px; color: var(--sub); line-height: 1.6; }
-.info-block-text strong { color: var(--text); }
-
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.content > * { animation: fadeUp 0.35s ease both; }
-.content > *:nth-child(1) { animation-delay: 0.04s; }
-.content > *:nth-child(2) { animation-delay: 0.08s; }
-.content > *:nth-child(3) { animation-delay: 0.12s; }
-.content > *:nth-child(4) { animation-delay: 0.16s; }
-.content > *:nth-child(5) { animation-delay: 0.20s; }
-.content > *:nth-child(6) { animation-delay: 0.24s; }
-
-.pcard:nth-child(1) { animation: fadeUp 0.3s 0.06s both; }
-.pcard:nth-child(2) { animation: fadeUp 0.3s 0.10s both; }
-.pcard:nth-child(3) { animation: fadeUp 0.3s 0.14s both; }
-.pcard:nth-child(4) { animation: fadeUp 0.3s 0.18s both; }
-.pcard:nth-child(5) { animation: fadeUp 0.3s 0.22s both; }
-
-/* ── SEARCH OVERLAY ─────────────────────────────────── */
-.search-overlay {
-  display: none; position: fixed; inset: 0; z-index: 400;
-  background: var(--bg);
-  flex-direction: column;
-  padding-top: env(safe-area-inset-top);
-}
-.search-overlay.open { display: flex; }
-
-.search-header {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 16px;
-  background: var(--hdr-bg);
-  border-bottom: 1px solid var(--hdr-border);
-}
-
-.search-input-wrap {
-  flex: 1; display: flex; align-items: center; gap: 8px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 0 12px;
-}
-
-.search-input {
-  flex: 1; background: none; border: none; outline: none;
-  color: var(--text); font-size: 16px; padding: 11px 0;
-  font-family: 'DM Sans', sans-serif;
-}
-.search-input::placeholder { color: var(--muted); }
-
-.search-cancel {
-  background: none; border: none; color: var(--hdr-logo1);
-  font-size: 14px; font-weight: 600; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; padding: 0; white-space: nowrap;
-}
-
-.search-body { flex: 1; overflow-y: auto; padding: 20px 16px; }
-
-.search-section-title {
-  font-size: 11px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--sub); margin-bottom: 10px;
-}
-
-.search-platforms { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
-
-.search-platform-btn {
-  display: flex; align-items: center; gap: 14px;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 12px; padding: 13px 16px; cursor: pointer;
-  text-decoration: none; color: var(--text);
-  transition: transform .15s;
-}
-.search-platform-btn:active { transform: scale(0.97); }
-
-.search-plat-icon {
-  width: 38px; height: 38px; border-radius: 9px;
-  display: grid; place-items: center; font-size: 20px; flex-shrink: 0;
-}
-
-.search-plat-name { font-size: 15px; font-weight: 600; }
-.search-plat-sub  { font-size: 12px; color: var(--sub); margin-top: 1px; }
-.search-plat-arrow { margin-left: auto; color: var(--gold); font-size: 16px; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);
+  min-height:100dvh;overflow-x:hidden;
+  padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 8px)}
+
+/* ── HEADER */
+.app-header{position:sticky;top:0;z-index:200;background:var(--hdr-bg);
+  border-bottom:1px solid var(--hdr-border);box-shadow:0 1px 12px rgba(0,0,0,.15);
+  padding:10px 18px 12px;padding-top:calc(10px + env(safe-area-inset-top))}
+.header-row{display:flex;align-items:center;justify-content:space-between;max-width:620px;margin:0 auto}
+.app-logo{font-family:"Playfair Display",serif;font-size:24px;font-weight:900;
+  letter-spacing:-.5px;color:var(--hdr-logo1)}
+.app-logo em{color:var(--hdr-logo2);font-style:normal;font-weight:700}
+.header-sub{font-family:"Playfair Display",serif;font-size:11px;font-style:italic;
+  color:var(--hdr-sub);letter-spacing:.5px;margin-top:1px}
+.hdr-search{background:var(--hdr-logo2);border:none;border-radius:10px;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  font-size:17px;cursor:pointer;flex-shrink:0}
+
+/* ── TABBAR – 6 tabs */
+.tabbar{position:fixed;bottom:0;left:0;right:0;z-index:300;
+  height:calc(var(--tab-h) + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
+  background:var(--hdr-bg);border-top:1px solid var(--hdr-border);
+  display:flex;align-items:stretch}
+.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:2px;background:none;border:none;cursor:pointer;
+  padding:5px 1px;color:#b0a090;transition:color .2s;min-width:0}
+.tab-btn.active{color:var(--hdr-logo1)}
+.tab-icon{font-size:20px;line-height:1}
+.tab-label{font-size:9.5px;font-weight:700;color:inherit;white-space:nowrap}
+.tab-dot{width:3px;height:3px;border-radius:50%;background:var(--hdr-logo1);opacity:0;transition:opacity .2s}
+.tab-btn.active .tab-dot{opacity:1}
+
+/* ── SCREENS */
+.screen{display:none}.screen.active{display:block}
+.content{max-width:620px;margin:0 auto;padding:16px 15px 22px}
+
+/* ── SECTION LABELS */
+.sec-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--sub);margin-bottom:10px;margin-top:20px}
+.sec-label:first-child{margin-top:0}
+
+/* ── HERO */
+.hero{background:linear-gradient(135deg,#1a1a2c,#1c2330);border:1px solid var(--border);
+  border-radius:18px;padding:18px 18px 16px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;
+  background:radial-gradient(circle,rgba(230,184,74,.12),transparent 70%);pointer-events:none}
+.hero-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:7px}
+.hero-title{font-family:"Playfair Display",serif;font-size:22px;font-weight:900;
+  line-height:1.2;margin-bottom:14px}
+.hero-actions{display:flex;gap:10px;align-items:center}
+.btn-gold{flex:1;padding:12px 10px;background:var(--gold);color:#000;font-weight:700;
+  font-size:15px;border:none;border-radius:10px;cursor:pointer;
+  font-family:"DM Sans",sans-serif;white-space:nowrap}
+.btn-dark{padding:12px 14px;background:var(--card);color:var(--text);font-weight:600;
+  font-size:15px;border:1px solid var(--border);border-radius:10px;cursor:pointer;
+  font-family:"DM Sans",sans-serif;white-space:nowrap;text-decoration:none;
+  display:flex;align-items:center;gap:6px}
+
+/* ── STATS */
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px;text-align:center}
+.stat-val{font-family:"Playfair Display",serif;font-size:22px;font-weight:900;
+  color:var(--gold);line-height:1}
+.stat-label{font-size:10px;color:var(--sub);margin-top:3px;line-height:1.3}
+
+/* ── PLATFORM GRID */
+.plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:4px}
+.plat-tile{background:var(--card);border:1px solid var(--border);border-radius:13px;
+  padding:14px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;
+  cursor:pointer;text-decoration:none;color:var(--text);transition:transform .15s}
+.plat-tile:active{transform:scale(.94)}
+.plat-icon{font-size:26px;line-height:1}
+.plat-name{font-size:11.5px;font-weight:600;text-align:center;line-height:1.2}
+.plat-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;
+  letter-spacing:.3px;text-transform:uppercase}
+
+/* ── COUNTDOWN */
+.countdown-strip{background:var(--green-bg);border:1px solid rgba(63,185,80,.25);
+  border-radius:12px;padding:12px 15px;display:flex;align-items:center;
+  justify-content:space-between;margin-top:16px;cursor:pointer;text-decoration:none;color:inherit}
+.countdown-left strong{color:var(--green);display:block;font-size:14px}
+.countdown-left{font-size:12px;color:var(--sub)}
+
+/* ── POSTER GRID */
+.poster-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.poster-card{border-radius:12px;overflow:hidden;background:var(--card);
+  border:1px solid var(--border);cursor:pointer;position:relative}
+.poster-card:active{opacity:.8}
+
+/* ── PLATFORM CARDS (Kijken tab) */
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:13px;
+  overflow:hidden;display:flex;align-items:stretch;text-decoration:none;
+  color:inherit;transition:transform .15s;margin-bottom:9px;cursor:pointer}
+.pcard:active{transform:scale(.975)}
+.pcard-bar{width:4px;flex-shrink:0}
+.pcard-body{padding:12px 13px;flex:1;min-width:0}
+.pcard-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.pcard-icon{font-size:19px;flex-shrink:0}
+.pcard-name{font-size:15px;font-weight:600;flex:1;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pcard-tags{display:flex;gap:4px;flex-shrink:0}
+.tag{font-size:10px;font-weight:600;border-radius:5px;padding:2px 6px;white-space:nowrap}
+.tag-nl{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd)}
+.tag-eu{background:rgba(57,210,192,.10);color:#39d2c0;border:1px solid rgba(57,210,192,.25)}
+.tag-free{background:var(--green-bg);color:var(--green);border:1px solid rgba(63,185,80,.25)}
+.tag-en{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25)}
+.pcard-desc{font-size:12.5px;color:var(--sub);line-height:1.4;margin-bottom:6px}
+.pcard-foot{display:flex;align-items:center;justify-content:space-between}
+.pcard-url{font-size:10.5px;color:var(--muted);font-family:monospace}
+.pcard-arrow{font-size:13px;color:var(--gold);font-weight:700}
+
+/* ── SURPRISE MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  align-items:flex-end;justify-content:center;
+  padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom) + 10px)}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:var(--surface);border:1px solid var(--border);
+  border-radius:22px 22px 16px 16px;padding:20px 20px 18px;width:100%;max-width:580px;
+  animation:slideUp .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--muted);margin:0 auto 16px}
+.modal-eyebrow{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.modal-title{font-family:"Playfair Display",serif;font-size:21px;font-weight:900;margin-bottom:4px;line-height:1.2}
+.modal-meta{font-size:13px;color:var(--sub);margin-bottom:8px}
+.modal-desc{font-size:14px;color:var(--sub);line-height:1.5;margin-bottom:17px}
+.modal-actions{display:flex;gap:10px}
+.modal-btn-go{flex:1;padding:13px;background:var(--gold);color:#000;font-weight:700;
+  font-size:15px;border:none;border-radius:10px;cursor:pointer;font-family:"DM Sans",sans-serif}
+.modal-btn-shuf{padding:13px 15px;background:var(--card);color:var(--text);
+  border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:17px}
+.modal-close{display:block;text-align:center;margin-top:11px;font-size:13px;
+  color:var(--muted);background:none;border:none;cursor:pointer;font-family:"DM Sans",sans-serif;width:100%}
+
+/* ── SEARCH OVERLAY */
+.search-overlay{display:none;position:fixed;inset:0;z-index:400;
+  background:var(--bg);flex-direction:column;padding-top:env(safe-area-inset-top)}
+.search-overlay.open{display:flex}
+.search-header{display:flex;align-items:center;gap:10px;padding:13px 15px;
+  background:var(--hdr-bg);border-bottom:1px solid var(--hdr-border)}
+.search-wrap{flex:1;display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0 11px}
+.search-input{flex:1;background:none;border:none;outline:none;color:var(--text);
+  font-size:16px;padding:11px 0;font-family:"DM Sans",sans-serif}
+.search-input::placeholder{color:var(--muted)}
+.search-cancel{background:none;border:none;color:var(--hdr-logo1);font-size:14px;
+  font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;white-space:nowrap}
+.search-body{flex:1;overflow-y:auto;padding:16px 15px}
+.search-plat{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;
+  text-decoration:none;color:var(--text);margin-bottom:8px;transition:transform .15s}
+.search-plat:active{transform:scale(.97)}
+.search-plat-icon{width:36px;height:36px;border-radius:8px;display:grid;
+  place-items:center;font-size:19px;flex-shrink:0}
+
+/* ── SETTINGS */
+.setting-row{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:4px}
+.setting-item{display:flex;align-items:center;gap:12px;padding:13px 14px;
+  border-bottom:1px solid var(--border)}
+.setting-item:last-child{border-bottom:none}
+.setting-icon{width:36px;height:36px;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.setting-title{font-size:15px;font-weight:500;margin-bottom:2px}
+.setting-desc{font-size:12px;color:var(--sub);line-height:1.4}
+.setting-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;flex-shrink:0}
+
+/* ── AI REC BUTTON */
+#recApiKeyBox input{width:100%;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:9px 11px;color:var(--text);font-size:13px;
+  font-family:"DM Sans",sans-serif;outline:none;margin-bottom:8px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.content>*{animation:fadeUp .35s ease both}
+.content>*:nth-child(1){animation-delay:.04s}.content>*:nth-child(2){animation-delay:.08s}
+.content>*:nth-child(3){animation-delay:.12s}.content>*:nth-child(4){animation-delay:.16s}
+.content>*:nth-child(5){animation-delay:.20s}.content>*:nth-child(6){animation-delay:.23s}
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ─────────────────────────────────────────── -->
+<!-- HEADER -->
 <header class="app-header">
   <div class="header-row">
     <div>
       <div class="app-logo">Stream<em>NL</em></div>
-      <div style="font-family:'Playfair Display',serif;font-size:11px;font-style:italic;font-weight:400;color:var(--hdr-sub);letter-spacing:0.5px;margin-top:1px;">Made by Rob Borghouts 2026</div>
+      <div class="header-sub">Made by Rob Borghouts 2026</div>
     </div>
-    <button onclick="openSearch()" style="background:var(--hdr-pill-bg);border:none;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;">🔍</button>
-    
+    <button class="hdr-search" onclick="openSearch()">🔍</button>
   </div>
 </header>
 
-<!-- ── SCREENS ─────────────────────────────────────────── -->
-
-<!-- HOME -->
+<!-- ══ HOME ═══════════════════════════════════════════════ -->
 <div class="screen active" id="screen-home">
 <div class="content">
 
   <div class="hero">
-    <div class="hero-label">🇳🇱 Jouw gratis streaming hub</div>
+    <div class="hero-label">🇳🇱 Jouw streaming hub</div>
     <div class="hero-title">Vanavond iets goeds kijken?</div>
-    <div class="hero-sub">Alle gratis NL-platforms op één plek.</div>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="openSurprise()">🎲&nbsp;Verras me</button>
-      <a class="btn-secondary" onclick="switchTab('watchlist')">📋&nbsp;Watchlist</a>
+      <button class="btn-gold" onclick="openSurprise()">🎲&nbsp;Verras me</button>
+      <a class="btn-dark" onclick="switchTab('watchlist')">📋&nbsp;Watchlist</a>
     </div>
   </div>
 
   <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-val">12</div>
-      <div class="stat-label">Platforms</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val" id="statDays">—</div>
-      <div class="stat-label">Dagen tot<br>nieuwe lijst</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-val">€0</div>
-      <div class="stat-label">Kosten</div>
-    </div>
+    <div class="stat-card"><div class="stat-val">13</div><div class="stat-label">Platforms</div></div>
+    <div class="stat-card"><div class="stat-val" id="statDays">—</div><div class="stat-label">Dagen tot nieuwe lijst</div></div>
+    <div class="stat-card"><div class="stat-val">€0</div><div class="stat-label">Extra kosten</div></div>
   </div>
 
-  <div class="section-gap">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div class="rec-label" style="margin-bottom:0;">⭐ Aanbevelingen deze week</div>
-      <button onclick="loadRecs(true)" id="recRefreshBtn" style="background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;color:var(--sub);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">↺ Ververs</button>
-    </div>
+  <div class="sec-label">🎬 Jouw platforms</div>
+  <div class="plat-grid">
+    <a class="plat-tile" onclick="goURL('https://www.netflix.com')">
+      <div class="plat-icon">🎬</div><div class="plat-name">Netflix</div>
+      <div class="plat-badge" style="background:rgba(229,9,20,.2);color:#e50914;">Eigen</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://www.ziggogo.tv')">
+      <div class="plat-icon">📡</div><div class="plat-name">Ziggo Go</div>
+      <div class="plat-badge" style="background:rgba(255,106,0,.2);color:#ff6a00;">Eigen</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://www.espnplayer.com')">
+      <div class="plat-icon">🏆</div><div class="plat-name">ESPN</div>
+      <div class="plat-badge" style="background:rgba(229,9,20,.2);color:#e50914;">Eigen</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://www.videoland.com')">
+      <div class="plat-icon">📺</div><div class="plat-name">Videoland</div>
+      <div class="plat-badge" style="background:rgba(230,57,70,.2);color:#e63946;">Kevin</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://www.primevideo.com')">
+      <div class="plat-icon">📦</div><div class="plat-name">Prime Video</div>
+      <div class="plat-badge" style="background:rgba(0,168,225,.2);color:#00a8e1;">Kevin</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://npostart.nl')">
+      <div class="plat-icon">🇳🇱</div><div class="plat-name">NPO Start</div>
+      <div class="plat-badge" style="background:var(--gold-bg);color:var(--gold);">Gratis</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://www.youtube.com')">
+      <div class="plat-icon">▶️</div><div class="plat-name">YouTube</div>
+      <div class="plat-badge" style="background:rgba(255,0,0,.15);color:#ff4444;">Premium</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://music.youtube.com')">
+      <div class="plat-icon">🎵</div><div class="plat-name">YT Music</div>
+      <div class="plat-badge" style="background:rgba(255,0,0,.15);color:#ff4444;">Premium</div>
+    </a>
+    <a class="plat-tile" onclick="goURL('https://rakuten.tv/nl/store/free')">
+      <div class="plat-icon">🎞️</div><div class="plat-name">Rakuten</div>
+      <div class="plat-badge" style="background:var(--gold-bg);color:var(--gold);">Gratis</div>
+    </a>
+  </div>
 
-    <!-- API key prompt (hidden als al ingesteld) -->
-    <div id="recApiKeyBox" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
-      <div style="font-size:13px;color:var(--text);font-weight:600;margin-bottom:8px;">🔑 Anthropic API sleutel</div>
-      <div style="font-size:12px;color:var(--sub);margin-bottom:10px;">Nodig voor AI-aanbevelingen met filmposters. Eenmalig instellen.</div>
-      <input id="recApiKeyInput" type="password" placeholder="sk-ant-..." style="width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 11px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:8px;">
-      <button onclick="saveApiKey()" style="width:100%;padding:10px;background:var(--gold);color:#000;font-weight:700;font-size:14px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;">Opslaan & laden</button>
-    </div>
-
-    <!-- Poster grid -->
-    <div id="recGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--muted);font-size:13px;" id="recLoading">⏳ Aanbevelingen laden...</div>
-    </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;margin-bottom:10px;">
+    <div class="sec-label" style="margin:0;">⭐ Aanbevelingen</div>
+    <button onclick="loadRecs(true)" id="recRefreshBtn" style="background:none;border:1px solid var(--border);border-radius:8px;padding:3px 9px;color:var(--sub);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">↺ Ververs</button>
+  </div>
+  <div id="recApiKeyBox" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
+    <div style="font-size:13px;color:var(--text);font-weight:600;margin-bottom:6px;">🔑 Anthropic API sleutel</div>
+    <div style="font-size:12px;color:var(--sub);margin-bottom:10px;">Eenmalig instellen voor AI-aanbevelingen met filmposters.</div>
+    <input id="recApiKeyInput" type="password" placeholder="sk-ant-...">
+    <button onclick="saveApiKey()" style="width:100%;padding:10px;background:var(--gold);color:#000;font-weight:700;font-size:14px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;">Opslaan & laden</button>
+  </div>
+  <div id="recGrid" class="poster-grid">
+    <div style="grid-column:1/-1;text-align:center;padding:28px;color:var(--muted);font-size:13px;">⏳ Laden...</div>
   </div>
 
   <a class="countdown-strip" onclick="switchTab('watchlist')">
-    <div class="countdown-left">
-      <strong id="countdownText">Laadt...</strong>
-      <span>Watchlist roteert elke maandag</span>
-    </div>
-    <div class="countdown-right">📅</div>
+    <div class="countdown-left"><strong id="countdownText">Laadt...</strong>Watchlist roteert elke maandag</div>
+    <div style="font-size:22px;">📅</div>
   </a>
 
 </div>
 </div>
 
-<!-- FILMS -->
-<div class="screen" id="screen-films">
+<!-- ══ KIJKEN ════════════════════════════════════════════ -->
+<div class="screen" id="screen-kijken">
 <div class="content">
-  <div class="section-title">🎬 <span>Films</span></div>
 
-  <div style="background:rgba(229,9,20,.08);border:1px solid rgba(229,9,20,.25);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#e50914;line-height:1.5;">
-    🎬 Netflix op #1 — eigen account. Rakuten en NPO zijn altijd gratis zonder account.
-  </div>
+  <div class="sec-label" style="margin-top:0;">🎬 Films</div>
 
-  <div class="cards">
+  <a class="pcard" onclick="goURL('https://www.netflix.com/browse/genre/8711')">
+    <div class="pcard-bar" style="background:#e50914;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎬</div><div class="pcard-name">Netflix Films</div>
+        <div class="pcard-tags"><div class="tag tag-en">EN/NL</div></div></div>
+      <div class="pcard-desc">Grootste filmbibliotheek. Originals, Hollywood en internationale topfilms.</div>
+      <div class="pcard-foot"><span class="pcard-url">netflix.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://www.netflix.com/browse/genre/8711" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:#e50914;"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎬</div>
-          <div class="pcard-name">Netflix Films</div>
-          <div class="pcard-tags">
-            <span class="tag tag-en">EN/NL</span>
-            <span class="tag" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen account</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Grootste filmbibliotheek. Netflix Originals, Hollywood blockbusters en internationale topfilms. NL ondertiteling.</div>
-        <div class="pcard-foot"><span class="pcard-url">netflix.com/browse/genre/8711</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.primevideo.com/storefront/ref=atv_hom_c_6lctn_2_1?contentType=movies')">
+    <div class="pcard-bar" style="background:#00a8e1;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">📦</div><div class="pcard-name">Prime Video Films</div>
+        <div class="pcard-tags"><div class="tag tag-en">EN/NL</div></div></div>
+      <div class="pcard-desc">Prime Originals en grote bibliotheek. Kevin's account.</div>
+      <div class="pcard-foot"><span class="pcard-url">primevideo.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://rakuten.tv/nl/store/free" onclick="goTo(this)">
-      <div class="pcard-bar bar-gold"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎞️</div>
-          <div class="pcard-name">Rakuten TV Free</div>
-          <div class="pcard-tags"><span class="tag tag-free">Altijd gratis</span></div>
-        </div>
-        <div class="pcard-desc">Gratis tier apart gefilterd van huur/koop. Klassiekers, actie en thrillers. Geen account nodig.</div>
-        <div class="pcard-foot"><span class="pcard-url">rakuten.tv/nl/store/free</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://rakuten.tv/nl/store/free')">
+    <div class="pcard-bar" style="background:var(--gold);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎞️</div><div class="pcard-name">Rakuten TV Free</div>
+        <div class="pcard-tags"><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Gefilterd gratis aanbod. Klassiekers, actie en thrillers. Geen account nodig.</div>
+      <div class="pcard-foot"><span class="pcard-url">rakuten.tv</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://npostart.nl/films" onclick="goTo(this)">
-      <div class="pcard-bar bar-gold"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🇳🇱</div>
-          <div class="pcard-name">NPO Start Films</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Altijd gratis</span></div>
-        </div>
-        <div class="pcard-desc">Nederlandse en internationale films van de publieke omroep. Geen account nodig, alles direct te kijken.</div>
-        <div class="pcard-foot"><span class="pcard-url">npostart.nl/films</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://npostart.nl/films')">
+    <div class="pcard-bar" style="background:var(--gold);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🇳🇱</div><div class="pcard-name">NPO Start Films</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Nederlandse en internationale films. Geen account nodig.</div>
+      <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-  </div>
+  <div class="sec-label">📺 Series & TV</div>
+
+  <a class="pcard" onclick="goURL('https://www.netflix.com')">
+    <div class="pcard-bar" style="background:#e50914;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎬</div><div class="pcard-name">Netflix Series</div></div>
+      <div class="pcard-desc">Beste series-aanbod ter wereld. Originals, HBO en internationale drama's.</div>
+      <div class="pcard-foot"><span class="pcard-url">netflix.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://www.ziggogo.tv')">
+    <div class="pcard-bar" style="background:linear-gradient(180deg,#ff6a00,#ee0979);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">📡</div><div class="pcard-name">Ziggo Go</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div></div></div>
+      <div class="pcard-desc">Al je Ziggo-kanalen live en terugkijken. Eigen account.</div>
+      <div class="pcard-foot"><span class="pcard-url">ziggogo.tv</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://www.videoland.com/series')">
+    <div class="pcard-bar" style="background:#e63946;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">📺</div><div class="pcard-name">Videoland Series</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div></div></div>
+      <div class="pcard-desc">Mocro Maffia, Nieuwe Buren, Nederlandse originals en HBO. Kevin's account.</div>
+      <div class="pcard-foot"><span class="pcard-url">videoland.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://npostart.nl')">
+    <div class="pcard-bar" style="background:var(--gold);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🇳🇱</div><div class="pcard-name">NPO Start</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">NPO 1/2/3 terugkijken en live. Drama, series, entertainment. Geen account.</div>
+      <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://www.rtlxl.nl')">
+    <div class="pcard-bar" style="background:var(--blue);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">📡</div><div class="pcard-name">RTL+</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">RTL 4/5/7/8 terugkijken. Reality en entertainment. Gratis met reclame.</div>
+      <div class="pcard-foot"><span class="pcard-url">rtlxl.nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://kijk.nl')">
+    <div class="pcard-bar" style="background:#a371f7;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">👁️</div><div class="pcard-name">Kijk.nl</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">SBS6, Net5 en Veronica terugkijken. Geen account nodig.</div>
+      <div class="pcard-foot"><span class="pcard-url">kijk.nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <div class="sec-label">🏆 Sport</div>
+
+  <a class="pcard" onclick="goURL('https://www.espnplayer.com')">
+    <div class="pcard-bar" style="background:#e50914;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🏆</div><div class="pcard-name">ESPN Player</div>
+        <div class="pcard-tags"><div class="tag tag-en">EN/NL</div></div></div>
+      <div class="pcard-desc">Live sport, voetbal, tennis, golf en meer. Eigen abonnement.</div>
+      <div class="pcard-foot"><span class="pcard-url">espnplayer.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://www.ziggogo.tv')">
+    <div class="pcard-bar" style="background:linear-gradient(180deg,#ff6a00,#ee0979);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">⚽</div><div class="pcard-name">Ziggo Sport</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div></div></div>
+      <div class="pcard-desc">Via Ziggo Go. Formula 1, voetbal en wielrennen live. Eigen account.</div>
+      <div class="pcard-foot"><span class="pcard-url">ziggogo.tv</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://nos.nl/live')">
+    <div class="pcard-bar" style="background:var(--red);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🔴</div><div class="pcard-name">NOS Live</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Gratis live sport en nieuws. Geen account nodig.</div>
+      <div class="pcard-foot"><span class="pcard-url">nos.nl/live</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <div class="sec-label">🎥 Documentaires</div>
+
+  <a class="pcard" onclick="goURL('https://arte.tv/nl/videos/documentaires/')">
+    <div class="pcard-bar" style="background:#39d2c0;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🔭</div><div class="pcard-name">ARTE Documentaires</div>
+        <div class="pcard-tags"><div class="tag tag-eu">EU</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap. Geen reclame, geen account.</div>
+      <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://npostart.nl/documentaire')">
+    <div class="pcard-bar" style="background:var(--gold);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎙️</div><div class="pcard-name">NPO Documentaires</div>
+        <div class="pcard-tags"><div class="tag tag-nl">NL</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">VPRO, NTR, Human. Nederlandstalige documentaires van hoge kwaliteit.</div>
+      <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
+  <a class="pcard" onclick="goURL('https://www.youtube.com/@DWDocumentary')">
+    <div class="pcard-bar" style="background:var(--red);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🌍</div><div class="pcard-name">DW Documentary</div>
+        <div class="pcard-tags"><div class="tag tag-en">EN</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Honderden gratis docs op YouTube. Geopolitiek, natuur, wetenschap.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com/@DWDocumentary</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
+
 </div>
 </div>
 
-<!-- SERIES -->
-<div class="screen" id="screen-series">
+<!-- ══ MUZIEK ════════════════════════════════════════════ -->
+<div class="screen" id="screen-muziek">
 <div class="content">
-  <div class="section-title">📺 <span>Series & TV</span></div>
-  <div class="cards">
 
-    <a class="pcard" href="https://www.netflix.com" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:#e50914;"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎬</div>
-          <div class="pcard-name">Netflix</div>
-          <div class="pcard-tags">
-            <span class="tag tag-en">EN/NL</span>
-            <span class="tag" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen account</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Films, series en Netflix Originals. Grootste streamingdienst ter wereld. NL ondertiteling beschikbaar.</div>
-        <div class="pcard-foot"><span class="pcard-url">netflix.com</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <div class="sec-label" style="margin-top:0;">🎵 Muziek streamen</div>
 
-    <a class="pcard" href="https://www.ziggogo.tv" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:linear-gradient(180deg,#ff6a00,#ee0979);"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">📡</div>
-          <div class="pcard-name">Ziggo Go</div>
-          <div class="pcard-tags">
-            <span class="tag tag-nl">NL</span>
-            <span class="tag" style="background:rgba(255,106,0,.15);color:#ff6a00;border:1px solid rgba(255,106,0,.3);">Eigen account</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Al je Ziggo-kanalen overal kijken. Live TV, terugkijken, HBO Max-content. Inclusief sport en nieuws.</div>
-        <div class="pcard-foot"><span class="pcard-url">ziggogo.tv</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://music.youtube.com')">
+    <div class="pcard-bar" style="background:#ff0000;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎵</div><div class="pcard-name">YouTube Music</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.15);color:#ff4444;border:1px solid rgba(255,0,0,.3);">Premium ✓</div></div></div>
+      <div class="pcard-desc">Jouw muziekplatform. Geen reclame. Marillion, Porcupine Tree, Steven Wilson en meer.</div>
+      <div class="pcard-foot"><span class="pcard-url">music.youtube.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://www.videoland.com" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:linear-gradient(180deg,#e63946,#c1121f);"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎬</div>
-          <div class="pcard-name">Videoland</div>
-          <div class="pcard-tags">
-            <span class="tag tag-nl">NL</span>
-            <span class="tag" style="background:rgba(230,57,70,.15);color:#e63946;border:1px solid rgba(230,57,70,.3);">Kevin ✓</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Beste NL streamingdienst. Nederlandse series, HBO-content, films en sport. Log in via Kevin's account.</div>
-        <div class="pcard-foot"><span class="pcard-url">videoland.com</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/@arteconcert')">
+    <div class="pcard-bar" style="background:#39d2c0;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎭</div><div class="pcard-name">ARTE Concert</div>
+        <div class="pcard-tags"><div class="tag tag-eu">EU</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Gratis concertopnames. Rock, jazz, klassiek, pop. Hoge kwaliteit streams en opnames.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com/@arteconcert</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://www.videoland.com/series" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:linear-gradient(180deg,#e63946,#c1121f);"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">📺</div>
-          <div class="pcard-name">Videoland Series</div>
-          <div class="pcard-tags">
-            <span class="tag tag-nl">NL</span>
-            <span class="tag" style="background:rgba(230,57,70,.15);color:#e63946;border:1px solid rgba(230,57,70,.3);">Kevin ✓</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Nederlandse originals, Baantjer, Mocro Maffia, Nieuwe Buren en internationale toppers. Direct naar series.</div>
-        <div class="pcard-foot"><span class="pcard-url">videoland.com/series</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://arte.tv/nl/live/')">
+    <div class="pcard-bar" style="background:#39d2c0;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🔴</div><div class="pcard-name">ARTE Live</div>
+        <div class="pcard-tags"><div class="tag tag-eu">EU</div><div class="tag tag-free">Gratis</div></div></div>
+      <div class="pcard-desc">Concerten en culturele evenementen live. Geen account nodig.</div>
+      <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/live</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://npostart.nl" onclick="goTo(this)">
-      <div class="pcard-bar bar-gold"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🇳🇱</div>
-          <div class="pcard-name">NPO Start</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Terugkijken NPO 1/2/3 + live streams. Series, drama, entertainment. Geen account nodig.</div>
-        <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <div class="sec-label">🎸 Favoriete artiesten</div>
 
-    <a class="pcard" href="https://www.rtlxl.nl" onclick="goTo(this)">
-      <div class="pcard-bar bar-blue"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">📡</div>
-          <div class="pcard-name">RTL+</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">RTL 4, 5, 7, 8 terugkijken. Reality, drama en entertainment. Gratis met reclame.</div>
-        <div class="pcard-foot"><span class="pcard-url">rtlxl.nl</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/@Marillion')">
+    <div class="pcard-bar" style="background:#e6b84a;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎸</div><div class="pcard-name">Marillion</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">YouTube</div></div></div>
+      <div class="pcard-desc">Officieel kanaal. Concertopnames, clips en behind the scenes.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com/@Marillion</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://kijk.nl" onclick="goTo(this)">
-      <div class="pcard-bar bar-purple"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">👁️</div>
-          <div class="pcard-name">Kijk.nl</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">SBS6, Net5 en Veronica terugkijken. Reality, shows en films. Geen account nodig.</div>
-        <div class="pcard-foot"><span class="pcard-url">kijk.nl</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/@PorcupineTree')">
+    <div class="pcard-bar" style="background:#a371f7;"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎸</div><div class="pcard-name">Porcupine Tree</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">YouTube</div></div></div>
+      <div class="pcard-desc">Steven Wilson's band. Live concerten, studio en specials.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com/@PorcupineTree</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://nos.nl/live" onclick="goTo(this)">
-      <div class="pcard-bar bar-red"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🔴</div>
-          <div class="pcard-name">NOS Live</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Live nieuws, breaking events en sportverslaggeving. Geen account nodig.</div>
-        <div class="pcard-foot"><span class="pcard-url">nos.nl/live</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/@StevenWilsonHQ')">
+    <div class="pcard-bar" style="background:var(--blue);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎵</div><div class="pcard-name">Steven Wilson</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">YouTube</div></div></div>
+      <div class="pcard-desc">Solowerk, remasters en live opnames van de prog rock meester.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com/@StevenWilsonHQ</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://www.primevideo.com" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:linear-gradient(180deg,#00a8e1,#0066c0);"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎥</div>
-          <div class="pcard-name">Amazon Prime Video</div>
-          <div class="pcard-tags">
-            <span class="tag tag-en">EN/NL</span>
-            <span class="tag" style="background:rgba(0,168,225,.15);color:#00a8e1;border:1px solid rgba(0,168,225,.3);">Kevin ✓</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Enorme bibliotheek films en series. Prime Originals, HBO-content, actie en thrillers. Log in via Kevin's account.</div>
-        <div class="pcard-foot"><span class="pcard-url">primevideo.com</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/results?search_query=pink+floyd+concert+full')">
+    <div class="pcard-bar" style="background:var(--green);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🌈</div><div class="pcard-name">Pink Floyd</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">YouTube</div></div></div>
+      <div class="pcard-desc">Concerten en klassiekers. Pulse, Pompeii, PULSE en meer.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-    <a class="pcard" href="https://www.primevideo.com/storefront/ref=atv_hom_c_6lctn_2_1?contentType=movies" onclick="goTo(this)">
-      <div class="pcard-bar" style="background:linear-gradient(180deg,#00a8e1,#0066c0);"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎬</div>
-          <div class="pcard-name">Prime — Films</div>
-          <div class="pcard-tags">
-            <span class="tag tag-en">EN/NL</span>
-            <span class="tag" style="background:rgba(0,168,225,.15);color:#00a8e1;border:1px solid rgba(0,168,225,.3);">Kevin ✓</span>
-          </div>
-        </div>
-        <div class="pcard-desc">Direct naar de filmbibliotheek. Actie, thriller en drama van grote studio's. NL ondertiteling beschikbaar.</div>
-        <div class="pcard-foot"><span class="pcard-url">primevideo.com/movies</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
+  <a class="pcard" onclick="goURL('https://www.youtube.com/results?search_query=airbag+band+norway+concert')">
+    <div class="pcard-bar" style="background:var(--red);"></div>
+    <div class="pcard-body">
+      <div class="pcard-top"><div class="pcard-icon">🎵</div><div class="pcard-name">Airbag</div>
+        <div class="pcard-tags"><div class="tag" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">YouTube</div></div></div>
+      <div class="pcard-desc">Noorse prog rock band. Atmosferische live opnames en studio sessies.</div>
+      <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
+    </div>
+  </a>
 
-  </div>
 </div>
 </div>
 
-<!-- DOCU'S -->
-<div class="screen" id="screen-docs">
-<div class="content">
-  <div class="section-title">🎥 <span>Documentaires</span></div>
-  <div class="cards">
-
-    <a class="pcard" href="https://arte.tv/nl/videos/documentaires/" onclick="goTo(this)">
-      <div class="pcard-bar bar-teal"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🔭</div>
-          <div class="pcard-name">ARTE Documentaires</div>
-          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Beste gratis docplatform. Natuur, cultuur, wetenschap, politiek. Geen reclame, geen account. Topkwaliteit.</div>
-        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://npostart.nl/documentaire" onclick="goTo(this)">
-      <div class="pcard-bar bar-gold"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🎙️</div>
-          <div class="pcard-name">NPO Documentaires</div>
-          <div class="pcard-tags"><span class="tag tag-nl">NL</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">VPRO, NTR, Human. Nederlandstalige documentaires over maatschappij, natuur en kunst.</div>
-        <div class="pcard-foot"><span class="pcard-url">npostart.nl</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://youtube.com/@DWDocumentary" onclick="goTo(this)">
-      <div class="pcard-bar bar-red"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🌍</div>
-          <div class="pcard-name">DW Documentary</div>
-          <div class="pcard-tags"><span class="tag tag-en">EN</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Honderden gratis docs op YouTube. Geopolitiek, natuur, wetenschap. Zoek ook op "VPRO documentary".</div>
-        <div class="pcard-foot"><span class="pcard-url">youtube.com</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-    <a class="pcard" href="https://arte.tv/nl/live/" onclick="goTo(this)">
-      <div class="pcard-bar bar-teal"></div>
-      <div class="pcard-body">
-        <div class="pcard-top">
-          <div class="pcard-icon">🌐</div>
-          <div class="pcard-name">ARTE Live</div>
-          <div class="pcard-tags"><span class="tag tag-eu">EU</span><span class="tag tag-free">Gratis</span></div>
-        </div>
-        <div class="pcard-desc">Concerten, theater, debatten en culturele evenementen live. Europees cultuurzender.</div>
-        <div class="pcard-foot"><span class="pcard-url">arte.tv/nl/live</span><span class="pcard-arrow">↗</span></div>
-      </div>
-    </a>
-
-  </div>
-</div>
-</div>
-
-<!-- WATCHLIST -->
+<!-- ══ WATCHLIST ═════════════════════════════════════════ -->
 <div class="screen" id="screen-watchlist">
 <div class="content">
-  <div class="section-title">📋 <span>Watchlist</span></div>
+  <div class="sec-label" style="margin-top:0;">📋 Wekelijkse Watchlist</div>
   <div id="watchlistContent"></div>
 </div>
 </div>
 
-<!-- INSTELLINGEN -->
-<div class="screen" id="screen-settings">
+<!-- ══ KANALEN ════════════════════════════════════════════ -->
+<div class="screen" id="screen-kanalen">
 <div class="content">
-
-  <div class="section-title">⚙️ <span>Advies & Instellingen</span></div>
-
-  <div class="setting-group">
-    <div class="setting-group-title">👤 Jouw accounts</div>
-    <div class="setting-row">
-      <div class="setting-item">
-        <div class="setting-icon" style="background:rgba(229,9,20,.15);">🎬</div>
-        <div class="setting-content">
-          <div class="setting-title">Netflix</div>
-          <div class="setting-desc">Eigen account. Grootste streamingdienst. Films, series, documentaires en Netflix Originals.</div>
-        </div>
-        <span class="setting-badge" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen ✓</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:rgba(255,106,0,.15);">📡</div>
-        <div class="setting-content">
-          <div class="setting-title">Ziggo Go</div>
-          <div class="setting-desc">Eigen Ziggo-account. Live TV en terugkijken op iPhone via Safari of app.</div>
-        </div>
-        <span class="setting-badge" style="background:rgba(255,106,0,.15);color:#ff6a00;border:1px solid rgba(255,106,0,.3);">Eigen ✓</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="setting-group">
-    <div class="setting-group-title">👤 Kevin's accounts</div>
-    <div class="setting-row">
-      <div class="setting-item">
-        <div class="setting-icon" style="background:rgba(230,57,70,.15);">🎬</div>
-        <div class="setting-content">
-          <div class="setting-title">Videoland</div>
-          <div class="setting-desc">Log in via Kevin's account. Beste NL-streamingdienst — Nederlandse originals, HBO en films.</div>
-        </div>
-        <span class="setting-badge" style="background:rgba(230,57,70,.15);color:#e63946;border:1px solid rgba(230,57,70,.3);">Kevin ✓</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:rgba(0,168,225,.15);">📦</div>
-        <div class="setting-content">
-          <div class="setting-title">Amazon Prime Video</div>
-          <div class="setting-desc">Log in via Kevin's account. Enorme filmbibliotheek, Prime Originals, NL ondertiteling beschikbaar.</div>
-        </div>
-        <span class="setting-badge" style="background:rgba(0,168,225,.15);color:#00a8e1;border:1px solid rgba(0,168,225,.3);">Kevin ✓</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:rgba(255,106,0,.15);">📡</div>
-        <div class="setting-content">
-          <div class="setting-title">Ziggo Go</div>
-          <div class="setting-desc">Eigen Ziggo-account. Live TV en terugkijken op iPhone via Safari of app.</div>
-        </div>
-        <span class="setting-badge" style="background:rgba(0,168,225,.15);color:#00a8e1;border:1px solid rgba(0,168,225,.3);">Kevin ✓</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="setting-group">
-    <div class="setting-group-title">📱 iPhone setup</div>
-    <div class="setting-row">
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1a3a2e;">🏠</div>
-        <div class="setting-content">
-          <div class="setting-title">Zet op beginscherm</div>
-          <div class="setting-desc">Safari → Deel → Zet op beginscherm. Werkt als native app met fullscreen.</div>
-        </div>
-        <span class="setting-badge badge-best">Stap 1</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1a2a3e;">📺</div>
-        <div class="setting-content">
-          <div class="setting-title">AirPlay naar TV</div>
-          <div class="setting-desc">Alle Safari-streams zijn AirPlay-compatibel. Tik het icoontje in de videospeler.</div>
-        </div>
-        <span class="setting-badge badge-tip">Tip</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#2a1a2e;">🎯</div>
-        <div class="setting-content">
-          <div class="setting-title">Focus-modus</div>
-          <div class="setting-desc">Instellingen → Focus → Niet storen. Kijk zonder afleidingen.</div>
-        </div>
-        <span class="setting-badge badge-tip">Tip</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="setting-group">
-    <div class="setting-group-title">🔇 Ad Blockers voor Safari</div>
-    <div class="setting-row">
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1e2a1e;">🛡️</div>
-        <div class="setting-content">
-          <div class="setting-title">AdGuard</div>
-          <div class="setting-desc">Beste keuze. Gratis Safari-extensie. Blokkeert voor ze laden. App Store → AdGuard → Instellingen → Safari → Extensies → Aan.</div>
-        </div>
-        <span class="setting-badge badge-free">Gratis</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1a1e2e;">🔒</div>
-        <div class="setting-content">
-          <div class="setting-title">1Blocker</div>
-          <div class="setting-desc">Lichtgewicht, iCloud-sync over al je Apple-apparaten. Basis gratis, YouTube-blokkering betaald.</div>
-        </div>
-        <span class="setting-badge badge-free">Gratis</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#2a1e1e;">⚡</div>
-        <div class="setting-content">
-          <div class="setting-title">Wipr 2</div>
-          <div class="setting-desc">Set & forget. Eenmalig €4,99. Geen abonnement, automatisch bijgewerkt.</div>
-        </div>
-        <span class="setting-badge badge-paid">€4,99</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="setting-group">
-    <div class="setting-group-title">📱 Apps vs Safari</div>
-    <div class="setting-row">
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1e2a1e;">✅</div>
-        <div class="setting-content">
-          <div class="setting-title">Download app: NPO Start, RTL+, Kijk.nl</div>
-          <div class="setting-desc">Native apps werken beter. AirPlay, offline, betere kwaliteit.</div>
-        </div>
-        <span class="setting-badge badge-best">App</span>
-      </div>
-      <div class="setting-item">
-        <div class="setting-icon" style="background:#1a2a3e;">🌐</div>
-        <div class="setting-content">
-          <div class="setting-title">Gebruik Safari: Rakuten TV, ARTE</div>
-          <div class="setting-desc">Geen NL-app beschikbaar. Safari werkt prima, AirPlay ook.</div>
-        </div>
-        <span class="setting-badge badge-tip">Safari</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="info-block">
-    <div class="info-block-title">⚠️ Let op: ads in apps</div>
-    <div class="info-block-text">Ad blockers werken alleen in <strong>Safari-browser</strong>. In de NPO Start-, RTL+- en Kijk.nl-apps zitten advertenties ingebakken in de videostream — die zijn technisch niet te blokkeren zonder de video te breken.</div>
-  </div>
-
-  <div style="text-align:center;padding:16px 0;font-size:11px;color:var(--muted);">
-    Made by Rob Borghouts 2026 · Alleen legale, gratis NL-platforms
-  </div>
-
-</div>
-</div>
-
-<!-- ── YOUTUBE KANALEN ────────────────────────────────── -->
-<div class="screen" id="screen-youtube">
-<div class="content">
-  <div class="section-title">▶️ <span>Mijn Kanalen</span></div>
-
-  <div id="yt-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;"></div>
-
-  <!-- Voeg kanaal toe -->
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;">
-    <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--text);">+ Kanaal toevoegen</div>
+  <div class="sec-label" style="margin-top:0;">▶️ Mijn YouTube Kanalen</div>
+  <div id="yt-list"></div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:13px;padding:15px;margin-bottom:12px;">
+    <div style="font-size:13px;font-weight:600;margin-bottom:11px;">+ Kanaal toevoegen</div>
     <div style="display:flex;flex-direction:column;gap:8px;">
-      <input id="yt-name" type="text" placeholder="Naam  (bijv. Marillion)" style="
-        background:var(--surface);border:1px solid var(--border);border-radius:8px;
-        padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;
-        outline:none;width:100%;
-      ">
-      <input id="yt-url" type="url" placeholder="YouTube URL  (bijv. youtube.com/@Marillion)" style="
-        background:var(--surface);border:1px solid var(--border);border-radius:8px;
-        padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;
-        outline:none;width:100%;
-      ">
-      <button onclick="addChannel()" style="
-        padding:12px;background:var(--gold);color:#000;font-weight:700;
-        font-size:15px;border:none;border-radius:8px;cursor:pointer;
-        font-family:'DM Sans',sans-serif;
-      ">Toevoegen</button>
+      <input id="yt-name" type="text" placeholder="Naam (bijv. Marillion)" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:100%;">
+      <input id="yt-url" type="url" placeholder="YouTube URL" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:100%;">
+      <button onclick="addChannel()" style="padding:12px;background:var(--gold);color:#000;font-weight:700;font-size:15px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;">Toevoegen</button>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);text-align:center;">Lang indrukken om kanaal te verwijderen</div>
+</div>
+</div>
+
+<!-- ══ ADVIES ═════════════════════════════════════════════ -->
+<div class="screen" id="screen-advies">
+<div class="content">
+
+  <div class="sec-label" style="margin-top:0;">👤 Jouw accounts</div>
+  <div class="setting-row">
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(229,9,20,.15);">🎬</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Netflix</div><div class="setting-desc">Eigen account. Films, series, documentaires en Originals.</div></div>
+      <span class="setting-badge" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(255,106,0,.15);">📡</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Ziggo Go</div><div class="setting-desc">Eigen account. Live TV, Ziggo Sport, terugkijken.</div></div>
+      <span class="setting-badge" style="background:rgba(255,106,0,.15);color:#ff6a00;border:1px solid rgba(255,106,0,.3);">Eigen</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(229,9,20,.15);">🏆</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">ESPN Player</div><div class="setting-desc">Eigen abonnement. Live sport, voetbal, tennis, golf.</div></div>
+      <span class="setting-badge" style="background:rgba(229,9,20,.15);color:#e50914;border:1px solid rgba(229,9,20,.3);">Eigen</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(255,0,0,.12);">▶️</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">YouTube Premium</div><div class="setting-desc">Eigen account. Geen reclame, YouTube Music inbegrepen.</div></div>
+      <span class="setting-badge" style="background:rgba(255,0,0,.12);color:#ff4444;border:1px solid rgba(255,0,0,.25);">Premium</span>
     </div>
   </div>
 
-  <div style="font-size:11px;color:var(--muted);text-align:center;">Tik op een kanaal om te openen · Lang indrukken om te verwijderen</div>
+  <div class="sec-label">👤 Kevin's accounts</div>
+  <div class="setting-row">
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(230,57,70,.15);">📺</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Videoland</div><div class="setting-desc">NL originals, HBO, films en series.</div></div>
+      <span class="setting-badge" style="background:rgba(230,57,70,.15);color:#e63946;border:1px solid rgba(230,57,70,.3);">Kevin</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:rgba(0,168,225,.15);">📦</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Amazon Prime Video</div><div class="setting-desc">Films, series en Prime Originals. NL ondertiteling.</div></div>
+      <span class="setting-badge" style="background:rgba(0,168,225,.15);color:#00a8e1;border:1px solid rgba(0,168,225,.3);">Kevin</span>
+    </div>
+  </div>
+
+  <div class="sec-label">📱 iPhone tips</div>
+  <div class="setting-row">
+    <div class="setting-item">
+      <div class="setting-icon" style="background:#1a3a2e;">🏠</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Beginscherm</div><div class="setting-desc">Safari → Deel → Zet op beginscherm. Verwijder en herinstall na elke update voor verse cache.</div></div>
+      <span class="setting-badge" style="background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd);">Stap 1</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:#1a2a3e;">📺</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">AirPlay naar TV</div><div class="setting-desc">Tik AirPlay-icoontje in videospeler. Werkt in alle Safari-streams.</div></div>
+      <span class="setting-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(88,166,255,.25);">Tip</span>
+    </div>
+  </div>
+
+  <div class="sec-label">🔇 Ad Blockers voor Safari</div>
+  <div class="setting-row">
+    <div class="setting-item">
+      <div class="setting-icon" style="background:#1e2a1e;">🛡️</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">AdGuard</div><div class="setting-desc">Beste keuze. Gratis. App Store → AdGuard → Instellingen → Safari → Extensies → Aan.</div></div>
+      <span class="setting-badge" style="background:var(--green-bg);color:var(--green);border:1px solid rgba(63,185,80,.25);">Gratis</span>
+    </div>
+    <div class="setting-item">
+      <div class="setting-icon" style="background:#2a1e1e;">⚡</div>
+      <div style="flex:1;min-width:0;"><div class="setting-title">Wipr 2</div><div class="setting-desc">Eenmalig €4,99. Set & forget, automatisch bijgewerkt.</div></div>
+      <span class="setting-badge" style="background:rgba(218,54,51,.1);color:#f87171;border:1px solid rgba(218,54,51,.25);">€4,99</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:20px 0 4px;font-size:11px;color:var(--muted);font-style:italic;">
+    Made by Rob Borghouts 2026 · StreamNL v3.0
+  </div>
 </div>
 </div>
 
-<!-- ── TABBAR ─────────────────────────────────────────── -->
+<!-- ══ TABBAR – 6 tabs ════════════════════════════════════ -->
 <nav class="tabbar">
   <button class="tab-btn active" id="tab-home" onclick="switchTab('home')">
-    <div class="tab-icon">🏠</div>
-    <div class="tab-label">Home</div>
-    <div class="tab-dot"></div>
+    <div class="tab-icon">🏠</div><div class="tab-label">Home</div><div class="tab-dot"></div>
   </button>
-  <button class="tab-btn" id="tab-films" onclick="switchTab('films')">
-    <div class="tab-icon">🎬</div>
-    <div class="tab-label">Films</div>
-    <div class="tab-dot"></div>
+  <button class="tab-btn" id="tab-kijken" onclick="switchTab('kijken')">
+    <div class="tab-icon">🎬</div><div class="tab-label">Kijken</div><div class="tab-dot"></div>
   </button>
-  <button class="tab-btn" id="tab-series" onclick="switchTab('series')">
-    <div class="tab-icon">📺</div>
-    <div class="tab-label">Series</div>
-    <div class="tab-dot"></div>
-  </button>
-  <button class="tab-btn" id="tab-docs" onclick="switchTab('docs')">
-    <div class="tab-icon">🎥</div>
-    <div class="tab-label">Docu's</div>
-    <div class="tab-dot"></div>
-  </button>
-  <button class="tab-btn" id="tab-youtube" onclick="switchTab('youtube')">
-    <div class="tab-icon">▶️</div>
-    <div class="tab-label">Kanalen</div>
-    <div class="tab-dot"></div>
+  <button class="tab-btn" id="tab-muziek" onclick="switchTab('muziek')">
+    <div class="tab-icon">🎵</div><div class="tab-label">Muziek</div><div class="tab-dot"></div>
   </button>
   <button class="tab-btn" id="tab-watchlist" onclick="switchTab('watchlist')">
-    <div class="tab-icon">📋</div>
-    <div class="tab-label">Watchlist</div>
-    <div class="tab-dot"></div>
+    <div class="tab-icon">📋</div><div class="tab-label">Watchlist</div><div class="tab-dot"></div>
   </button>
-  <button class="tab-btn" id="tab-settings" onclick="switchTab('settings')">
-    <div class="tab-icon">⚙️</div>
-    <div class="tab-label">Advies</div>
-    <div class="tab-dot"></div>
+  <button class="tab-btn" id="tab-kanalen" onclick="switchTab('kanalen')">
+    <div class="tab-icon">▶️</div><div class="tab-label">Kanalen</div><div class="tab-dot"></div>
+  </button>
+  <button class="tab-btn" id="tab-advies" onclick="switchTab('advies')">
+    <div class="tab-icon">⚙️</div><div class="tab-label">Advies</div><div class="tab-dot"></div>
   </button>
 </nav>
 
-<!-- ── SURPRISE MODAL ─────────────────────────────────── -->
+<!-- ══ SURPRISE MODAL ════════════════════════════════════ -->
 <div class="modal-overlay" id="surpriseModal" onclick="closeSurprise()">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -1145,276 +699,134 @@ body {
     <div class="modal-desc" id="mDesc">—</div>
     <div class="modal-actions">
       <button class="modal-btn-go" id="surpriseGoBtn" onclick="goToSurprise()">Bekijk nu →</button>
-      <button class="modal-btn-shuffle" onclick="openSurprise()">🔀</button>
+      <button class="modal-btn-shuf" onclick="openSurprise()">🔀</button>
     </div>
     <button class="modal-close" onclick="closeSurprise()">Sluiten</button>
   </div>
 </div>
 
+<!-- ══ SEARCH OVERLAY ════════════════════════════════════ -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-header">
+    <div class="search-wrap">
+      <span style="color:var(--muted);font-size:16px;">🔍</span>
+      <input class="search-input" id="searchInput" type="search"
+        placeholder="Zoek film, serie, sport of artiest..."
+        autocomplete="off" oninput="updateSearchLinks()"
+        onkeydown="if(event.key==='Escape')closeSearch()">
+    </div>
+    <button class="search-cancel" onclick="closeSearch()">Annuleer</button>
+  </div>
+  <div class="search-body">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);margin-bottom:10px;">Zoek op platform</div>
+
+    <a class="search-plat" onclick="doSearch('netflix');return false;" href="#">
+      <div class="search-plat-icon" style="background:rgba(229,9,20,.15);">🎬</div>
+      <div><div style="font-size:15px;font-weight:600;">Netflix</div><div style="font-size:12px;color:var(--sub);" id="s-netflix">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+    <a class="search-plat" onclick="doSearch('prime');return false;" href="#">
+      <div class="search-plat-icon" style="background:rgba(0,168,225,.15);">📦</div>
+      <div><div style="font-size:15px;font-weight:600;">Amazon Prime</div><div style="font-size:12px;color:var(--sub);" id="s-prime">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+    <a class="search-plat" onclick="doSearch('videoland');return false;" href="#">
+      <div class="search-plat-icon" style="background:rgba(230,57,70,.15);">📺</div>
+      <div><div style="font-size:15px;font-weight:600;">Videoland</div><div style="font-size:12px;color:var(--sub);" id="s-videoland">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+    <a class="search-plat" onclick="doSearch('espn');return false;" href="#">
+      <div class="search-plat-icon" style="background:rgba(229,9,20,.15);">🏆</div>
+      <div><div style="font-size:15px;font-weight:600;">ESPN Player</div><div style="font-size:12px;color:var(--sub);" id="s-espn">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+    <a class="search-plat" onclick="doSearch('youtube');return false;" href="#">
+      <div class="search-plat-icon" style="background:rgba(255,0,0,.15);">▶️</div>
+      <div><div style="font-size:15px;font-weight:600;">YouTube</div><div style="font-size:12px;color:var(--sub);" id="s-youtube">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+    <a class="search-plat" onclick="doSearch('npo');return false;" href="#">
+      <div class="search-plat-icon" style="background:var(--gold-bg);">🇳🇱</div>
+      <div><div style="font-size:15px;font-weight:600;">NPO Start</div><div style="font-size:12px;color:var(--sub);" id="s-npo">Voer een zoekterm in</div></div>
+      <div style="margin-left:auto;color:var(--gold);">↗</div>
+    </a>
+
+    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--sub);margin:14px 0 10px;">Snel zoeken</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <button onclick="quickSearch('thriller')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🔪 Thriller</button>
+      <button onclick="quickSearch('voetbal')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">⚽ Voetbal</button>
+      <button onclick="quickSearch('formule 1')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🏎️ F1</button>
+      <button onclick="quickSearch('documentaire')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🎥 Docu</button>
+      <button onclick="quickSearch('marillion')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🎸 Marillion</button>
+      <button onclick="quickSearch('tennis')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 13px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🎾 Tennis</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// ── TAB SWITCHING ─────────────────────────────────────
+
 function switchTab(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('screen-' + name).classList.add('active');
+  const scr = document.getElementById('screen-' + name);
+  if (scr) scr.classList.add('active');
   const btn = document.getElementById('tab-' + name);
   if (btn) btn.classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
+  if (name==='watchlist') renderWatchlist();
+  if (name==='kanalen')   renderChannels();
 }
+function goURL(url) { window.location.href = url; }
 
-// ── EXTERNAL LINK HANDLER (PWA safe) ─────────────────
-function goTo(el) {
-  event.preventDefault();
-  window.location.href = el.href;
-}
-
-// ── COUNTDOWN ─────────────────────────────────────────
 function updateCountdown() {
-  const now = new Date();
-  const day = now.getDay();
-  const daysUntil = day === 1 ? 7 : (8 - day) % 7 || 7;
+  const day = new Date().getDay();
+  const days = day===1 ? 7 : (8-day)%7||7;
   const el = document.getElementById('countdownText');
-  const stat = document.getElementById('statDays');
-  if (el) el.textContent = daysUntil === 7 ? 'Vandaag nieuwe lijst!' : `Nieuwe lijst over ${daysUntil} dag${daysUntil !== 1 ? 'en' : ''}`;
-  if (stat) stat.textContent = daysUntil === 7 ? '0' : daysUntil;
+  const st = document.getElementById('statDays');
+  const msg = days===7 ? 'Vandaag nieuwe lijst!' : `Nieuwe lijst over ${days} dag${days!==1?'en':''}`;
+  if(el) el.textContent = msg;
+  if(st) st.textContent = days===7?'0':days;
 }
 updateCountdown();
 
-// ── SURPRISE ME ───────────────────────────────────────
 const pool = [
-  { title:'No Country for Old Men', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie', genre:'Thriller', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk. Javier Bardem als ultieme schurk.' },
-  { title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/spotlight', genre:'Waargeburd', desc:'Journalisten van de Boston Globe onthullen misbruikschandaal bij de kerk. Oscarwinnaar.' },
-  { title:'Parasite', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie', genre:'Thriller', desc:'Bong Joon-ho. Klasse-spanning die uitloopt op iets heel anders. Oscarwinnaar.' },
-  { title:'Mad Max: Fury Road', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie', genre:'Actie', desc:'Twee uur non-stop achtervolging in de woestijn. Visueel meesterwerk. Ademloos.' },
-  { title:'Zodiac', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie', genre:'Thriller', desc:'Fincher. De echte Zodiac-moordenaar. Obsessieve, langzame spanning die blijft hangen.' },
-  { title:'The Social Network', year:'2010', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie', genre:'Waargeburd', desc:'Facebook-oprichting als rechtbankdrama. Fincher op zijn sterkst. Trent Reznor score.' },
-  { title:'Dunkirk', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie', genre:'Actie', desc:'Nolan. Evacuatie van het strand van Duinkerken, 1940. Spanning zonder woorden.' },
-  { title:'City of God', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie', genre:'Actie', desc:'Rio favela. Drugs en geweld. Meeslepend, mooi en hartverscheurend tegelijk.' },
-  { title:'Gone Girl', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gone+girl+2014+fincher+full+movie', genre:'Thriller', desc:'Fincher snijdt scherp. Huwelijk als slagveld. Rosamund Pike steelt de show.' },
-  { title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', genre:'Documentaire', desc:'Begon als dopingexperiment, eindigde als staatsschandaal. Oscar-winnaar.' },
-  { title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie', genre:'Waargeburd', desc:'Don Cheadle redt 1200 mensen tijdens de Rwandese genocide. Verplicht kijken.' },
-  { title:'Nightcrawler', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=nightcrawler+2014+gyllenhaal+full+movie', genre:'Thriller', desc:'Jake Gyllenhaal als sinistere freelance videojournalist in LA. Ongemakkelijk goed.' },
-  { title:'Three Billboards', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie', genre:'Thriller', desc:'Frances McDormand. Wraak, gerechtigheid en morele grijszones. Briljant schriftwerk.' },
-  { title:'Sicario', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sicario+2015+villeneuve+full+movie', genre:'Actie', desc:'Villeneuve. Drugsoorlog aan de Mexicaanse grens. Onbarmhartig en prachtig gefilmd.' },
-  { title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/argo', genre:'Waargeburd', desc:'CIA redt gijzelaars via een nepfilmproductie. Ben Affleck. Oscarwinnaar.' },
-  { title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary', genre:'Documentaire', desc:'Bhagwan sekte in Oregon. Giftaanslag. Bizarre absolute werkelijkheid.' },
-  { title:'Black Hawk Down', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie', genre:'Actie', desc:'Mogadishu 1993. Militaire operatie loopt catastrofaal af. Ridley Scott op zijn best.' },
-  { title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+documentary', genre:'Documentaire', desc:'Robert Durst. Zes afleveringen die eindigen met een ongelooflijk moment.' },
-  { title:'Uncut Gems', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie', genre:'Thriller', desc:'Adam Sandler als juwelier in schulden. Spanning die je adem afsnijdt. Non-stop.' },
-  { title:'All the President\'s Men', year:'1976', platform:'YouTube', url:'https://www.youtube.com/results?search_query=all+the+presidents+men+1976+full+movie', genre:'Waargeburd', desc:'Woodward en Bernstein leggen Watergate bloot. Journalistiek icoon. Redford en Hoffman.' },
+  {title:'No Country for Old Men',year:'2007',platform:'YouTube',url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie',genre:'Thriller',desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.'},
+  {title:'Spotlight',year:'2015',platform:'Rakuten TV',url:'https://rakuten.tv/nl/movies/spotlight',genre:'Waargeburd',desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.'},
+  {title:'Parasite',year:'2019',platform:'YouTube',url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie',genre:'Thriller',desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.'},
+  {title:'Mad Max: Fury Road',year:'2015',platform:'YouTube',url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie',genre:'Actie',desc:'Non-stop achtervolging. Visueel meesterwerk.'},
+  {title:'Zodiac',year:'2007',platform:'YouTube',url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie',genre:'Thriller',desc:'Fincher. De echte Zodiac-moordenaar.'},
+  {title:'Dunkirk',year:'2017',platform:'YouTube',url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie',genre:'Actie',desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.'},
+  {title:'Gone Girl',year:'2014',platform:'YouTube',url:'https://www.youtube.com/results?search_query=gone+girl+2014+fincher+full+movie',genre:'Thriller',desc:'Fincher. Huwelijk als slagveld.'},
+  {title:'Icarus',year:'2017',platform:'YouTube',url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary',genre:'Docu',desc:'Dopingschandaal wordt staatsgeheim. Oscar-winnaar.'},
+  {title:'Nightcrawler',year:'2014',platform:'YouTube',url:'https://www.youtube.com/results?search_query=nightcrawler+2014+full+movie',genre:'Thriller',desc:'Jake Gyllenhaal als sinistere nieuwsjager.'},
+  {title:'Sicario',year:'2015',platform:'YouTube',url:'https://www.youtube.com/results?search_query=sicario+2015+full+movie',genre:'Actie',desc:'Villeneuve. Drugsoorlog. Onbarmhartig.'},
+  {title:'Argo',year:'2012',platform:'Rakuten TV',url:'https://rakuten.tv/nl/movies/argo',genre:'Waargeburd',desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.'},
+  {title:'Hotel Rwanda',year:'2004',platform:'YouTube',url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie',genre:'Waargeburd',desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.'},
+  {title:'Wild Wild Country',year:'2018',platform:'YouTube',url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary',genre:'Docu',desc:'Rajneesh-sekte. Bizarre absolute werkelijkheid.'},
+  {title:'Uncut Gems',year:'2019',platform:'YouTube',url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie',genre:'Thriller',desc:'Sandler. Spanning die je adem afsnijdt.'},
+  {title:"Knives Out",year:'2019',platform:'YouTube',url:'https://www.youtube.com/results?search_query=knives+out+2019+full+movie',genre:'Thriller',desc:'Rian Johnson. Whodunnit met twist. Heerlijk.'},
+  {title:'Three Billboards',year:'2017',platform:'YouTube',url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie',genre:'Thriller',desc:'McDormand. Wraak. Morele grijszone.'},
+  {title:'Black Hawk Down',year:'2001',platform:'YouTube',url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie',genre:'Actie',desc:'Mogadishu 1993. Militaire catastrofe.'},
+  {title:'The Social Network',year:'2010',platform:'YouTube',url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie',genre:'Waargeburd',desc:'Facebook-oprichting als thriller. Fincher.'},
+  {title:'Memento',year:'2000',platform:'YouTube',url:'https://www.youtube.com/results?search_query=memento+2000+nolan+full+movie',genre:'Thriller',desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.'},
+  {title:'City of God',year:'2002',platform:'YouTube',url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie',genre:'Actie',desc:'Rio favela. Drugs en geweld. Meeslepend.'},
 ];
 
-let currentUrl = '';
-let lastIdx = -1;
-
+let currentUrl='', lastIdx=-1;
 function openSurprise() {
   let idx;
-  do { idx = Math.floor(Math.random() * pool.length); } while (idx === lastIdx);
+  do { idx = Math.floor(Math.random()*pool.length); } while(idx===lastIdx);
   lastIdx = idx;
   const t = pool[idx];
   currentUrl = t.url;
   document.getElementById('mTitle').textContent = t.title;
-  document.getElementById('mMeta').textContent = t.genre + ' · ' + t.year + ' · ' + t.platform;
-  document.getElementById('mDesc').textContent = t.desc;
-  const btn = document.getElementById('surpriseGoBtn');
-  btn.textContent = 'Bekijk nu →';
+  document.getElementById('mMeta').textContent  = t.genre+' · '+t.year+' · '+t.platform;
+  document.getElementById('mDesc').textContent  = t.desc;
   document.getElementById('surpriseModal').classList.add('open');
 }
+function closeSurprise() { document.getElementById('surpriseModal').classList.remove('open'); }
+function goToSurprise()  { closeSurprise(); window.location.href = currentUrl; }
 
-function closeSurprise() {
-  document.getElementById('surpriseModal').classList.remove('open');
-}
-
-function goToSurprise() {
-  closeSurprise();
-  window.location.href = currentUrl;
-}
-
-// ── WATCHLIST ─────────────────────────────────────────
-const WPOOL = [
-  [ // Week A
-    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
-    { genre:'actie', title:'Heat', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=heat+1995+de+niro+pacino+full+movie', desc:'De Niro vs Pacino. Hectische LA-heist.' },
-    { genre:'waar', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/spotlight', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
-    { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=making+a+murderer+documentary', desc:'Schudde Amerika op. True crime meesterwerk.' },
-    { genre:'thriller', title:'Zodiac', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
-    { genre:'actie', title:'Sicario', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sicario+2015+full+movie', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
-    { genre:'waar', title:'The Big Short', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+big+short+2015+full+movie', desc:'De financiële crash van 2008. Woedend en grappig.' },
-  ],
-  [ // Week B
-    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gone+girl+2014+full+movie', desc:'Fincher. Huwelijk als slagveld.' },
-    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
-    { genre:'waar', title:'Captain Phillips', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=captain+phillips+2013+full+movie', desc:'Somalische piraten. Hanks op zijn best.' },
-    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+hbo+documentary', desc:'Robert Durst. Ongelooflijk slot.' },
-    { genre:'thriller', title:'Prisoners', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=prisoners+2013+villeneuve+full+movie', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
-    { genre:'actie', title:'Dunkirk', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
-    { genre:'waar', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/argo', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
-  ],
-  [ // Week C
-    { genre:'thriller', title:'Se7en', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=se7en+1995+fincher+full+movie', desc:'Wat zit er in de doos? Klassieke Fincher.' },
-    { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+raid+2011+full+movie', desc:'Indonesisch actiemeesterwerk. Puur en rauw.' },
-    { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zero+dark+thirty+2012+full+movie', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
-    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar.' },
-    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=nightcrawler+2014+gyllenhaal+full+movie', desc:'Jake Gyllenhaal als sinistere nieuwsjager.' },
-    { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie', desc:'Rio favela. Drugs en geweld. Meeslepend.' },
-    { genre:'waar', title:'The Report', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+report+2019+full+movie', desc:'CIA-folterprogramma onthuld. Op ware feiten.' },
-  ],
-  [ // Week D
-    { genre:'thriller', title:'Parasite', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
-    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie', desc:'Mogadishu 1993. Militaire catastrofe.' },
-    { genre:'waar', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/sully', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
-    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+staircase+2004+documentary', desc:'Heeft hij haar gedood? 18 jaar, zes afleveringen.' },
-    { genre:'thriller', title:'Memento', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=memento+2000+nolan+full+movie', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
-    { genre:'actie', title:'Gladiator', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gladiator+2000+ridley+scott+full+movie', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
-    { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'YouTube', url:'https://www.youtube.com/results?search_query=frost+nixon+2008+full+movie', desc:'Nixon gedwongen te bekennen op live tv.' },
-  ],
-  [ // Week E
-    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=silence+of+the+lambs+1991+full+movie', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
-    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
-    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'YouTube', url:'https://www.youtube.com/results?search_query=leon+the+professional+1994+full+movie', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
-    { genre:'docu', title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary', desc:'Rajneesh-sekte. Giftaanslag. Absolute werkelijkheid.' },
-    { genre:'thriller', title:'Oldboy', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=oldboy+2003+park+chan+wook+full+movie', desc:'Park Chan-wook. Koreaanse revenge-thriller.' },
-    { genre:'waar', title:'Catch Me If You Can', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=catch+me+if+you+can+2002+full+movie', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio.' },
-    { genre:'docu', title:"Don't F**k with Cats", year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dont+f+with+cats+documentary+2019', desc:'Internetdetectives jagen seriemoordenaar.' },
-  ],
-  [ // Week F
-    { genre:'thriller', title:'Mystic River', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mystic+river+2003+eastwood+full+movie', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
-    { genre:'thriller', title:'Three Billboards', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
-    { genre:'actie', title:'Training Day', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=training+day+2001+denzel+washington+full+movie', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
-    { genre:'docu', title:'Amanda Knox', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=amanda+knox+documentary+2016', desc:'Italiaanse moordrechtszaak. Mediaobsessie.' },
-    { genre:'thriller', title:'Knives Out', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=knives+out+2019+full+movie', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
-    { genre:'waar', title:"All the President's Men", year:'1976', platform:'YouTube', url:'https://www.youtube.com/results?search_query=all+the+presidents+men+1976+full+movie', desc:'Woodward en Bernstein leggen Watergate bloot.' },
-    { genre:'thriller', title:'Rear Window', year:'1954', platform:'YouTube', url:'https://www.youtube.com/results?search_query=rear+window+1954+hitchcock+full+movie', desc:'Hitchcock. Spanning vanuit één kamer. Tijdloos.' },
-  ],
-  [ // Week G
-    { genre:'thriller', title:'True Detective S1', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=true+detective+season+1+full+episodes', desc:'McConaughey en Harrelson. Louisiana noir.' },
-    { genre:'thriller', title:'Hereditary', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hereditary+2018+ari+aster+full+movie', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
-    { genre:'actie', title:'Point Break', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=point+break+1991+full+movie', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
-    { genre:'docu', title:'The Last Dance', year:'2020', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+last+dance+documentary+michael+jordan', desc:'Michael Jordan en de Bulls. Sportdocu op zijn allerbest.' },
-    { genre:'thriller', title:'Blue Ruin', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=blue+ruin+2013+full+movie', desc:'Indie-wraakthriller. Geweld als gevolg. Ruw en echt.' },
-    { genre:'waar', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie', desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.' },
-    { genre:'actie', title:'The Social Network', year:'2010', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
-  ],
-  [ // Week H
-    { genre:'thriller', title:'Chinatown', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=chinatown+1974+polanski+full+movie', desc:'Polanski. De ultieme noir thriller. Tijdloos.' },
-    { genre:'thriller', title:'Sharp Objects', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sharp+objects+hbo+2018+full+series', desc:'Amy Adams. Gothisch Missouri. Duistere familiegeheimen.' },
-    { genre:'actie', title:'No Escape', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+escape+2015+owen+wilson+full+movie', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop.' },
-    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=evil+genius+documentary+2018', desc:'Bizarre bankroof. Echte true crime chaos.' },
-    { genre:'thriller', title:'The Conversation', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+conversation+1974+coppola+full+movie', desc:"Coppola's paranoïde meesterwerk. Tijdloos." },
-    { genre:'waar', title:'Deepwater Horizon', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=deepwater+horizon+2016+full+movie', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
-    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar-winnaar.' },
-  ],
-];
-
-function getWeekNum() {
-  const d = new Date();
-  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-  const y = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  return Math.ceil((((date - y) / 86400000) + 1) / 7);
-}
-
-function getMondayOf(d) {
-  const date = new Date(d);
-  const day = date.getDay();
-  date.setDate(date.getDate() + (day === 0 ? -6 : 1 - day));
-  return date;
-}
-
-const genreColors = {
-  thriller: { bg:'rgba(218,54,51,.12)', color:'#f87171', border:'rgba(218,54,51,.3)', label:'🔪 Thriller' },
-  actie:    { bg:'rgba(214,134,22,.12)', color:'#f0a830', border:'rgba(214,134,22,.3)', label:'💥 Actie' },
-  waar:     { bg:'rgba(161,113,247,.12)', color:'#a371f7', border:'rgba(161,113,247,.3)', label:'📋 Waargeburd' },
-  docu:     { bg:'rgba(88,166,255,.12)', color:'#58a6ff', border:'rgba(88,166,255,.3)', label:'🎥 Docu' },
-};
-
-function renderWatchlist() {
-  const wn = getWeekNum();
-  const titles = WPOOL[wn % WPOOL.length];
-  const key = 'rob_wl_w' + wn;
-  let watched = JSON.parse(localStorage.getItem(key) || '[]');
-
-  const mon = getMondayOf(new Date());
-  const fri = new Date(mon); fri.setDate(mon.getDate() + 6);
-  const fmt = d => d.toLocaleDateString('nl-NL', { day:'numeric', month:'long' });
-  const done = watched.length;
-  const pct = Math.round(done / titles.length * 100);
-
-  let html = `
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px;">
-      
-    <div style="font-size:12px;color:var(--sub);margin-bottom:3px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:8px;margin-top:8px;">
-        <span>Voortgang</span><span>${done} / ${titles.length} bekeken</span>
-      </div>
-      <div style="height:5px;background:var(--muted);border-radius:3px;overflow:hidden;">
-        <div style="height:100%;width:${pct}%;background:var(--gold);border-radius:3px;transition:width .5s;"></div>
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:16px;">
-  `;
-
-  titles.forEach((t, i) => {
-    const isW = watched.includes(i);
-    const c = genreColors[t.genre];
-    html += `
-      <div onclick="toggleWatch(${i})" style="
-        background:var(--card);border:1px solid ${isW ? 'var(--gold)' : 'var(--border)'};
-        border-radius:12px;padding:13px 14px;display:flex;gap:12px;align-items:center;
-        cursor:pointer;transition:border-color .2s;position:relative;
-        ${isW ? 'background:#16180f;' : ''}
-      ">
-        <div style="
-          width:36px;height:36px;border-radius:8px;flex-shrink:0;
-          background:${c.bg};border:1px solid ${c.border};
-          display:grid;place-items:center;font-size:16px;
-        ">${c.label.split(' ')[0]}</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:15px;font-weight:600;${isW ? 'text-decoration:line-through;color:var(--sub);' : ''}">${t.title}</div>
-          <div style="font-size:12px;color:var(--sub);margin-top:2px;">${t.year} · ${t.platform}</div>
-        </div>
-        ${isW
-          ? '<div style="width:24px;height:24px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;">✓</div>'
-          : `<a href="${t.url}" onclick="event.stopPropagation();window.location.href=this.href;return false;" style="font-size:11px;color:var(--gold);text-decoration:none;flex-shrink:0;text-align:right;line-height:1.3;">${'Bekijk →'}</a>`
-        }
-      </div>`;
-  });
-
-  html += `</div>
-    <button onclick="resetWatchlist()" style="
-      width:100%;padding:12px;background:transparent;
-      border:1px solid var(--border);border-radius:10px;
-      color:var(--sub);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;
-    ">↺ Reset week</button>`;
-
-  document.getElementById('watchlistContent').innerHTML = html;
-}
-
-window._wlKey = null;
-function toggleWatch(idx) {
-  const wn = getWeekNum();
-  const key = 'rob_wl_w' + wn;
-  let watched = JSON.parse(localStorage.getItem(key) || '[]');
-  if (watched.includes(idx)) {
-    watched = watched.filter(i => i !== idx);
-  } else {
-    watched.push(idx);
-  }
-  localStorage.setItem(key, JSON.stringify(watched));
-  renderWatchlist();
-}
-
-function resetWatchlist() {
-  if (confirm('Reset alle vinkjes voor deze week?')) {
-    const wn = getWeekNum();
-    localStorage.removeItem('rob_wl_w' + wn);
-    renderWatchlist();
-  }
-}
-
-renderWatchlist();
-
-// ── AI AANBEVELINGEN ─────────────────────────────────
 const REC_KEY   = 'rob_recs_cache';
 const REC_WEEK  = 'rob_recs_week';
 const APIKEY_KEY = 'rob_anthropic_key';
@@ -1533,6 +945,136 @@ Regels:
 // Init recs
 loadRecs(false);
 
+const WPOOL = [
+  [ // Week A
+    { genre:'thriller', title:'No Country for Old Men', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+country+for+old+men+2007+full+movie', desc:'Genadeloos neo-noir. Cormac McCarthy meesterwerk.' },
+    { genre:'actie', title:'Heat', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=heat+1995+de+niro+pacino+full+movie', desc:'De Niro vs Pacino. Hectische LA-heist.' },
+    { genre:'waar', title:'Spotlight', year:'2015', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/spotlight', desc:'Journalisten onthullen misbruikschandaal. Oscarwinnaar.' },
+    { genre:'docu', title:'Making a Murderer', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=making+a+murderer+documentary', desc:'Schudde Amerika op. True crime meesterwerk.' },
+    { genre:'thriller', title:'Zodiac', year:'2007', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zodiac+2007+fincher+full+movie', desc:'Fincher. Echte seriemoordenaar. Obsessieve spanning.' },
+    { genre:'actie', title:'Sicario', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sicario+2015+full+movie', desc:'Drugs. Grens. Onbarmhartig. Villeneuve.' },
+    { genre:'waar', title:'The Big Short', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+big+short+2015+full+movie', desc:'De financiële crash van 2008. Woedend en grappig.' },
+  ],
+  [ // Week B
+    { genre:'thriller', title:'Gone Girl', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gone+girl+2014+full+movie', desc:'Fincher. Huwelijk als slagveld.' },
+    { genre:'actie', title:'Mad Max: Fury Road', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mad+max+fury+road+full+movie', desc:'Non-stop achtervolging. Visueel meesterwerk.' },
+    { genre:'waar', title:'Captain Phillips', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=captain+phillips+2013+full+movie', desc:'Somalische piraten. Hanks op zijn best.' },
+    { genre:'docu', title:'The Jinx', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+jinx+robert+durst+hbo+documentary', desc:'Robert Durst. Ongelooflijk slot.' },
+    { genre:'thriller', title:'Prisoners', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=prisoners+2013+villeneuve+full+movie', desc:'Vermiste kinderen. Villeneuve op zijn donkerst.' },
+    { genre:'actie', title:'Dunkirk', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dunkirk+2017+nolan+full+movie', desc:'Nolan. Evacuatie 1940. Spanning zonder woorden.' },
+    { genre:'waar', title:'Argo', year:'2012', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/argo', desc:'CIA redt gijzelaars via nepfilm. Oscarwinnaar.' },
+  ],
+  [ // Week C
+    { genre:'thriller', title:'Se7en', year:'1995', platform:'YouTube', url:'https://www.youtube.com/results?search_query=se7en+1995+fincher+full+movie', desc:'Wat zit er in de doos? Klassieke Fincher.' },
+    { genre:'actie', title:'The Raid', year:'2011', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+raid+2011+full+movie', desc:'Indonesisch actiemeesterwerk. Puur en rauw.' },
+    { genre:'waar', title:'Zero Dark Thirty', year:'2012', platform:'YouTube', url:'https://www.youtube.com/results?search_query=zero+dark+thirty+2012+full+movie', desc:'De jacht op Bin Laden. Tien jaar, één obsessie.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar.' },
+    { genre:'thriller', title:'Nightcrawler', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=nightcrawler+2014+gyllenhaal+full+movie', desc:'Jake Gyllenhaal als sinistere nieuwsjager.' },
+    { genre:'actie', title:'City of God', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=city+of+god+2002+full+movie', desc:'Rio favela. Drugs en geweld. Meeslepend.' },
+    { genre:'waar', title:'The Report', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+report+2019+full+movie', desc:'CIA-folterprogramma onthuld. Op ware feiten.' },
+  ],
+  [ // Week D
+    { genre:'thriller', title:'Parasite', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=parasite+2019+bong+joon+ho+full+movie', desc:'Bong Joon-ho. Klasse-spanning. Oscarwinnaar.' },
+    { genre:'actie', title:'Black Hawk Down', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=black+hawk+down+2001+full+movie', desc:'Mogadishu 1993. Militaire catastrofe.' },
+    { genre:'waar', title:'Sully', year:'2016', platform:'Rakuten TV', url:'https://rakuten.tv/nl/movies/sully', desc:'Noodlanding Hudson. Eastwood. Heldenmoed.' },
+    { genre:'docu', title:'The Staircase', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+staircase+2004+documentary', desc:'Heeft hij haar gedood? 18 jaar, zes afleveringen.' },
+    { genre:'thriller', title:'Memento', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=memento+2000+nolan+full+movie', desc:'Nolan. Achterwaarts verteld. Je hoofd tolt.' },
+    { genre:'actie', title:'Gladiator', year:'2000', platform:'YouTube', url:'https://www.youtube.com/results?search_query=gladiator+2000+ridley+scott+full+movie', desc:'Ridley Scott. Rome. Wraak. Episch en tijdloos.' },
+    { genre:'waar', title:'Frost/Nixon', year:'2008', platform:'YouTube', url:'https://www.youtube.com/results?search_query=frost+nixon+2008+full+movie', desc:'Nixon gedwongen te bekennen op live tv.' },
+  ],
+  [ // Week E
+    { genre:'thriller', title:'The Silence of the Lambs', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=silence+of+the+lambs+1991+full+movie', desc:'Lecter vs Starling. Ooit geëvenaard? Nooit.' },
+    { genre:'thriller', title:'Uncut Gems', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=uncut+gems+2019+full+movie', desc:'Sandler. Spanning die je adem afsnijdt. Non-stop.' },
+    { genre:'actie', title:'Léon: The Professional', year:'1994', platform:'YouTube', url:'https://www.youtube.com/results?search_query=leon+the+professional+1994+full+movie', desc:'Huurmoordenaar beschermt meisje. Besson klassieker.' },
+    { genre:'docu', title:'Wild Wild Country', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=wild+wild+country+documentary', desc:'Rajneesh-sekte. Giftaanslag. Absolute werkelijkheid.' },
+    { genre:'thriller', title:'Oldboy', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=oldboy+2003+park+chan+wook+full+movie', desc:'Park Chan-wook. Koreaanse revenge-thriller.' },
+    { genre:'waar', title:'Catch Me If You Can', year:'2002', platform:'YouTube', url:'https://www.youtube.com/results?search_query=catch+me+if+you+can+2002+full+movie', desc:'Frank Abagnale bedriegt iedereen jarenlang. DiCaprio.' },
+    { genre:'docu', title:"Don't F**k with Cats", year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=dont+f+with+cats+documentary+2019', desc:'Internetdetectives jagen seriemoordenaar.' },
+  ],
+  [ // Week F
+    { genre:'thriller', title:'Mystic River', year:'2003', platform:'YouTube', url:'https://www.youtube.com/results?search_query=mystic+river+2003+eastwood+full+movie', desc:'Eastwood. Penn en Bacon. Verwoestend drama.' },
+    { genre:'thriller', title:'Three Billboards', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=three+billboards+outside+ebbing+missouri+full+movie', desc:'McDormand. Wraak. Morele grijszone. Briljant.' },
+    { genre:'actie', title:'Training Day', year:'2001', platform:'YouTube', url:'https://www.youtube.com/results?search_query=training+day+2001+denzel+washington+full+movie', desc:'Washington wint Oscar voor meest sinistere politieagent.' },
+    { genre:'docu', title:'Amanda Knox', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=amanda+knox+documentary+2016', desc:'Italiaanse moordrechtszaak. Mediaobsessie.' },
+    { genre:'thriller', title:'Knives Out', year:'2019', platform:'YouTube', url:'https://www.youtube.com/results?search_query=knives+out+2019+full+movie', desc:'Rian Johnson. Whodunnit met twist. Heerlijk.' },
+    { genre:'waar', title:"All the President's Men", year:'1976', platform:'YouTube', url:'https://www.youtube.com/results?search_query=all+the+presidents+men+1976+full+movie', desc:'Woodward en Bernstein leggen Watergate bloot.' },
+    { genre:'thriller', title:'Rear Window', year:'1954', platform:'YouTube', url:'https://www.youtube.com/results?search_query=rear+window+1954+hitchcock+full+movie', desc:'Hitchcock. Spanning vanuit één kamer. Tijdloos.' },
+  ],
+  [ // Week G
+    { genre:'thriller', title:'True Detective S1', year:'2014', platform:'YouTube', url:'https://www.youtube.com/results?search_query=true+detective+season+1+full+episodes', desc:'McConaughey en Harrelson. Louisiana noir.' },
+    { genre:'thriller', title:'Hereditary', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hereditary+2018+ari+aster+full+movie', desc:'Ari Aster. Familie-horror-thriller. Nooit vergeten.' },
+    { genre:'actie', title:'Point Break', year:'1991', platform:'YouTube', url:'https://www.youtube.com/results?search_query=point+break+1991+full+movie', desc:'FBI undercover bij surfende bankrovers. Keanu Reeves.' },
+    { genre:'docu', title:'The Last Dance', year:'2020', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+last+dance+documentary+michael+jordan', desc:'Michael Jordan en de Bulls. Sportdocu op zijn allerbest.' },
+    { genre:'thriller', title:'Blue Ruin', year:'2013', platform:'YouTube', url:'https://www.youtube.com/results?search_query=blue+ruin+2013+full+movie', desc:'Indie-wraakthriller. Geweld als gevolg. Ruw en echt.' },
+    { genre:'waar', title:'Hotel Rwanda', year:'2004', platform:'YouTube', url:'https://www.youtube.com/results?search_query=hotel+rwanda+2004+full+movie', desc:'Don Cheadle redt 1200 mensen. Verplicht kijken.' },
+    { genre:'actie', title:'The Social Network', year:'2010', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+social+network+2010+full+movie', desc:'Facebook-oprichting als thriller. Fincher op zijn sterkst.' },
+  ],
+  [ // Week H
+    { genre:'thriller', title:'Chinatown', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=chinatown+1974+polanski+full+movie', desc:'Polanski. De ultieme noir thriller. Tijdloos.' },
+    { genre:'thriller', title:'Sharp Objects', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=sharp+objects+hbo+2018+full+series', desc:'Amy Adams. Gothisch Missouri. Duistere familiegeheimen.' },
+    { genre:'actie', title:'No Escape', year:'2015', platform:'YouTube', url:'https://www.youtube.com/results?search_query=no+escape+2015+owen+wilson+full+movie', desc:'Amerikaans gezin vlucht voor staatsgreep. Non-stop.' },
+    { genre:'docu', title:'Evil Genius', year:'2018', platform:'YouTube', url:'https://www.youtube.com/results?search_query=evil+genius+documentary+2018', desc:'Bizarre bankroof. Echte true crime chaos.' },
+    { genre:'thriller', title:'The Conversation', year:'1974', platform:'YouTube', url:'https://www.youtube.com/results?search_query=the+conversation+1974+coppola+full+movie', desc:"Coppola's paranoïde meesterwerk. Tijdloos." },
+    { genre:'waar', title:'Deepwater Horizon', year:'2016', platform:'YouTube', url:'https://www.youtube.com/results?search_query=deepwater+horizon+2016+full+movie', desc:'Ergste olieramp ooit. Menselijke helden in chaos.' },
+    { genre:'docu', title:'Icarus', year:'2017', platform:'YouTube', url:'https://www.youtube.com/results?search_query=icarus+2017+doping+documentary', desc:'Fietsen en doping worden staatsgeheim. Oscar-winnaar.' },
+  ],
+];
+
+function getWeekNum() {
+  const d=new Date(), date=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  date.setUTCDate(date.getUTCDate()+4-(date.getUTCDay()||7));
+  const y=new Date(Date.UTC(date.getUTCFullYear(),0,1));
+  return Math.ceil((((date-y)/86400000)+1)/7);
+}
+function getMondayOf(d) {
+  const date=new Date(d),day=date.getDay();
+  date.setDate(date.getDate()+(day===0?-6:1-day)); return date;
+}
+const genreColors = {
+  thriller:{bg:'rgba(218,54,51,.12)',color:'#f87171',border:'rgba(218,54,51,.3)',label:'🔪 Thriller'},
+  actie:   {bg:'rgba(214,134,22,.12)',color:'#f0a830',border:'rgba(214,134,22,.3)',label:'💥 Actie'},
+  waar:    {bg:'rgba(161,113,247,.12)',color:'#a371f7',border:'rgba(161,113,247,.3)',label:'📋 Waargeburd'},
+  docu:    {bg:'rgba(88,166,255,.12)', color:'#58a6ff',border:'rgba(88,166,255,.3)', label:'🎥 Docu'},
+};
+function renderWatchlist() {
+  const wn=getWeekNum(), titles=WPOOL[wn%WPOOL.length];
+  const key='rob_wl_w'+wn;
+  let watched=JSON.parse(localStorage.getItem(key)||'[]');
+  const mon=getMondayOf(new Date()), fri=new Date(mon);
+  fri.setDate(mon.getDate()+6);
+  const fmt=d=>d.toLocaleDateString('nl-NL',{day:'numeric',month:'long'});
+  const done=watched.length, pct=Math.round(done/titles.length*100);
+  let html=`<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px;margin-bottom:14px;">
+    <div style="font-size:12px;color:var(--sub);margin-bottom:8px;">Week ${wn} · ${fmt(mon)} – ${fmt(fri)}</div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--sub);margin-bottom:7px;"><span>Voortgang</span><span>${done} / ${titles.length}</span></div>
+    <div style="height:5px;background:var(--muted);border-radius:3px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--gold);border-radius:3px;transition:width .5s;"></div></div>
+  </div>`;
+  titles.forEach((t,i)=>{
+    const isW=watched.includes(i), c=genreColors[t.genre]||genreColors.docu;
+    html+=`<div style="background:var(--card);border:1px solid ${isW?'var(--gold)':'var(--border)'};border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;margin-bottom:9px;${isW?'background:#16180f;':''}" onclick="toggleWatch(${i})">
+      <div style="width:36px;height:36px;border-radius:8px;flex-shrink:0;background:${c.bg};border:1px solid ${c.border};display:grid;place-items:center;font-size:16px;">${c.label.split(' ')[0]}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:15px;font-weight:600;${isW?'text-decoration:line-through;color:var(--sub);':''}">${t.title}</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:2px;">${t.year} · ${t.platform}</div>
+      </div>
+      ${isW
+        ? '<div style="width:24px;height:24px;background:var(--gold);border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;">✓</div>'
+        : `<a href="${t.url}" style="font-size:12px;color:var(--gold);text-decoration:none;flex-shrink:0;" onclick="event.stopPropagation();window.location.href=this.href;return false;">Bekijk →</a>`}
+    </div>`;
+  });
+  html+=`<button onclick="resetWatchlist()" style="width:100%;padding:11px;background:transparent;border:1px solid var(--border);border-radius:10px;color:var(--sub);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;margin-top:4px;">↺ Reset week</button>`;
+  document.getElementById('watchlistContent').innerHTML=html;
+}
+function toggleWatch(idx) {
+  const wn=getWeekNum(), key='rob_wl_w'+wn;
+  let w=JSON.parse(localStorage.getItem(key)||'[]');
+  w=w.includes(idx)?w.filter(i=>i!==idx):[...w,idx];
+  localStorage.setItem(key,JSON.stringify(w)); renderWatchlist();
+}
+function resetWatchlist() {
+  if(confirm('Reset alle vinkjes?')) { localStorage.removeItem('rob_wl_w'+getWeekNum()); renderWatchlist(); }
+}
+
 const DEFAULT_CHANNELS = [
   { name: 'Marillion', url: 'https://www.youtube.com/@Marillion', emoji: '🎸' },
   { name: 'Porcupine Tree', url: 'https://www.youtube.com/@PorcupineTree', emoji: '🎸' },
@@ -1544,197 +1086,68 @@ const DEFAULT_CHANNELS = [
   { name: 'ARTE Concert', url: 'https://www.youtube.com/@arteconcert', emoji: '🎭' },
 ];
 
-const YT_KEY = 'rob_yt_channels_v1';
-
-function loadChannels() {
-  try {
-    const saved = localStorage.getItem(YT_KEY);
-    return saved ? JSON.parse(saved) : DEFAULT_CHANNELS;
-  } catch(e) { return DEFAULT_CHANNELS; }
-}
-
-function saveChannels(ch) {
-  localStorage.setItem(YT_KEY, JSON.stringify(ch));
-}
-
+const YT_KEY='rob_yt_channels_v1';
+function loadChannels() { try { const s=localStorage.getItem(YT_KEY); return s?JSON.parse(s):DEFAULT_CHANNELS; } catch(e) { return DEFAULT_CHANNELS; } }
+function saveChannels(ch) { localStorage.setItem(YT_KEY,JSON.stringify(ch)); }
 function renderChannels() {
-  const channels = loadChannels();
-  const list = document.getElementById('yt-list');
-  if (!list) return;
-  if (channels.length === 0) {
-    list.innerHTML = `<div style="text-align:center;color:var(--muted);padding:24px;font-size:14px;">Nog geen kanalen. Voeg je eerste toe hieronder.</div>`;
-    return;
-  }
-  list.innerHTML = channels.map((c, i) => `
-    <div style="
-      background:var(--card);border:1px solid var(--border);border-radius:12px;
-      display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;
-    "
-    onclick="window.location.href='${c.url}'"
-    ontouchstart="startLongPress(${i},this)" ontouchend="cancelLongPress()" ontouchmove="cancelLongPress()"
-    >
+  const channels=loadChannels(), list=document.getElementById('yt-list');
+  if(!list) return;
+  if(!channels.length) { list.innerHTML='<div style="text-align:center;color:var(--muted);padding:24px;font-size:14px;">Nog geen kanalen.</div>'; return; }
+  list.innerHTML=channels.map((c,i)=>`
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;margin-bottom:9px;"
+      onclick="window.location.href='${c.url}'"
+      ontouchstart="startLP(${i},this)" ontouchend="cancelLP()" ontouchmove="cancelLP()">
       <div style="width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(255,0,0,.12);border:1px solid rgba(255,0,0,.25);display:grid;place-items:center;font-size:20px;">${c.emoji||'▶️'}</div>
       <div style="flex:1;min-width:0;">
         <div style="font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.name}</div>
         <div style="font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${c.url.replace('https://www.','').replace('https://','')}</div>
       </div>
-      <div style="font-size:16px;color:#e63946;flex-shrink:0;">▶</div>
-    </div>
-  `).join('');
+      <div style="font-size:16px;color:#e50914;flex-shrink:0;">▶</div>
+    </div>`).join('');
 }
-
 function addChannel() {
-  const name = document.getElementById('yt-name').value.trim();
-  let url = document.getElementById('yt-url').value.trim();
-  if (!name || !url) { alert('Vul naam en URL in.'); return; }
-  if (!url.startsWith('http')) url = 'https://' + url;
-  const channels = loadChannels();
-  channels.push({ name, url, emoji: '▶️' });
-  saveChannels(channels);
-  document.getElementById('yt-name').value = '';
-  document.getElementById('yt-url').value = '';
-  renderChannels();
-}
-
-function deleteChannel(idx) {
-  if (!confirm('Kanaal verwijderen?')) return;
-  const ch = loadChannels();
-  ch.splice(idx, 1);
+  const name=document.getElementById('yt-name').value.trim();
+  let url=document.getElementById('yt-url').value.trim();
+  if(!name||!url){alert('Vul naam en URL in.');return;}
+  if(!url.startsWith('http')) url='https://'+url;
+  const ch=loadChannels(); ch.push({name,url,emoji:'▶️'});
   saveChannels(ch);
+  document.getElementById('yt-name').value='';
+  document.getElementById('yt-url').value='';
   renderChannels();
 }
+function deleteChannel(idx){if(!confirm('Verwijderen?'))return;const ch=loadChannels();ch.splice(idx,1);saveChannels(ch);renderChannels();}
+let _lp=null;
+function startLP(idx,el){_lp=setTimeout(()=>{el.style.borderColor='var(--red)';deleteChannel(idx);},750);}
+function cancelLP(){clearTimeout(_lp);}
 
-let _lpt = null;
-function startLongPress(idx, el) {
-  _lpt = setTimeout(() => { el.style.borderColor='var(--red)'; deleteChannel(idx); }, 750);
+function openSearch(){document.getElementById('searchOverlay').classList.add('open');setTimeout(()=>document.getElementById('searchInput').focus(),100);}
+function closeSearch(){document.getElementById('searchOverlay').classList.remove('open');document.getElementById('searchInput').value='';updateSearchLinks();}
+function updateSearchLinks(){
+  const q=document.getElementById('searchInput').value.trim();
+  const msg=q?`Zoek "${q}"`:'Voer een zoekterm in';
+  ['netflix','prime','videoland','espn','youtube','npo'].forEach(p=>{const el=document.getElementById('s-'+p);if(el)el.textContent=msg;});
 }
-function cancelLongPress() { clearTimeout(_lpt); }
+function doSearch(platform){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q){document.getElementById('searchInput').focus();return;}
+  const enc=encodeURIComponent(q);
+  const urls={
+    netflix:`https://www.netflix.com/search?q=${enc}`,
+    prime:`https://www.primevideo.com/search?phrase=${enc}`,
+    videoland:`https://www.videoland.com/zoeken?query=${enc}`,
+    espn:`https://www.espnplayer.com/search?q=${enc}`,
+    youtube:`https://www.youtube.com/results?search_query=${enc}`,
+    npo:`https://npostart.nl/zoeken?q=${enc}`,
+  };
+  closeSearch(); window.location.href=urls[platform];
+}
+function quickSearch(term){document.getElementById('searchInput').value=term;updateSearchLinks();document.getElementById('searchInput').focus();}
 
+loadRecs(false);
+renderWatchlist();
 renderChannels();
 
-// ── SEARCH ────────────────────────────────────────────
-function openSearch() {
-  document.getElementById('searchOverlay').classList.add('open');
-  setTimeout(() => document.getElementById('searchInput').focus(), 100);
-}
-
-function closeSearch() {
-  document.getElementById('searchOverlay').classList.remove('open');
-  document.getElementById('searchInput').value = '';
-  updateSearchLinks();
-}
-
-function updateSearchLinks() {
-  const q = document.getElementById('searchInput').value.trim();
-  const subs = {
-    'netflix':   document.getElementById('srch-netflix-sub'),
-    'prime':     document.getElementById('srch-prime-sub'),
-    'videoland': document.getElementById('srch-videoland-sub'),
-    'ziggo':     document.getElementById('srch-ziggo-sub'),
-    'npo':       document.getElementById('srch-npo-sub'),
-  };
-  const msg = q ? `Zoek "${q}"` : 'Voer een zoekterm in';
-  Object.values(subs).forEach(el => el.textContent = msg);
-}
-
-function doSearch(platform) {
-  const q = document.getElementById('searchInput').value.trim();
-  if (!q) { document.getElementById('searchInput').focus(); return; }
-  const enc = encodeURIComponent(q);
-  const urls = {
-    netflix:   `https://www.netflix.com/search?q=${enc}`,
-    prime:     `https://www.primevideo.com/search?phrase=${enc}`,
-    videoland: `https://www.videoland.com/zoeken?query=${enc}`,
-    ziggo:     `https://www.ziggogo.tv/zoekopdracht?q=${enc}`,
-    npo:       `https://npostart.nl/zoeken?q=${enc}`,
-  };
-  closeSearch();
-  window.location.href = urls[platform];
-}
-
-function quickSearch(term) {
-  document.getElementById('searchInput').value = term;
-  updateSearchLinks();
-  document.getElementById('searchInput').focus();
-}
-
 </script>
-
-<!-- ── SEARCH OVERLAY ────────────────────────────────── -->
-<div class="search-overlay" id="searchOverlay">
-  <div class="search-header">
-    <div class="search-input-wrap">
-      <span style="color:var(--muted);font-size:16px;">🔍</span>
-      <input class="search-input" id="searchInput" type="search"
-        placeholder="Zoek film of serie..."
-        autocomplete="off" autocorrect="off" spellcheck="false"
-        oninput="updateSearchLinks()"
-        onkeydown="if(event.key==='Escape')closeSearch()">
-    </div>
-    <button class="search-cancel" onclick="closeSearch()">Annuleer</button>
-  </div>
-
-  <div class="search-body">
-    <div class="search-section-title">Zoek op platform</div>
-    <div class="search-platforms">
-
-      <a class="search-platform-btn" id="srch-netflix" href="#" onclick="doSearch('netflix');return false;">
-        <div class="search-plat-icon" style="background:rgba(229,9,20,.15);">🎬</div>
-        <div>
-          <div class="search-plat-name">Netflix</div>
-          <div class="search-plat-sub" id="srch-netflix-sub">Voer een zoekterm in</div>
-        </div>
-        <div class="search-plat-arrow">↗</div>
-      </a>
-
-      <a class="search-platform-btn" id="srch-prime" href="#" onclick="doSearch('prime');return false;">
-        <div class="search-plat-icon" style="background:rgba(0,168,225,.15);">📦</div>
-        <div>
-          <div class="search-plat-name">Amazon Prime Video</div>
-          <div class="search-plat-sub" id="srch-prime-sub">Voer een zoekterm in</div>
-        </div>
-        <div class="search-plat-arrow">↗</div>
-      </a>
-
-      <a class="search-platform-btn" id="srch-videoland" href="#" onclick="doSearch('videoland');return false;">
-        <div class="search-plat-icon" style="background:rgba(230,57,70,.15);">📺</div>
-        <div>
-          <div class="search-plat-name">Videoland</div>
-          <div class="search-plat-sub" id="srch-videoland-sub">Voer een zoekterm in</div>
-        </div>
-        <div class="search-plat-arrow">↗</div>
-      </a>
-
-      <a class="search-platform-btn" id="srch-ziggo" href="#" onclick="doSearch('ziggo');return false;">
-        <div class="search-plat-icon" style="background:rgba(255,106,0,.15);">📡</div>
-        <div>
-          <div class="search-plat-name">Ziggo Go</div>
-          <div class="search-plat-sub" id="srch-ziggo-sub">Voer een zoekterm in</div>
-        </div>
-        <div class="search-plat-arrow">↗</div>
-      </a>
-
-      <a class="search-platform-btn" id="srch-npo" href="#" onclick="doSearch('npo');return false;">
-        <div class="search-plat-icon" style="background:var(--gold-bg);">🇳🇱</div>
-        <div>
-          <div class="search-plat-name">NPO Start</div>
-          <div class="search-plat-sub" id="srch-npo-sub">Voer een zoekterm in</div>
-        </div>
-        <div class="search-plat-arrow">↗</div>
-      </a>
-
-    </div>
-
-    <div class="search-section-title">Populaire zoekopdrachten</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;">
-      <button onclick="quickSearch('thriller')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🔪 Thriller</button>
-      <button onclick="quickSearch('misdaad')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🚔 Misdaad</button>
-      <button onclick="quickSearch('actie')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">💥 Actie</button>
-      <button onclick="quickSearch('documentaire')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">🎥 Docu</button>
-      <button onclick="quickSearch('nieuw')" style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;color:var(--text);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">✨ Nieuw</button>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
