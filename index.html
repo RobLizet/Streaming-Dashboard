@@ -845,7 +845,46 @@ function switchTab(name) {
   if (name==='watchlist') renderWatchlist();
   if (name==='kanalen')   renderChannels();
 }
-function goURL(url) { window.location.href = url; }
+// Domeinen met een bekende native Android-app. Als die app geïnstalleerd is,
+// opent Android 'm rechtstreeks (met eigen Chromecast/screencast-knop).
+// Staat het domein er niet in, of is de app niet geïnstalleerd, dan gaat
+// het gewoon naar de website zoals voorheen.
+const APP_INTENTS = {
+  'netflix.com':        'com.netflix.mediaclient',
+  'www.netflix.com':    'com.netflix.mediaclient',
+  'primevideo.com':     'com.amazon.avod.thirdpartyclient',
+  'www.primevideo.com': 'com.amazon.avod.thirdpartyclient',
+  'videoland.com':      'nl.rtl.videoland.v2',
+  'www.videoland.com':  'nl.rtl.videoland.v2',
+  'npostart.nl':         'nl.uitzendinggemist',
+  'www.npostart.nl':     'nl.uitzendinggemist',
+  'ziggogo.tv':          'com.lgi.ziggotv',
+  'www.ziggogo.tv':      'com.lgi.ziggotv',
+  'youtube.com':         'com.google.android.youtube',
+  'www.youtube.com':     'com.google.android.youtube',
+  'music.youtube.com':   'com.google.android.apps.youtube.music',
+};
+
+function isAndroidDevice() { return /Android/i.test(navigator.userAgent); }
+
+function goURL(url) {
+  if (!isAndroidDevice()) { window.location.href = url; return; }
+
+  let u;
+  try { u = new URL(url, window.location.href); }
+  catch (e) { window.location.href = url; return; }
+
+  const pkg = APP_INTENTS[u.hostname];
+  if (!pkg) { window.location.href = url; return; }
+
+  const restOfUrl = u.pathname + u.search;
+  const intentUrl =
+    'intent://' + u.hostname + restOfUrl +
+    '#Intent;scheme=https;package=' + pkg +
+    ';S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+
+  window.location.href = intentUrl;
+}
 
 function updateCountdown() {
   const day = new Date().getDay();
